@@ -1,5 +1,5 @@
 <launch>
-  <arg name="GROUP"                       default="/robot_5"/>
+  <arg name="GROUP"                       default="robot_5"/>
   <arg name="ROBOT_NAME"                  default="megarover"/>
   <!--megarover turtlebot3 beego-->
   <arg name="IS_SIMULATOR"                default="false"/>
@@ -15,7 +15,26 @@
   <arg name="TOPIC/ODOM"                  default="/robot_5/odom/fusion"/>
   <arg name="TOPIC/CMD_VEL"               default="/robot_5/cmd_vel"/>
 
-  <group ns="$(arg GROUP)">
+  <include file="$(find potbot)/launch/potbot.launch">
+    <arg name="GROUP"         value="$(arg GROUP)"/>
+    <arg name="USE_RVIZ"         value="$(arg USE_RVIZ)"/>
+    <arg name="PUBLISH_COMMAND"         value="$(arg PUBLISH_COMMAND)"/>
+    <arg name="FRAME_ID/GLOBAL"         value="$(arg FRAME_ID/GLOBAL)"/>
+    <arg name="FRAME_ID/ROBOT_BASE"         value="$(arg FRAME_ID/ROBOT_BASE)"/>
+    <arg name="FRAME_ID/LIDAR"         value="$(arg FRAME_ID/LIDAR)"/>
+    <arg name="TARGET/POSITION/X"         value="$(arg TARGET/POSITION/X)"/>
+    <arg name="TARGET/POSITION/Y"         value="$(arg TARGET/POSITION/Y)"/>
+    <arg name="TARGET/POSITION/YAW"         value="$(arg TARGET/POSITION/YAW)"/>
+    <arg name="TOPIC/SCAN"         value="$(arg TOPIC/SCAN)"/>
+    <arg name="TOPIC/ODOM"         value="$(arg TOPIC/ODOM)"/>
+    <arg name="TOPIC/CMD_VEL"         value="$(arg TOPIC/CMD_VEL)"/>
+    <arg name="FILE/URDF"         value="$(find potbot_example)/urdf/megarover21.urdf.xacro"/>
+    <arg name="FILE/MAP"         value="$(find potbot_description)/maps/garage.yaml"/>
+    <arg name="FILE/FUSION"         value="$(find potbot_description)/config/megarover_robot_localization.yaml"/>
+    <arg name="FILE/RVIZ"         value="$(find potbot_description)/rviz/megarover21.rviz"/>
+  </include>
+
+  <!-- <group ns="$(arg GROUP)">
 
     <include file="$(find potbot)/launch/megarover_amcl.launch">
       <arg name="map_file"                value="$(find potbot_description)/maps/garage.yaml"/>
@@ -85,6 +104,6 @@
       </include>
     </group>
 
-  </group>
+  </group> -->
 
 </launch>

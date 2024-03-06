@@ -2,8 +2,8 @@
 
 # 起動方法
 
-**turtlebot3_with_willowgarage.launch**
+**multi_robot.launch**
 gazebo環境
   
-**demo.launch**
+**potbot_megarover21.launch**
 potbot起動
