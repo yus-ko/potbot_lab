@@ -1,5 +1,5 @@
 <launch>
-  <arg name="GROUP"                       default="robot_5"/>
+  <arg name="GROUP"                       default="robot_6"/>
   <arg name="IS_SIMULATOR"                default="false"/>
   <arg name="USE_RVIZ"                    default="true"/>
   <arg name="PUBLISH_COMMAND"             default="true"/>
@@ -13,7 +13,7 @@
   <arg name="TOPIC/SCAN"                  default="scan"/>
   <arg name="TOPIC/ODOM"                  default="odom/fusion"/>
   <arg name="TOPIC/CMD_VEL"               default="cmd_vel"/>
-  <arg name="FILE/URDF"                   default="$(find potbot_example)/urdf/megarover21.urdf.xacro"/>
+  <arg name="FILE/URDF"                   default="$(find potbot_example)/urdf/megarover3.urdf.xacro"/>
   <arg name="FILE/MAP"                    default="$(find potbot_description)/maps/garage.yaml"/>
   <arg name="FILE/FUSION"                 default="$(find potbot_example)/config/megarover_robot_localization.yaml"/>
   <arg name="FILE/RVIZ"                   default="$(find potbot_example)/rviz/megarover21.rviz"/>

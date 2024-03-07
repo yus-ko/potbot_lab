@@ -37,7 +37,7 @@
   </gazebo>
 
   <gazebo>
-    <plugin name="megarover21_controller" filename="libgazebo_ros_diff_drive.so">
+    <plugin name="megarover3_controller" filename="libgazebo_ros_diff_drive.so">
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
@@ -91,21 +91,6 @@
     </sensor>
   </gazebo>
 
-  <!-- <gazebo>
-    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
-      <alwaysOn>true</alwaysOn>
-      <frameName>imu_link</frameName>
-      <bodyName>imu_link</bodyName>
-      <topicName>imu</topicName>
-      <serviceName>imu_service</serviceName>
-      <gaussianNoise>0.0</gaussianNoise>
-      <updateRate>20.0</updateRate>
-      <xyzOffset>0 0 0</xyzOffset>
-      <rpyOffset>0 0 0</rpyOffset>
-      <initialOrientationAsReference>false</initialOrientationAsReference>
-    </plugin>
-  </gazebo> -->
-
   <gazebo reference="imu_link">
     <!-- <gravity>true</gravity> -->
     <sensor name="imu_sensor" type="imu">
@@ -131,90 +116,8 @@
     <sensor type="camera" name="Pi Camera">
       <always_on>true</always_on>
       <visualize>$(arg camera_visual)</visualize>
-      <!-- <camera>
-          <horizontal_fov>1.085595</horizontal_fov>
-          <image>
-              <width>640</width>
-              <height>480</height>
-              <format>R8G8B8</format>
-          </image>
-          <clip>
-              <near>0.03</near>
-              <far>100</far>
-          </clip>
-      </camera>
-      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-        <alwaysOn>true</alwaysOn>
-        <updateRate>30.0</updateRate>
-        <cameraName>camera</cameraName>
-        <frameName>left_camera_optical_frame</frameName>
-        <imageTopicName>rgb/image_raw</imageTopicName>
-        <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
-        <hackBaseline>0.07</hackBaseline>
-        <distortionK1>0.0</distortionK1>
-        <distortionK2>0.0</distortionK2>
-        <distortionK3>0.0</distortionK3>
-        <distortionT1>0.0</distortionT1>
-        <distortionT2>0.0</distortionT2>
-      </plugin> -->
     </sensor>
   </gazebo>
-
-  <!-- <gazebo reference="left_camera_frame">
-    <sensor type="multicamera" name="left_camera">
-      <always_on>true</always_on>
-      <update_rate>30.0</update_rate>
-      <camera name="left">
-        <horizontal_fov>1.3962634</horizontal_fov>
-        <image>
-          <width>800</width>
-          <height>800</height>
-          <format>R8G8B8</format>
-        </image>
-        <clip>
-          <near>0.02</near>
-          <far>300</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-      </camera>
-      <camera name="right">
-        <pose>0 -0.07 0 0 0 0</pose>
-        <horizontal_fov>1.3962634</horizontal_fov>
-        <image>
-          <width>800</width>
-          <height>800</height>
-          <format>R8G8B8</format>
-        </image>
-        <clip>
-          <near>0.02</near>
-          <far>300</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-      </camera>
-      <plugin name="left_camera_controller" filename="libgazebo_ros_multicamera.so">
-        <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
-        <cameraName>mynteye</cameraName>
-        <imageTopicName>image_raw</imageTopicName>
-        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>left_camera_optical_frame</frameName>
-        <hackBaseline>0.07</hackBaseline>
-        <distortionK1>0.0</distortionK1>
-        <distortionK2>0.0</distortionK2>
-        <distortionK3>0.0</distortionK3>
-        <distortionT1>0.0</distortionT1>
-        <distortionT2>0.0</distortionT2>
-      </plugin>
-    </sensor>
-  </gazebo> -->
 
   <gazebo reference="left_camera_frame">
     <sensor name="depth_camera" type="depth">
