@@ -16,7 +16,7 @@
   <arg name="FILE/URDF"                   default="$(find potbot_example)/urdf/megarover3.urdf.xacro"/>
   <arg name="FILE/MAP"                    default="$(find potbot_description)/maps/garage.yaml"/>
   <arg name="FILE/FUSION"                 default="$(find potbot_example)/config/megarover_robot_localization.yaml"/>
-  <arg name="FILE/RVIZ"                   default="$(find potbot_example)/rviz/megarover21.rviz"/>
+  <arg name="FILE/RVIZ"                   default="$(find potbot_example)/rviz/megarover3.rviz"/>
 
   <group ns="$(arg GROUP)">
 
