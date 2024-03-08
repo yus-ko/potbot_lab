@@ -17,7 +17,7 @@
 
   <group ns="$(arg GROUP)">
 
-    <include file="$(find potbot)/launch/megarover_act_amcl.launch">
+    <include file="$(find potbot_example)/launch/megarover_act_amcl.launch">
       <arg name="map_file"                value="$(find potbot_description)/maps/lab9.yaml"/>
       <arg name="USE_RVIZ"                value="false"/>
       <arg name="initial_pose_x" value="0.05"/>
@@ -35,7 +35,7 @@
       <param name="angle_max" value="1.5707963"/> -->
     <!-- </node> -->
 
-    <include file="$(find potbot)/launch/megarover_act_sensor.launch"/>
+    <include file="$(find potbot_example)/launch/megarover_act_sensor.launch"/>
 
     <!-- <node name="rosserial_python" pkg="rosserial_python" type="serial_node.py" output="screen">
       <param name="_port" value="/dev/ttyUSB0"/> 
@@ -98,7 +98,7 @@
     
     <group if="$(arg USE_RVIZ)">
       <include file="$(find potbot_rviz)/launch/rviz.launch">
-        <arg name="RVIZ_FILE"             value="megarover21.rviz"/>
+        <arg name="RVIZ_FILE"             value="$(find potbot_example)/rviz/megarover3.rviz"/>
       </include>
     </group>
 

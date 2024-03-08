@@ -8,7 +8,7 @@
     <arg name="base_frame_id" value="robot_5/camera_link" />
   </include>
 
-  <include file="$(find potbot)/launch/potbot_remote.launch">
+  <include file="$(find potbot_example)/launch/potbot_remote.launch">
     <arg name="model" value="megarover21"/>
     <arg name="multi_robot_name" value="robot_5"/>
   </include>
@@ -26,6 +26,6 @@
     <param name="TOPIC/PUB/ODOM" value="/robot_5/odom"/>
   </node>
 
-  <include file="$(find potbot)/launch/robot_localization.launch"/>
+  <include file="$(find potbot_example)/launch/robot_localization.launch"/>
 
 </launch>
