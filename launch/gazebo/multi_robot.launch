@@ -80,8 +80,8 @@
   <!-- megarover ver3.0 -->
   <include file="$(find potbot_example)/launch/gazebo/spawn_robot.launch">
     <arg name="tf_prefix"       value="robot_6"/>
-    <!-- <arg name="model"           value="$(find megarover_description)/urdf/mega3.xacro"/> -->
     <arg name="model"           value="$(find potbot_example)/urdf/megarover3.urdf.xacro"/>
+    <!-- <arg name="model"           value="$(find potbot_example)/urdf/megarover3_mesh.urdf.xacro"/> -->
     <arg name="x_pos"           value="2"/>
     <arg name="y_pos"           value="2.2"/>
     <arg name="z_pos"           value="0.01"/>

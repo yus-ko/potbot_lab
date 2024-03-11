@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="megarover3_sim" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="megarover3" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:arg name="laser_visual"  default="false"/>
   <xacro:arg name="camera_visual" default="false"/>
   <xacro:arg name="imu_visual"    default="false"/>
@@ -14,26 +14,43 @@
       <xacro:property name="imu_frame" value="$(arg tf_prefix)/imu_link" />
   </xacro:unless>
 
-  <gazebo reference="base_link">
-    <selfCollide>false</selfCollide>
-    <mu1 value="0.0" />
-    <mu2 value="0.0" />
+  <gazebo reference="camera_stay_link">
+    <material>Gazebo/Grey</material>
   </gazebo>
 
-  <gazebo reference="wheel_left_link">
-    <selfCollide>false</selfCollide>
-    <mu1 value="1.0" />
-    <mu2 value="1.0" />
+  <xacro:property name="body_color" value="Gazebo/Silver" />
+  <xacro:property name="wheel_color" value="Gazebo/DarkGrey" />
+
+  <gazebo reference="base_link">
+    <material>${body_color}</material>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <kp>1e6</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
   </gazebo>
 
   <gazebo reference="wheel_right_link">
-    <selfCollide>false</selfCollide>
-    <mu1 value="1.0" />
-    <mu2 value="1.0" />
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <fdir1>1 0 0</fdir1>
+    <kp>1e6</kp>
+    <kd>10.0</kd>
+    <minDepth>0.0001</minDepth>
+    <maxVel>0.1</maxVel>
+    <material>${wheel_color}</material>
   </gazebo>
 
-  <gazebo reference="camera_stay_link">
-    <material>Gazebo/Grey</material>
+  <gazebo reference="wheel_left_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <fdir1>1 0 0</fdir1>
+    <kp>1e6</kp>
+    <kd>10.0</kd>
+    <minDepth>0.0001</minDepth>
+    <maxVel>0.1</maxVel>
+    <material>${wheel_color}</material>
   </gazebo>
 
   <gazebo>
@@ -46,18 +63,22 @@
       <robotBaseFrame>base_footprint</robotBaseFrame>
       <publishWheelTF>true</publishWheelTF>
       <publishTf>true</publishTf>
-      <publishWheelJointState>true</publishWheelJointState>
+      <publishWheelJointState>false</publishWheelJointState>
       <legacyMode>false</legacyMode>
       <updateRate>30</updateRate>
       <leftJoint>wheel_left_joint</leftJoint>
       <rightJoint>wheel_right_joint</rightJoint>
-      <wheelSeparation>0.284</wheelSeparation>
-      <wheelDiameter>0.152</wheelDiameter>
-      <!-- <wheelAcceleration>1</wheelAcceleration> -->
-      <!-- <wheelTorque>10</wheelTorque> -->
+      <wheelSeparation>0.272</wheelSeparation>
+      <wheelDiameter>0.140</wheelDiameter>
+      <wheelAcceleration>1.0</wheelAcceleration>
+      <wheelTorque>30</wheelTorque>
       <rosDebugLevel>na</rosDebugLevel>
     </plugin>
   </gazebo>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so" />
+  </gazebo> 
 
   <gazebo reference="base_scan">
     <sensor type="ray" name="urg_lrf_sensor">

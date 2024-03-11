@@ -13,9 +13,11 @@
   <arg name="TOPIC/SCAN"                  default="scan"/>
   <arg name="TOPIC/ODOM"                  default="odom/fusion"/>
   <arg name="TOPIC/CMD_VEL"               default="cmd_vel"/>
+  <arg name="TOPIC/PCL2"                  default="realsense/depth/points"/>
+  <arg name="DEPTH_PCL_CLUSTERING_METHOD" default="Euclidean"/>
   <arg name="FILE/URDF"                   default="$(find potbot_example)/urdf/megarover3.urdf.xacro"/>
   <arg name="FILE/MAP"                    default="$(find potbot_description)/maps/garage.yaml"/>
-  <arg name="FILE/FUSION"                 default="$(find potbot_example)/config/megarover_robot_localization.yaml"/>
+  <arg name="FILE/FUSION"                 default="$(find potbot_example)/config/megarover3_robot_localization.yaml"/>
   <arg name="FILE/RVIZ"                   default="$(find potbot_example)/rviz/megarover3.rviz"/>
 
   <group ns="$(arg GROUP)">
@@ -27,9 +29,9 @@
 
     <include file="$(find potbot)/launch/env/amcl.launch">
       <arg name="map_file"                value="$(arg FILE/MAP)"/>
-      <arg name="initial_pose_x"          value="0.0"/>
-      <arg name="initial_pose_y"          value="0.0"/>
-      <arg name="initial_pose_a"          value="0.0"/>
+      <arg name="initial_pose_x"          value="2.0"/>
+      <arg name="initial_pose_y"          value="2.2"/>
+      <arg name="initial_pose_a"          value="-1.57"/>
       <arg name="odom_frame_id"           value="$(arg FRAME_ID/ODOM)"/>
       <arg name="base_frame_id"           value="$(arg FRAME_ID/ROBOT_BASE)"/>
     </include>
@@ -40,19 +42,21 @@
     </node>
 
     <include file="$(find potbot)/launch/env/potbot.launch">
-      <arg name="GROUP"                   value="$(arg GROUP)"/>
-      <arg name="USE_RVIZ"                value="$(arg USE_RVIZ)"/>
-      <arg name="PUBLISH_COMMAND"         value="$(arg PUBLISH_COMMAND)"/>
-      <arg name="FRAME_ID/GLOBAL"         value="$(arg FRAME_ID/GLOBAL)"/>
-      <arg name="FRAME_ID/ROBOT_BASE"     value="$(arg FRAME_ID/ROBOT_BASE)"/>
-      <arg name="FRAME_ID/LIDAR"          value="$(arg FRAME_ID/LIDAR)"/>
-      <arg name="TARGET/POSITION/X"       value="$(arg TARGET/POSITION/X)"/>
-      <arg name="TARGET/POSITION/Y"       value="$(arg TARGET/POSITION/Y)"/>
-      <arg name="TARGET/POSITION/YAW"     value="$(arg TARGET/POSITION/YAW)"/>
-      <arg name="TOPIC/SCAN"              value="$(arg TOPIC/SCAN)"/>
-      <arg name="TOPIC/ODOM"              value="$(arg TOPIC/ODOM)"/>
-      <arg name="TOPIC/CMD_VEL"           value="$(arg TOPIC/CMD_VEL)"/>
-      <arg name="FILE/RVIZ"               value="$(arg FILE/RVIZ)"/>
+      <arg name="GROUP"                         value="$(arg GROUP)"/>
+      <arg name="USE_RVIZ"                      value="$(arg USE_RVIZ)"/>
+      <arg name="PUBLISH_COMMAND"               value="$(arg PUBLISH_COMMAND)"/>
+      <arg name="FRAME_ID/GLOBAL"               value="$(arg FRAME_ID/GLOBAL)"/>
+      <arg name="FRAME_ID/ROBOT_BASE"           value="$(arg FRAME_ID/ROBOT_BASE)"/>
+      <arg name="FRAME_ID/LIDAR"                value="$(arg FRAME_ID/LIDAR)"/>
+      <arg name="TARGET/POSITION/X"             value="$(arg TARGET/POSITION/X)"/>
+      <arg name="TARGET/POSITION/Y"             value="$(arg TARGET/POSITION/Y)"/>
+      <arg name="TARGET/POSITION/YAW"           value="$(arg TARGET/POSITION/YAW)"/>
+      <arg name="TOPIC/SCAN"                    value="$(arg TOPIC/SCAN)"/>
+      <arg name="TOPIC/ODOM"                    value="$(arg TOPIC/ODOM)"/>
+      <arg name="TOPIC/CMD_VEL"                 value="$(arg TOPIC/CMD_VEL)"/>
+      <arg name="TOPIC/PCL2"                    value="$(arg TOPIC/PCL2)"/>
+      <arg name="DEPTH_PCL_CLUSTERING_METHOD"   value="$(arg DEPTH_PCL_CLUSTERING_METHOD)"/>
+      <arg name="FILE/RVIZ"                     value="$(arg FILE/RVIZ)"/>
     </include>
 
   </group>

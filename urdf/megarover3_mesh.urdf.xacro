@@ -1,42 +1,19 @@
 <?xml version="1.0" ?>
 <robot name="megarover3" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find megarover_samples)/urdf/common.xacro"/>
-  <!-- <xacro:include filename="$(find turtlebot3_description)/urdf/common_properties.xacro"/> -->
+  <xacro:include filename="$(find turtlebot3_description)/urdf/common_properties.xacro"/>
   <xacro:include filename="$(find potbot_example)/urdf/megarover3.gazebo.xacro"/>
-
-  <xacro:include filename="$(find megarover_description)/urdf/materials.xacro" />
-  <xacro:include filename="$(find megarover_description)/urdf/mega3.gazebo" />
-  <!-- OPTION: LRF TG30 -->
-  <!-- <xacro:include filename="$(find vs_rover_options_description)/urdf/lrf/tg30_mega3.xacro" /> -->
-  <!-- OPTION: bumper sensor -->
-  <xacro:include filename="$(find vs_rover_options_description)/urdf/bumper/bumper_mega3.xacro" />
-  <xacro:bumperbaseboard prefix="front" parent="base_link" xyz="0 0.19 0.02" z_dir="180" />
-  <xacro:bumperbaseboard prefix="back" parent="base_link" xyz="0 -0.19 0.02" z_dir="0" />
-  <!-- OPTION: camera stay -->
-  <!-- <xacro:include filename="$(find vs_rover_options_description)/urdf/cam_stay/cam_stay_mega3.xacro" /> -->
-  <!-- OPTION: Intel Realsense depth camera D435i (camera stay required) -->
-  <!-- <xacro:include filename="$(find vs_rover_options_description)/urdf/depth_cam/_d435i.urdf.xacro" />
-  <xacro:sensor_d435i parent="cam_mount_link" use_nominal_extrinsics="true">
-    <origin xyz="0.0295 0 0.0095" rpy="0 0 0" />
-  </xacro:sensor_d435i> -->
-  <!-- OPTION: AMIR 740 (disabled by default because of interference with camera stay)-->
-  <!-- <xacro:include filename="$(find amir_description)/urdf/amir_for_rover.xacro" />
-  <joint name="base_fixed" type="fixed">
-    <origin xyz="0.0 0.03 0.398" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="link0_1" />
-  </joint> -->
 
   <xacro:property name="wheel_radius" value="0.076"/>
   <xacro:property name="wheel_length" value="0.03"/>
   <xacro:property name="wheel_mass" value="0.823"/>
   
-  <link name="base_footprint" />
+  <link name="base_footprint"/>
 
   <joint name="base_joint" type="fixed">
-    <parent link="base_footprint" />
+    <parent link="base_footprint"/>
     <child link="base_link" />
-    <origin xyz="-0.1 0 0" rpy="0 0 -${M_PI/2}" />
+    <origin xyz="-0.1 0 0" rpy="0 0 -1.5708" />
   </joint>
 
   <link name="base_link">
@@ -78,7 +55,7 @@
     <origin xyz="-0.136 0.1 0.07" rpy="0 -1.5708 0" />
     <parent link="base_link" />
     <child link="wheel_left_link" />
-    <axis xyz="0.0 0.0 1.0" />
+    <axis xyz="0 0 1" />
   </joint>
 
   <link name="wheel_left_link">
@@ -114,7 +91,7 @@
     <origin xyz="0.136 0.1 0.07" rpy="0 -1.5708 0" />
     <parent link="base_link" />
     <child link="wheel_right_link" />
-    <axis xyz="0.0 0.0 1.0" />
+    <axis xyz="0 0 1" />
   </joint>
 
   <link name="wheel_right_link">
@@ -149,7 +126,7 @@
   <joint name="scan_joint" type="fixed">
     <parent link="base_link" />
     <child link="base_scan" />
-    <origin xyz="0 0.09 0.223" rpy="0 0 ${M_PI/2}"/>
+    <origin xyz="0 0.18 0.223" rpy="0 0 1.57"/>
   </joint>
 
   <!-- <link name="base_scan">
@@ -182,7 +159,7 @@
   </link>
 
   <joint name="camera_stay_joint" type="fixed">
-    <origin xyz="0 0.06 0.305" rpy="0 0 ${M_PI/2}"/>
+    <origin xyz="0 0.15 0.305" rpy="0 0 1.57"/>
     <parent link="base_link"/>
     <child link="camera_stay_link"/>
   </joint>
@@ -211,9 +188,9 @@
 
   <link name="camera_link">
     <visual>
-      <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://vs_rover_options_description/meshes/depth_cam/d435.dae" />
+        <box size="0.03 0.165 0.03"/>
       </geometry>
       <material name="white" />
     </visual>
@@ -222,6 +199,7 @@
   <joint name="imu_joint" type="fixed">
     <parent link="camera_link"/>
     <child link="imu_link"/>
+    <!-- <origin xyz="0 0 0" rpy="3.14 0 0"/> -->
     <origin xyz="0 0 0" rpy="0 1.57 0"/>
   </joint>
 
