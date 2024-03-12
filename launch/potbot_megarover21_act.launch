@@ -42,14 +42,15 @@
     <node pkg="tf" type="static_transform_publisher" name="base_footprint_tf" args="0 0 0 0 0 0 $(arg FRAME_ID/ODOM) $(arg FRAME_ID/BASE_FOOTPRINT) 100" />
     <node pkg="tf" type="static_transform_publisher" name="camera_tf" args="0 0 0 0 0 0 $(arg FRAME_ID/CAMERA) $(arg CAMERA_NAME)_link 100" />
 
-    <include file="$(find potbot)/launch/env/amcl.launch">
+    <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg FRAME_ID/GLOBAL) $(arg FRAME_ID/ODOM) 100" />
+    <!-- <include file="$(find potbot)/launch/env/amcl.launch">
       <arg name="map_file"                value="$(arg FILE/MAP)"/>
       <arg name="initial_pose_x"          value="0.0"/>
       <arg name="initial_pose_y"          value="0.0"/>
       <arg name="initial_pose_a"          value="0.0"/>
       <arg name="odom_frame_id"           value="$(arg FRAME_ID/ODOM)"/>
       <arg name="base_frame_id"           value="$(arg FRAME_ID/ROBOT_BASE)"/>
-    </include>
+    </include> -->
 
     <node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true" output="screen">
       <rosparam command="load"            file="$(arg FILE/FUSION)"/>
