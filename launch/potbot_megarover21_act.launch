@@ -10,6 +10,9 @@
   <arg name="FRAME_ID/ROBOT_BASE"         default="$(arg GROUP)/base_link"/>
   <arg name="FRAME_ID/LIDAR"              default="$(arg GROUP)/base_scan"/>
   <arg name="FRAME_ID/CAMERA"             default="$(arg GROUP)/camera_link"/>
+  <arg name="INITIAL/POSE/X"              default="0"/>
+  <arg name="INITIAL/POSE/Y"              default="0"/>
+  <arg name="INITIAL/POSE/YAW"            default="0"/>
   <arg name="TARGET/POSITION/X"           default="0"/>
   <arg name="TARGET/POSITION/Y"           default="0"/>
   <arg name="TARGET/POSITION/YAW"         default="0"/>
@@ -33,7 +36,11 @@
       <arg name="FRAME_ID/ODOM"           value="$(arg FRAME_ID/ODOM)"/>
       <arg name="FRAME_ID/BASE_FOOTPRINT" value="$(arg FRAME_ID/BASE_FOOTPRINT)"/>
       <arg name="FRAME_ID/ROBOT_BASE"     value="$(arg FRAME_ID/ROBOT_BASE)"/>
+      <arg name="TOPIC/INITIAL_POSE"      value="$(arg TOPIC/INITIAL_POSE)"/>
       <arg name="TOPIC/CMD_VEL"           value="$(arg TOPIC/CMD_VEL)"/>
+      <param name="INITIAL/POSE/X"        value="$(arg INITIAL/POSE/X)"/>
+      <param name="INITIAL/POSE/Y"        value="$(arg INITIAL/POSE/Y)"/>
+      <param name="INITIAL/POSE/YAW"      value="$(arg INITIAL/POSE/YAW)"/>
     </include>
 
     <include file="$(find potbot)/launch/env/remote.launch">
@@ -48,9 +55,9 @@
     <!-- <include file="$(find potbot)/launch/env/amcl.launch">
       <arg name="map_file"                value="$(arg FILE/MAP)"/>
       <arg name="initial_pose_topic"      value="$(arg TOPIC/INITIAL_POSE)"/>
-      <arg name="initial_pose_x"          value="0.0"/>
-      <arg name="initial_pose_y"          value="0.0"/>
-      <arg name="initial_pose_a"          value="0.0"/>
+      <arg name="initial_pose_x"          value="$(arg INITIAL/POSE/X)"/>
+      <arg name="initial_pose_y"          value="$(arg INITIAL/POSE/Y)"/>
+      <arg name="initial_pose_a"          value="$(arg INITIAL/POSE/YAW)"/>
       <arg name="odom_frame_id"           value="$(arg FRAME_ID/ODOM)"/>
       <arg name="base_frame_id"           value="$(arg FRAME_ID/ROBOT_BASE)"/>
     </include> -->

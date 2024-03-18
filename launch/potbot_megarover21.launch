@@ -7,6 +7,9 @@
   <arg name="FRAME_ID/ODOM"               default="$(arg GROUP)/odom"/>
   <arg name="FRAME_ID/ROBOT_BASE"         default="$(arg GROUP)/base_link"/>
   <arg name="FRAME_ID/LIDAR"              default="$(arg GROUP)/base_scan"/>
+  <arg name="INITIAL/POSE/X"              default="2"/>
+  <arg name="INITIAL/POSE/Y"              default="6"/>
+  <arg name="INITIAL/POSE/YAW"            default="-1.57"/>
   <arg name="TARGET/POSITION/X"           default="0"/>
   <arg name="TARGET/POSITION/Y"           default="0"/>
   <arg name="TARGET/POSITION/YAW"         default="0"/>
@@ -34,9 +37,9 @@
     <include file="$(find potbot)/launch/env/amcl.launch">
       <arg name="map_file"                value="$(arg FILE/MAP)"/>
       <arg name="initial_pose_topic"      value="$(arg TOPIC/INITIAL_POSE)"/>
-      <arg name="initial_pose_x"          value="2.0"/>
-      <arg name="initial_pose_y"          value="6"/>
-      <arg name="initial_pose_a"          value="-1.57"/>
+      <arg name="initial_pose_x"          value="$(arg INITIAL/POSE/X)"/>
+      <arg name="initial_pose_y"          value="$(arg INITIAL/POSE/Y)"/>
+      <arg name="initial_pose_a"          value="$(arg INITIAL/POSE/YAW)"/>
       <arg name="odom_frame_id"           value="$(arg FRAME_ID/ODOM)"/>
       <arg name="base_frame_id"           value="$(arg FRAME_ID/ROBOT_BASE)"/>
     </include>
