@@ -16,6 +16,8 @@
   <arg name="TOPIC/SCAN"                  default="scan"/>
   <arg name="TOPIC/ODOM"                  default="odom/fusion"/>
   <arg name="TOPIC/CMD_VEL"               default="cmd_vel"/>
+  <arg name="TOPIC/GOAL"                  default="/$(arg GROUP)/goal"/>
+  <arg name="TOPIC/INITIAL_POSE"          default="/$(arg GROUP)/initialpose"/>
   <arg name="TOPIC/PCL2"                  default="$(arg CAMERA_NAME)/points/data_raw"/>
   <arg name="DEPTH_PCL_CLUSTERING_METHOD" default="Euclidean"/>
   <arg name="FILE/URDF"                   default="$(find potbot_example)/urdf/megarover21.urdf.xacro"/>
@@ -45,6 +47,7 @@
     <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg FRAME_ID/GLOBAL) $(arg FRAME_ID/ODOM) 100" />
     <!-- <include file="$(find potbot)/launch/env/amcl.launch">
       <arg name="map_file"                value="$(arg FILE/MAP)"/>
+      <arg name="initial_pose_topic"      value="$(arg TOPIC/INITIAL_POSE)"/>
       <arg name="initial_pose_x"          value="0.0"/>
       <arg name="initial_pose_y"          value="0.0"/>
       <arg name="initial_pose_a"          value="0.0"/>
@@ -70,6 +73,7 @@
       <arg name="TOPIC/SCAN"                    value="$(arg TOPIC/SCAN)"/>
       <arg name="TOPIC/ODOM"                    value="$(arg TOPIC/ODOM)"/>
       <arg name="TOPIC/CMD_VEL"                 value="$(arg TOPIC/CMD_VEL)"/>
+      <arg name="TOPIC/GOAL"                    value="$(arg TOPIC/GOAL)"/>
       <arg name="TOPIC/PCL2"                    value="$(arg TOPIC/PCL2)"/>
       <arg name="DEPTH_PCL_CLUSTERING_METHOD"   value="$(arg DEPTH_PCL_CLUSTERING_METHOD)"/>
       <arg name="FILE/RVIZ"                     value="$(arg FILE/RVIZ)"/>
