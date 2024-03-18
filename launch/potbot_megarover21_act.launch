@@ -13,9 +13,9 @@
   <arg name="TARGET/POSITION/X"           default="0"/>
   <arg name="TARGET/POSITION/Y"           default="0"/>
   <arg name="TARGET/POSITION/YAW"         default="0"/>
-  <arg name="TOPIC/SCAN"                  default="scan"/>
-  <arg name="TOPIC/ODOM"                  default="odom/fusion"/>
-  <arg name="TOPIC/CMD_VEL"               default="cmd_vel"/>
+  <arg name="TOPIC/SCAN"                  default="/$(arg GROUP)/scan"/>
+  <arg name="TOPIC/ODOM"                  default="/$(arg GROUP)/odom/fusion"/>
+  <arg name="TOPIC/CMD_VEL"               default="/$(arg GROUP)/cmd_vel2"/>
   <arg name="TOPIC/GOAL"                  default="/$(arg GROUP)/goal"/>
   <arg name="TOPIC/INITIAL_POSE"          default="/$(arg GROUP)/initialpose"/>
   <arg name="TOPIC/PCL2"                  default="$(arg CAMERA_NAME)/points/data_raw"/>
