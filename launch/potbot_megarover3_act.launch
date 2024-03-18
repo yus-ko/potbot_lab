@@ -10,18 +10,25 @@
   <arg name="FRAME_ID/ROBOT_BASE"         default="$(arg GROUP)/base_link"/>
   <arg name="FRAME_ID/LIDAR"              default="$(arg GROUP)/base_scan"/>
   <arg name="FRAME_ID/CAMERA"             default="$(arg GROUP)/camera_link"/>
+  <arg name="INITIAL/POSE/X"              default="6"/>
+  <arg name="INITIAL/POSE/Y"              default="0"/>
+  <arg name="INITIAL/POSE/YAW"            default="3.14"/>
   <arg name="TARGET/POSITION/X"           default="0"/>
   <arg name="TARGET/POSITION/Y"           default="0"/>
   <arg name="TARGET/POSITION/YAW"         default="0"/>
-  <arg name="TOPIC/SCAN"                  default="scan"/>
-  <arg name="TOPIC/ODOM"                  default="odom/fusion"/>
-  <arg name="TOPIC/CMD_VEL"               default="cmd_vel"/>
+  <arg name="MAX_LINEAR_VELOCITY"         default="0.2"/>
+  <arg name="MAX_ANGULAR_VELOCITY"        default="0.3"/>
+  <arg name="TOPIC/SCAN"                  default="/$(arg GROUP)/scan"/>
+  <arg name="TOPIC/ODOM"                  default="/$(arg GROUP)/odom/fusion"/>
+  <arg name="TOPIC/CMD_VEL"               default="/$(arg GROUP)/cmd_vel"/>
+  <arg name="TOPIC/GOAL"                  default="/$(arg GROUP)/goal"/>
+  <arg name="TOPIC/INITIAL_POSE"          default="/$(arg GROUP)/initialpose"/>
   <arg name="TOPIC/PCL2"                  default="$(arg CAMERA_NAME)/depth/points"/>
   <arg name="DEPTH_PCL_CLUSTERING_METHOD" default="Euclidean"/>
   <arg name="FILE/URDF"                   default="$(find potbot_example)/urdf/megarover3.urdf.xacro"/>
   <arg name="FILE/MAP"                    default="$(find potbot_description)/maps/lab9.yaml"/>
   <arg name="FILE/FUSION"                 default="$(find potbot_example)/config/megarover3_act_robot_localization.yaml"/>
-  <arg name="FILE/RVIZ"                   default="$(find potbot_example)/rviz/megarover3.rviz"/>
+  <arg name="FILE/RVIZ"                   default="$(find potbot_example)/rviz/megarover21.rviz"/>
 
   <group ns="$(arg GROUP)">
 
@@ -31,7 +38,11 @@
       <arg name="FRAME_ID/ODOM"           value="$(arg FRAME_ID/ODOM)"/>
       <arg name="FRAME_ID/BASE_FOOTPRINT" value="$(arg FRAME_ID/BASE_FOOTPRINT)"/>
       <arg name="FRAME_ID/ROBOT_BASE"     value="$(arg FRAME_ID/ROBOT_BASE)"/>
+      <arg name="TOPIC/INITIAL_POSE"      value="$(arg TOPIC/INITIAL_POSE)"/>
       <arg name="TOPIC/CMD_VEL"           value="$(arg TOPIC/CMD_VEL)"/>
+      <arg name="INITIAL/POSE/X"          value="$(arg INITIAL/POSE/X)"/>
+      <arg name="INITIAL/POSE/Y"          value="$(arg INITIAL/POSE/Y)"/>
+      <arg name="INITIAL/POSE/YAW"        value="$(arg INITIAL/POSE/YAW)"/>
     </include>
 
     <include file="$(find potbot)/launch/env/remote.launch">
@@ -42,14 +53,16 @@
     <node pkg="tf" type="static_transform_publisher" name="base_footprint_tf" args="0 0 0 0 0 0 $(arg FRAME_ID/ODOM) $(arg FRAME_ID/BASE_FOOTPRINT) 100" />
     <node pkg="tf" type="static_transform_publisher" name="camera_tf" args="0 0 0 0 0 0 $(arg FRAME_ID/CAMERA) $(arg CAMERA_NAME)_link 100" />
 
-    <include file="$(find potbot)/launch/env/amcl.launch">
+    <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg FRAME_ID/GLOBAL) $(arg FRAME_ID/ODOM) 100" />
+    <!-- <include file="$(find potbot)/launch/env/amcl.launch">
       <arg name="map_file"                value="$(arg FILE/MAP)"/>
-      <arg name="initial_pose_x"          value="0.0"/>
-      <arg name="initial_pose_y"          value="0.0"/>
-      <arg name="initial_pose_a"          value="0.0"/>
+      <arg name="initial_pose_topic"      value="$(arg TOPIC/INITIAL_POSE)"/>
+      <arg name="initial_pose_x"          value="$(arg INITIAL/POSE/X)"/>
+      <arg name="initial_pose_y"          value="$(arg INITIAL/POSE/Y)"/>
+      <arg name="initial_pose_a"          value="$(arg INITIAL/POSE/YAW)"/>
       <arg name="odom_frame_id"           value="$(arg FRAME_ID/ODOM)"/>
       <arg name="base_frame_id"           value="$(arg FRAME_ID/ROBOT_BASE)"/>
-    </include>
+    </include> -->
 
     <node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true" output="screen">
       <rosparam command="load"            file="$(arg FILE/FUSION)"/>
@@ -66,9 +79,12 @@
       <arg name="TARGET/POSITION/X"             value="$(arg TARGET/POSITION/X)"/>
       <arg name="TARGET/POSITION/Y"             value="$(arg TARGET/POSITION/Y)"/>
       <arg name="TARGET/POSITION/YAW"           value="$(arg TARGET/POSITION/YAW)"/>
+      <arg name="MAX_LINEAR_VELOCITY"           value="$(arg MAX_LINEAR_VELOCITY)"/>
+      <arg name="MAX_ANGULAR_VELOCITY"          value="$(arg MAX_ANGULAR_VELOCITY)"/>
       <arg name="TOPIC/SCAN"                    value="$(arg TOPIC/SCAN)"/>
       <arg name="TOPIC/ODOM"                    value="$(arg TOPIC/ODOM)"/>
       <arg name="TOPIC/CMD_VEL"                 value="$(arg TOPIC/CMD_VEL)"/>
+      <arg name="TOPIC/GOAL"                    value="$(arg TOPIC/GOAL)"/>
       <arg name="TOPIC/PCL2"                    value="$(arg TOPIC/PCL2)"/>
       <arg name="DEPTH_PCL_CLUSTERING_METHOD"   value="$(arg DEPTH_PCL_CLUSTERING_METHOD)"/>
       <arg name="FILE/RVIZ"                     value="$(arg FILE/RVIZ)"/>
