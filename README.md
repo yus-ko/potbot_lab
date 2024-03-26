@@ -15,13 +15,17 @@ git clone https://github.com/yus-ko/multiple_robots_slam
 ```
 ```bash
 cd ~/catkin_ws
-catkin build megarover_samples vs_rover_options_description megarover_description multiple_robots_slam
+catkin build megarover_samples vs_rover_options_description megarover_description multi_turtlebot_gazebo
 ```
 
 # 起動方法
 
-**multi_robot.launch**
+```bash
+roslaunch potbot_example multi_robot.launch
+```
 gazebo環境
-  
-**potbot_megarover21.launch**
+
+```bash  
+potbot_megarover21.launch
+```
 potbot起動
