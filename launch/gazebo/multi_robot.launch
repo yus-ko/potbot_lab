@@ -5,32 +5,57 @@
   <arg name="world_name" default="$(find potbot_description)/worlds/willowgarage.world"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(arg world_name)"/>
-    <arg name="paused" value="false"/>
-    <arg name="use_sim_time" value="true"/>
-    <arg name="gui" value="true"/>
-    <arg name="headless" value="false"/>
-    <arg name="debug" value="false"/>
+    <arg name="world_name"      value="$(arg world_name)"/>
+    <arg name="paused"          value="false"/>
+    <arg name="use_sim_time"    value="true"/>
+    <arg name="gui"             value="true"/>
+    <arg name="headless"        value="false"/>
+    <arg name="debug"           value="false"/>
   </include>
 
   <!-- turtlebot3 waffle_pi -->
-  <!-- <include file="$(find potbot)/launch/gazebo/spawn_turtlebot3.launch">
-    <arg name="tf_prefix" value="robot_0"/>
-    <arg name="model" value="waffle_pi"/>
-    <arg name="laser_visual" value="true"/>
-    <arg name="imu_visual" value="false"/>
-    <arg name="camera_visual" value="true"/>
-  </include> -->
+  <include file="$(find potbot)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
+    <arg name="tf_prefix"       value="robot_0"/>
+    <arg name="model"           value="waffle_pi"/>
+    <arg name="laser_visual"    value="false"/>
+    <arg name="imu_visual"      value="false"/>
+    <arg name="camera_visual"   value="true"/>
+    <arg name="x_pos"           value="2"/>
+    <arg name="y_pos"           value="6"/>
+    <arg name="z_pos"           value="0.01"/>
+    <arg name="yaw"             value="-1.57"/>
+  </include>
 
   <!-- turtlebot3 burger -->
-  <!-- <include file="$(find potbot)/launch/gazebo/spawn_turtlebot3.launch">
-    <arg name="tf_prefix" value="robot_1"/>
-    <arg name="model" value="burger"/>
-    <arg name="y_pos" value="0.5"/>
-  </include> -->
-  
+  <include file="$(find potbot)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
+    <arg name="tf_prefix"       value="robot_1"/>
+    <arg name="model"           value="burger"/>
+    <arg name="x_pos"           value="2"/>
+    <arg name="y_pos"           value="1"/>
+    <arg name="z_pos"           value="0.01"/>
+    <arg name="yaw"             value="1.57"/>
+  </include>
+
+  <include file="$(find potbot)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
+    <arg name="tf_prefix"       value="robot_2"/>
+    <arg name="model"           value="burger"/>
+    <arg name="x_pos"           value="1.3"/>
+    <arg name="y_pos"           value="0"/>
+    <arg name="z_pos"           value="0.01"/>
+    <arg name="yaw"             value="1.57"/>
+  </include>
+
+  <include file="$(find potbot)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
+    <arg name="tf_prefix"       value="robot_3"/>
+    <arg name="model"           value="burger"/>
+    <arg name="x_pos"           value="2.7"/>
+    <arg name="y_pos"           value="0"/>
+    <arg name="z_pos"           value="0.01"/>
+    <arg name="yaw"             value="1.57"/>
+  </include>
+
   <!-- turtlebot3 waffle -->
-  <!-- <include file="$(find potbot)/launch/gazebo/spawn_turtlebot3.launch">
+  <!-- <include file="$(find potbot)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
     <arg name="tf_prefix" value="robot_2"/>
     <arg name="model" value="waffle"/>
     <arg name="x_pos" value="6"/>
@@ -67,7 +92,7 @@
   <node name="controller_spawner_pan" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/robot_4" args="pan tilt joint_state_controller"/> -->
 
   <!-- megarover ver2.1 -->
-  <include file="$(find potbot_example)/launch/gazebo/spawn_robot.launch">
+  <!-- <include file="$(find potbot_example)/launch/gazebo/spawn_robot.launch">
     <arg name="tf_prefix"       value="robot_5"/>
     <arg name="model"           value="$(find potbot_example)/urdf/megarover21.urdf.xacro"/>
     <arg name="x_pos"           value="2"/>
@@ -75,18 +100,18 @@
     <arg name="z_pos"           value="0.01"/>
     <arg name="yaw"             value="-1.57"/>
     <arg name="camera_visual"   value="true"/>
-  </include>
+  </include> -->
 
   <!-- megarover ver3.0 -->
-  <include file="$(find potbot_example)/launch/gazebo/spawn_robot.launch">
+  <!-- <include file="$(find potbot_example)/launch/gazebo/spawn_robot.launch">
     <arg name="tf_prefix"       value="robot_6"/>
     <arg name="model"           value="$(find potbot_example)/urdf/megarover3.urdf.xacro"/>
-    <!-- <arg name="model"           value="$(find potbot_example)/urdf/megarover3_mesh.urdf.xacro"/> -->
+    <arg name="model"           value="$(find potbot_example)/urdf/megarover3_mesh.urdf.xacro"/>
     <arg name="x_pos"           value="2"/>
     <arg name="y_pos"           value="0"/>
     <arg name="z_pos"           value="0.01"/>
     <arg name="yaw"             value="1.57"/>
     <arg name="camera_visual"   value="true"/>
-  </include>
+  </include> -->
 
 </launch>
