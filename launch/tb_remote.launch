@@ -1,7 +1,7 @@
 <launch>
   <arg name="GROUP"                       default="robot_0"/>
-  <arg name="FILE/URDF"                   default="$(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro"/>
-  <arg name="FILE/RVIZ"                   default="$(find potbot_description)/rviz/waffle_pi.rviz"/>
+  <arg name="FILE/URDF"                   default="$(find turtlebot3_description)/urdf/turtlebot3_waffle.urdf.xacro"/>
+  <arg name="FILE/RVIZ"                   default="$(find potbot_description)/rviz/waffle.rviz"/>
 
   <group ns="$(arg GROUP)">
 
