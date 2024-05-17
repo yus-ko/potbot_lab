@@ -1,0 +1,12 @@
+<launch>
+  <arg name="multi_robot"                       default="robot_0"/>
+
+  <group ns="$(arg multi_robot)">
+
+    <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch">
+      <arg name="multi_robot_name" value="$(arg multi_robot)"/>
+      <arg name="set_lidar_frame_id" default="base_scan"/>
+    </include>
+
+  </group>
+</launch>
