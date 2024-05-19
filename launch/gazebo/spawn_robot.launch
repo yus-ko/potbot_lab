@@ -1,5 +1,4 @@
 <launch>
-	<env name="GAZEBO_MODEL_PATH" value="$(find potbot_description)/models:$(optenv GAZEBO_MODEL_PATH)"/>
   <arg name="model" default="$(find potbot_description)/urdf/megarover21.urdf.xacro"/>
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
