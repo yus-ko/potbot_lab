@@ -1,5 +1,6 @@
 <launch>
-  <arg name="multi_robot"                       default="robot_0"/>
+  <arg name="multi_robot" default="robot_0"/>
+  <arg name="set_lidar_frame_id" default="$(arg multi_robot)/base_scan"/>
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
 
   <group ns="$(arg multi_robot)">
