@@ -66,7 +66,7 @@
     <sensor type="ray" name="urg_lrf_sensor">
       <pose>0 0 0 0 0 0</pose>
       <visualize>$(arg laser_visual)</visualize>
-      <update_rate>40</update_rate>
+      <update_rate>5</update_rate>
       <ray>
         <scan>
           <horizontal>
