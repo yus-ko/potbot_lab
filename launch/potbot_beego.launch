@@ -28,7 +28,7 @@
       <arg name="multi_robot_name"        value="$(arg multi_robot)"/>
     </include>
 
-    <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg frame_id_global) $(arg frame_id_odom) 100" />
+    <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg frame_id_global) $(arg frame_id_odom) 30" />
 
     <include file="$(find potbot)/launch/env/potbot.launch">
       <arg name="use_rviz"                value="$(arg use_rviz)"/>
