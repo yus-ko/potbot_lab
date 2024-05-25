@@ -16,22 +16,26 @@
   <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
   <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
   
-  <include file="$(find potbot_example)/launch/navigation/navigation.launch">
-    <arg name="multi_robot"                   value="$(arg multi_robot)"/>
-    <arg name="localization_method"           value="$(arg localization_method)"/>
-    <arg name="frame_id_global"               value="$(arg frame_id_global)"/>
-    <arg name="frame_id_odom"                 value="$(arg frame_id_odom)"/>
-    <arg name="frame_id_base_footprint"       value="$(arg frame_id_base_footprint)"/>
-    <arg name="frame_id_scan"                 value="$(arg frame_id_scan)"/>
-    <arg name="topic_scan"                    value="$(arg topic_scan)"/>
-    <arg name="topic_odom"                    value="$(arg topic_odom)"/>
-    <arg name="topic_cmd"                     value="$(arg topic_cmd)"/>
-    <arg name="initial_pose_x"                value="$(arg initial_pose_x)"/>
-    <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
-    <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>
-    <arg name="file_urdf"                     value="$(arg file_urdf)"/>
-    <arg name="file_map"                      value="$(arg file_map)"/>
-    <arg name="file_rviz"                     value="$(arg file_rviz)"/>
-  </include>
+  <group ns="$(arg multi_robot)">
+
+    <include file="$(find potbot_example)/launch/navigation/navigation.launch">
+      <arg name="multi_robot"                   value="$(arg multi_robot)"/>
+      <arg name="localization_method"           value="$(arg localization_method)"/>
+      <arg name="frame_id_global"               value="$(arg frame_id_global)"/>
+      <arg name="frame_id_odom"                 value="$(arg frame_id_odom)"/>
+      <arg name="frame_id_base_footprint"       value="$(arg frame_id_base_footprint)"/>
+      <arg name="frame_id_scan"                 value="$(arg frame_id_scan)"/>
+      <arg name="topic_scan"                    value="$(arg topic_scan)"/>
+      <arg name="topic_odom"                    value="$(arg topic_odom)"/>
+      <arg name="topic_cmd"                     value="$(arg topic_cmd)"/>
+      <arg name="initial_pose_x"                value="$(arg initial_pose_x)"/>
+      <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
+      <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>
+      <arg name="file_urdf"                     value="$(arg file_urdf)"/>
+      <arg name="file_map"                      value="$(arg file_map)"/>
+      <arg name="file_rviz"                     value="$(arg file_rviz)"/>
+    </include>
+
+  </group>
 
 </launch>
