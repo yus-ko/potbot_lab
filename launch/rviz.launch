@@ -1,0 +1,9 @@
+<launch>
+  <arg name="multi_robot"                 default="robot_0"/>
+  <arg name="file_rviz"                   default="$(find potbot_example)/rviz/navigation.rviz"/>
+
+  <group ns="$(arg multi_robot)">
+    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(arg file_rviz)"/>
+  </group>
+
+</launch>

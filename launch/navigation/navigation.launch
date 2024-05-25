@@ -1,0 +1,98 @@
+<launch>
+  <arg name="multi_robot"                     default="robot_0"/>
+  <arg name="localization_method"             default="odom"/> <!-- odom, amcl, gmapping -->
+  <arg name="frame_id_global"                 default="map"/>
+  <arg name="frame_id_odom"                   default="$(arg multi_robot)/odom"/>
+  <arg name="frame_id_base_footprint"         default="$(arg multi_robot)/base_footprint"/>
+  <arg name="frame_id_scan"                   default="$(arg multi_robot)/base_scan"/>
+  <arg name="topic_scan"                      default="/$(arg multi_robot)/scan"/>
+  <arg name="topic_odom"                      default="/$(arg multi_robot)/odom"/>
+  <arg name="topic_cmd"                       default="/$(arg multi_robot)/cmd_vel"/>
+  <arg name="model"                           default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="initial_pose_x"                  default="0"/>
+  <arg name="initial_pose_y"                  default="0"/>
+  <arg name="initial_pose_yaw"                default="0"/>
+  <arg name="file_urdf"                       default="$(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro"/>
+  <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
+  <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
+
+  <group ns = "$(arg multi_robot)">
+
+    <include file="$(find potbot_example)/launch/navigation/robot_localization.launch">
+      <arg name="frame_id_global"             value="$(arg frame_id_global)"/>
+      <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
+      <arg name="frame_id_base_footprint"     value="$(arg frame_id_base_footprint)"/>
+      <!-- <arg name="frame_id_world"              value="$(arg frame_id_odom)"/> -->
+      <arg name="file_fusion"                 value="$(find potbot_example)/config/navigation/robot_localization.yaml"/>
+    </include>
+
+    <include file="$(find potbot_example)/launch/navigation/visual_odometry.launch">
+      <arg name="topic_rgb"                   value="camera/rgb/image_raw"/>
+      <arg name="topic_info"                  value="camera/rgb/camera_info"/>
+      <arg name="topic_depth"                 value="camera/depth/image_raw"/>
+      <arg name="frame_id_camera"             value="robot_0/camera_link"/>
+      <arg name="frame_id_odom"               value="map"/>
+      <arg name="initial_pose"                value="$(arg initial_pose_x) $(arg initial_pose_y) 0 0 0 $(arg initial_pose_yaw)"/>
+    </include>
+    
+  </group>
+
+  <group if = "$(eval localization_method == 'amcl')">
+    <include file="$(find potbot_example)/launch/navigation/amcl.launch">
+      <arg name="multi_robot"                 value="$(arg multi_robot)"/>
+      <arg name="use_rviz"                    value="true"/>
+      <arg name="publish_robot_description"   value="true"/>
+      <arg name="frame_id_base_footprint"     value="$(arg frame_id_base_footprint)"/>
+      <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
+      <arg name="file_urdf"                   value="$(arg file_urdf)"/>
+      <arg name="topic_scan"                  value="$(arg topic_scan)"/>
+      <arg name="initial_pose_x"              value="$(arg initial_pose_x)"/>
+      <arg name="initial_pose_y"              value="$(arg initial_pose_y)"/>
+      <arg name="initial_pose_yaw"            value="$(arg initial_pose_yaw)"/>
+      <arg name="map_file"                    value="$(arg file_map)"/>
+      <arg name="file_rviz"                   value="$(arg file_rviz)"/>
+    </include>
+  </group>
+
+  <group if = "$(eval localization_method == 'odom')">
+    <group ns="$(arg multi_robot)">
+      <node pkg="map_server" type="map_server" name="map_server" args="$(arg file_map)"/>
+      <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg frame_id_global) $(arg frame_id_odom) 30" />
+    </group>
+  </group>
+
+  <group if = "$(eval localization_method == 'gmapping')">
+    <include file="$(find potbot_example)/launch/navigation/slam.launch">
+      <arg name="multi_robot"                 value="$(arg multi_robot)"/>
+      <arg name="use_rviz"                    value="true"/>
+      <arg name="publish_robot_description"   value="true"/>
+      <arg name="file_urdf"                   value="$(arg file_urdf)"/>
+      <arg name="set_base_frame"              value="$(arg frame_id_base_footprint)"/>
+      <arg name="set_odom_frame"              value="$(arg frame_id_odom)"/>
+      <arg name="set_map_frame"               value="$(arg frame_id_global)"/>
+    </include>
+  </group>
+  
+  <include file="$(find potbot_example)/launch/navigation/move_base.launch">
+    <arg name="multi_robot"                 value="$(arg multi_robot)"/>
+
+    <arg name="use_rviz"                    value="true" if = "$(eval localization_method == 'odom')"/>
+    <arg name="publish_robot_description"   value="true" if = "$(eval localization_method == 'odom')"/>
+
+    <arg name="use_rviz"                    value="false" unless = "$(eval localization_method == 'odom')"/>
+    <arg name="publish_robot_description"   value="false" unless = "$(eval localization_method == 'odom')"/>
+    
+    <arg name="frame_id_global"             value="$(arg frame_id_global)"/>
+    <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
+    <arg name="frame_id_base_footprint"     value="$(arg frame_id_base_footprint)"/>
+    <arg name="frame_id_scan"               value="$(arg frame_id_scan)"/>
+    <arg name="max_linear_velocity"         value="0.5"/>
+    <arg name="max_angular_velocity"        value="1.0"/>
+    <arg name="topic_scan"                  value="$(arg topic_scan)"/>
+    <arg name="topic_odom"                  value="$(arg topic_odom)"/>
+    <arg name="topic_cmd"                   value="$(arg topic_cmd)"/>
+    <arg name="file_urdf"                   value="$(arg file_urdf)"/>
+    <arg name="file_rviz"                   value="$(arg file_rviz)"/>
+  </include>
+
+</launch>

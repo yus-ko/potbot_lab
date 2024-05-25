@@ -2,13 +2,12 @@
   <arg name="use_rviz"                    default="true"/>
   <arg name="publish_robot_description"   default="true"/>
   <arg name="multi_robot"                 default="robot_0"/>
-  <arg name="set_base_frame"              default="$(arg multi_robot)/base_footprint"/>
-  <arg name="set_odom_frame"              default="$(arg multi_robot)/odom"/>
-  <arg name="set_map_frame"               default="map"/>
-  <arg name="scan_topic"                  default="scan"/>
+  <arg name="frame_id_base_footprint"     default="$(arg multi_robot)/base_footprint"/>
+  <arg name="frame_id_odom"               default="$(arg multi_robot)/odom"/>
+  <arg name="topic_scan"                  default="scan"/>
   <arg name="initial_pose_x"              default="0.0"/>
   <arg name="initial_pose_y"              default="0.0"/>
-  <arg name="initial_pose_a"              default="0.0"/>
+  <arg name="initial_pose_yaw"            default="0.0"/>
   <arg name="map_file"                    default="$(find potbot_description)/maps/garage.yaml"/>
   <arg name="file_urdf"                   default="$(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro"/>
   <arg name="file_rviz"                   default="$(find potbot_example)/rviz/navigation.rviz"/>
@@ -25,12 +24,12 @@
     <!-- AMCL -->
     <node pkg="amcl" type="amcl" name="amcl">
       <rosparam command="load" file="$(find potbot_example)/config/navigation/amcl.yaml" />
-      <remap from="scan"                      to="$(arg scan_topic)"/>
-      <param name="odom_frame_id"             value="$(arg set_odom_frame)"/>
-      <param name="base_frame_id"             value="$(arg set_base_frame)"/>
+      <remap from="scan"                      to="$(arg topic_scan)"/>
+      <param name="odom_frame_id"             value="$(arg frame_id_odom)"/>
+      <param name="base_frame_id"             value="$(arg frame_id_base_footprint)"/>
       <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>
       <param name="initial_pose_y"            value="$(arg initial_pose_y)"/>
-      <param name="initial_pose_a"            value="$(arg initial_pose_a)"/>
+      <param name="initial_pose_a"            value="$(arg initial_pose_yaw)"/>
     </node>
 
     <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)"/>

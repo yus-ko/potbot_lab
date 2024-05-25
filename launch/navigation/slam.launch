@@ -18,7 +18,7 @@
     </group>
 
     <!-- Gmapping -->
-    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
       <rosparam command="load" file="$(find potbot_example)/config/navigation/gmapping.yaml" />
       <param name="base_frame" value="$(arg set_base_frame)"/>
       <param name="odom_frame" value="$(arg set_odom_frame)"/>
