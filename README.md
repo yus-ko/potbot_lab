@@ -7,6 +7,10 @@
 次に以下のコマンドで必要なパッケージをインストールしてください
 
 ```bash
+sudo apt install ros-$ROS_DISTRO-gmapping ros-$ROS_DISTRO-amcl ros-$ROS_DISTRO-move-base ros-$ROS_DISTRO-map-server ros-$ROS_DISTRO-robot-localization ros-$ROS_DISTRO-rtabmap-ros
+```
+
+```bash
 cd ~/catkin_ws/src
 git clone https://github.com/vstoneofficial/megarover_samples
 git clone https://github.com/vstoneofficial/vs_rover_options_description
