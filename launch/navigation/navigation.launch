@@ -1,5 +1,6 @@
 <launch>
   <arg name="multi_robot"                     default=""/>
+  <arg name="use_rviz"                        default="true"/>
   <arg name="method_localization"             default="odom"/> <!-- odom, amcl, gmapping -->
   <arg name="method_navigation"               default="potbot"/> <!-- potbot, move_base-->
   <arg name="frame_id_global"                 default="map"/>
@@ -10,7 +11,7 @@
   <arg name="topic_odom"                      default="odom"/>
   <arg name="topic_cmd"                       default="cmd_vel"/>
   <arg name="topic_goal"                      default="/move_base_simple/goal"/>
-  <arg name="model"                           default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="model"                           default="burger"/>
   <arg name="initial_pose_x"                  default="0"/>
   <arg name="initial_pose_y"                  default="0"/>
   <arg name="initial_pose_yaw"                default="0"/>
@@ -96,6 +97,8 @@
     </include>
   </group>
 
-  <node pkg="rviz" type="rviz" name="rviz_amcl" required="true" args="-d $(arg file_rviz)"/>
+  <group if="$(arg use_rviz)">
+    <node pkg="rviz" type="rviz" name="rviz_navigation" required="true" args="-d $(arg file_rviz)"/>
+  </group>
 
 </launch>

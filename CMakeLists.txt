@@ -17,7 +17,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(${PROJECT_NAME}_twist_to_odometry src/twist_to_odometry.cpp)
-target_link_libraries(${PROJECT_NAME}_twist_to_odometry ${catkin_LIBRARIES})
+add_executable(twist_to_odometry src/twist_to_odometry.cpp)
+target_link_libraries(twist_to_odometry ${catkin_LIBRARIES})
 
 add_definitions(-std=c++14)
