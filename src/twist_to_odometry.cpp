@@ -7,14 +7,14 @@
 // #include <tf2_ros/static_transform_broadcaster.h>
 #include <sensor_msgs/Imu.h>
 
-std::string G_FRAME_ID_MAP						= "map",
-			G_FRAME_ID_ODOM						= "odom",
-			G_FRAME_ID_BASE_FOOTPRINT			= "base_footprint",
-			G_FRAME_ID_ROBOT_BASE				= "base_link",
-			G_TOPIC_SUB_TWIST					= "cmd_vel",
-			G_TOPIC_SUB_INITPOSE				= "initialpose",
-			G_TOPIC_PUB_ODOM					= "odom",
-			G_DEAD_RECKONING					= "rectangle";
+std::string g_frame_id_odom						= "odom",
+			g_frame_id_robot_base				= "base_link",
+			g_topic_sub_twist					= "cmd_vel",
+			g_topic_sub_initpose				= "initialpose",
+			g_topic_pub_odom					= "odom",
+			g_dead_reckoning					= "rectangle";
+
+bool g_publish_tf = true;
 
 ros::Publisher g_pub_odom;
 nav_msgs::Odometry g_odom;
@@ -22,7 +22,7 @@ nav_msgs::Odometry g_odom;
 void dead_reckoning(geometry_msgs::TwistStamped vel_msg)
 {
 	g_odom.header								= vel_msg.header;
-	g_odom.child_frame_id						= G_FRAME_ID_BASE_FOOTPRINT;
+	g_odom.child_frame_id						= g_frame_id_robot_base;
 	g_odom.twist.twist							= vel_msg.twist;
 
 	static double t_pre							= g_odom.header.stamp.toSec();
@@ -35,13 +35,14 @@ void dead_reckoning(geometry_msgs::TwistStamped vel_msg)
 	static double omega_pre						= omega;
 
 	double theta,x,y;
-	if (G_DEAD_RECKONING == "rectangle")
+	if (g_dead_reckoning == "rectangle")
 	{
 		theta									= potbot_lib::utility::get_Yaw(g_odom.pose.pose.orientation) + omega*dt;
+		// theta									= potbot_lib::utility::get_Yaw(g_odom.pose.pose.orientation);
 		x										= g_odom.pose.pose.position.x + v*cos(theta)*dt;
 		y										= g_odom.pose.pose.position.y + v*sin(theta)*dt;
 	}
-	else if (G_DEAD_RECKONING == "trapezoid")
+	else if (g_dead_reckoning == "trapezoid")
 	{
 		theta									= potbot_lib::utility::get_Yaw(g_odom.pose.pose.orientation) + ((omega + omega_pre)*dt/2);
 		x										= g_odom.pose.pose.position.x + ((v + v_pre)*dt/2)*cos(theta);
@@ -79,13 +80,13 @@ void twist_callback(const geometry_msgs::Twist& msg)
 {
 	// ROS_INFO("twist callback");
 	geometry_msgs::TwistStamped tm;
-	tm.header.frame_id							= G_FRAME_ID_ODOM;
+	tm.header.frame_id							= g_frame_id_odom;
 	tm.header.stamp								= ros::Time::now();
 	tm.twist									= msg;
 
 	dead_reckoning(tm);
 
-	odom_broadcast(g_odom);
+	if (g_publish_tf) odom_broadcast(g_odom);
 	g_pub_odom.publish(g_odom);
 }
 
@@ -97,11 +98,11 @@ void pose_callback(const geometry_msgs::PoseWithCovarianceStamped& msg)
 
 void imu_callback(const sensor_msgs::Imu& msg)
 {
-	ROS_INFO("imu callback");
+	// ROS_INFO("imu callback");
 	double roll,pitch,yaw;
 	potbot_lib::utility::get_RPY(msg.orientation, roll, pitch, yaw);
-	ROS_INFO("(r,p,y) = (%f, %f, %f)", roll, pitch, yaw);
-	// g_odom.pose = msg.pose;
+	// ROS_INFO("(r,p,y) = (%f, %f, %f)", roll/M_PI*180, pitch/M_PI*180, yaw/M_PI*180);
+	g_odom.pose.pose.orientation = msg.orientation;
 
 }
 
@@ -111,13 +112,12 @@ int main(int argc,char **argv){
 	ros::NodeHandle n("~");
 	
 	double x=0,y=0,z=0,roll=0,pitch=0,yaw=0;
-	n.getParam("frame_id_map",					G_FRAME_ID_MAP);
-	n.getParam("frame_id_odom",					G_FRAME_ID_ODOM);
-	n.getParam("frame_id_base_footprint",		G_FRAME_ID_BASE_FOOTPRINT);
-	n.getParam("frame_id_robot_base",			G_FRAME_ID_ROBOT_BASE);
-	n.getParam("topic_sub_twist",				G_TOPIC_SUB_TWIST);
-	n.getParam("topic_sub_initial_pose",		G_TOPIC_SUB_INITPOSE);
-	n.getParam("topic_pub_odom",				G_TOPIC_PUB_ODOM);
+	n.getParam("publish_tf",					g_publish_tf);
+	n.getParam("frame_id_odom",					g_frame_id_odom);
+	n.getParam("frame_id_robot_base",			g_frame_id_robot_base);
+	n.getParam("topic_sub_twist",				g_topic_sub_twist);
+	n.getParam("topic_sub_initial_pose",		g_topic_sub_initpose);
+	n.getParam("topic_pub_odom",				g_topic_pub_odom);
 	n.getParam("initial_pose_x",				x);
 	n.getParam("initial_pose_y",				y);
 	n.getParam("initial_pose_z",				z);
@@ -126,10 +126,10 @@ int main(int argc,char **argv){
 	n.getParam("initial_pose_yaw",				yaw);
 
 	ros::NodeHandle nh;
-	ros::Subscriber sub_twist					= nh.subscribe(G_TOPIC_SUB_TWIST,1,&twist_callback);
-	ros::Subscriber sub_pose					= nh.subscribe(G_TOPIC_SUB_INITPOSE,1,&pose_callback);
-	// ros::Subscriber sub_imu						= nh.subscribe("/robot_5/camera/imu/data_raw",1,&imu_callback);
-	g_pub_odom									= nh.advertise<nav_msgs::Odometry>(G_TOPIC_PUB_ODOM, 1);
+	ros::Subscriber sub_twist					= nh.subscribe(g_topic_sub_twist,1,&twist_callback);
+	ros::Subscriber sub_pose					= nh.subscribe(g_topic_sub_initpose,1,&pose_callback);
+	ros::Subscriber sub_imu						= nh.subscribe("imu/data",1,&imu_callback);
+	g_pub_odom									= nh.advertise<nav_msgs::Odometry>(g_topic_pub_odom, 1);
 	
 	g_odom.pose.pose							= potbot_lib::utility::get_Pose(x,y,z,roll,pitch,yaw);
 
