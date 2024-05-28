@@ -15,6 +15,7 @@
     <param name="odom_frame_id"   value="$(arg frame_id_odom)"/>
     <param name="publish_tf"      value="false"/>
     <param name="initial_pose"    value="$(arg initial_pose)"/>
+    <param name="approx_sync"     value="false"/>
   </node>
 
 </launch>

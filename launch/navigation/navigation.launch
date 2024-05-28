@@ -7,15 +7,20 @@
   <arg name="frame_id_odom"                   default="odom"/>
   <arg name="frame_id_base_footprint"         default="base_footprint"/>
   <arg name="frame_id_scan"                   default="base_scan"/>
+  <arg name="frame_id_camera"                 default="camera_link"/>
   <arg name="topic_scan"                      default="scan"/>
   <arg name="topic_odom"                      default="odom"/>
   <arg name="topic_cmd"                       default="cmd_vel"/>
   <arg name="topic_goal"                      default="/move_base_simple/goal"/>
+  <arg name="topic_rgb"                       default="camera/rgb/image_raw"/>
+  <arg name="topic_info"                      default="camera/rgb/camera_info"/>
+  <arg name="topic_depth"                     default="camera/depth/image_raw"/>
   <arg name="model"                           default="burger"/>
   <arg name="initial_pose_x"                  default="0"/>
   <arg name="initial_pose_y"                  default="0"/>
   <arg name="initial_pose_yaw"                default="0"/>
   <arg name="file_urdf"                       default="$(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro"/>
+  <arg name="file_fusion"                     default="$(find potbot_example)/config/navigation/robot_localization.yaml"/>
   <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
   <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
 
@@ -29,15 +34,15 @@
     <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
     <arg name="frame_id_base_footprint"     value="$(arg frame_id_base_footprint)"/>
     <!-- <arg name="frame_id_world"              value="$(arg frame_id_odom)"/> -->
-    <arg name="file_fusion"                 value="$(find potbot_example)/config/navigation/robot_localization.yaml"/>
+    <arg name="file_fusion"                 value="$(arg file_fusion)"/>
   </include>
 
   <include file="$(find potbot_example)/launch/navigation/visual_odometry.launch">
-    <arg name="topic_rgb"                   value="camera/rgb/image_raw"/>
-    <arg name="topic_info"                  value="camera/rgb/camera_info"/>
-    <arg name="topic_depth"                 value="camera/depth/image_raw"/>
-    <arg name="frame_id_camera"             value="robot_0/camera_link"/>
-    <arg name="frame_id_odom"               value="map"/>
+    <arg name="topic_rgb"                   value="$(arg topic_rgb)"/>
+    <arg name="topic_info"                  value="$(arg topic_info)"/>
+    <arg name="topic_depth"                 value="$(arg topic_depth)"/>
+    <arg name="frame_id_camera"             value="$(arg frame_id_camera)"/>
+    <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
     <arg name="initial_pose"                value="$(arg initial_pose_x) $(arg initial_pose_y) 0 0 0 $(arg initial_pose_yaw)"/>
   </include>
 

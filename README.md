@@ -7,7 +7,7 @@
 次に以下のコマンドで必要なパッケージをインストールしてください
 
 ```bash
-sudo apt install ros-$ROS_DISTRO-gmapping ros-$ROS_DISTRO-amcl ros-$ROS_DISTRO-move-base ros-$ROS_DISTRO-map-server ros-$ROS_DISTRO-robot-localization ros-$ROS_DISTRO-rtabmap-ros ros-noetic-imu-tools
+sudo apt install ros-$ROS_DISTRO-gmapping ros-$ROS_DISTRO-amcl ros-$ROS_DISTRO-move-base ros-$ROS_DISTRO-map-server ros-$ROS_DISTRO-robot-localization ros-$ROS_DISTRO-rtabmap-ros ros-$ROS_DISTRO-imu-tools
 ```
 
 ```bash

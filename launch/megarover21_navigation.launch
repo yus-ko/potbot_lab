@@ -29,6 +29,10 @@
       <arg name="frame_id_odom"                 value="$(arg frame_id_odom)"/>
       <arg name="frame_id_base_footprint"       value="$(arg frame_id_base_footprint)"/>
       <arg name="frame_id_scan"                 value="$(arg frame_id_scan)"/>
+      <arg name="frame_id_camera"               value="$(arg multi_robot)/camera_link"/>
+      <arg name="topic_rgb"                     value="camera/left/image_raw"/>
+      <arg name="topic_info"                    value="camera/left/camera_info"/>
+      <arg name="topic_depth"                   value="camera/depth/image_raw"/>
       <arg name="topic_scan"                    value="$(arg topic_scan)"/>
       <arg name="topic_odom"                    value="$(arg topic_odom)"/>
       <arg name="topic_cmd"                     value="$(arg topic_cmd)"/>
@@ -37,6 +41,7 @@
       <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
       <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>
       <arg name="file_urdf"                     value="$(arg file_urdf)"/>
+      <arg name="file_fusion"                   value="$(find potbot_example)/config/megarover21/robot_localization.yaml"/>
       <arg name="file_map"                      value="$(arg file_map)"/>
       <arg name="file_rviz"                     value="$(arg file_rviz)"/>
     </include>
