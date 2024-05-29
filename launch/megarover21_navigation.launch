@@ -15,7 +15,8 @@
   <arg name="initial_pose_y"                  default="0"/>
   <arg name="initial_pose_yaw"                default="0"/>
   <arg name="file_urdf"                       default="$(find potbot_example)/urdf/megarover21.urdf.xacro"/>
-  <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
+  <!-- <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/> -->
+  <arg name="file_map"                        default="$(find potbot_example)/maps/lab.yaml"/>
   <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
 
   <group ns="$(arg multi_robot)">
@@ -30,8 +31,8 @@
       <arg name="frame_id_base_footprint"       value="$(arg frame_id_base_footprint)"/>
       <arg name="frame_id_scan"                 value="$(arg frame_id_scan)"/>
       <arg name="frame_id_camera"               value="$(arg multi_robot)/camera_link"/>
-      <arg name="topic_rgb"                     value="camera/left/image_raw"/>
-      <arg name="topic_info"                    value="camera/left/camera_info"/>
+      <arg name="topic_rgb"                     value="camera/left_rect/image_rect"/>
+      <arg name="topic_info"                    value="camera/left_rect/camera_info"/>
       <arg name="topic_depth"                   value="camera/depth/image_raw"/>
       <arg name="topic_scan"                    value="$(arg topic_scan)"/>
       <arg name="topic_odom"                    value="$(arg topic_odom)"/>

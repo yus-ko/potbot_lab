@@ -68,7 +68,9 @@
       <arg name="set_base_frame"              value="$(arg frame_id_base_footprint)"/>
       <arg name="set_odom_frame"              value="$(arg frame_id_odom)"/>
       <arg name="set_map_frame"               value="$(arg frame_id_global)"/>
+      <!-- <arg name="publish_tf"                  value="false"/> -->
     </include>
+    <!-- <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg frame_id_global) $(arg frame_id_odom) 30" /> -->
   </group>
 
   <group if = "$(eval method_navigation == 'move_base')">

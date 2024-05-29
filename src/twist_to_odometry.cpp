@@ -9,9 +9,6 @@
 
 std::string g_frame_id_odom						= "odom",
 			g_frame_id_robot_base				= "base_link",
-			g_topic_sub_twist					= "cmd_vel",
-			g_topic_sub_initpose				= "initialpose",
-			g_topic_pub_odom					= "odom",
 			g_dead_reckoning					= "rectangle";
 
 bool g_publish_tf = true;
@@ -34,19 +31,20 @@ void dead_reckoning(geometry_msgs::TwistStamped vel_msg)
 	static double v_pre							= v;
 	static double omega_pre						= omega;
 
-	double theta,x,y;
+	double theta 								= potbot_lib::utility::get_Yaw(g_odom.pose.pose.orientation);
+	double x									= g_odom.pose.pose.position.x;
+	double y 									= g_odom.pose.pose.position.y;
 	if (g_dead_reckoning == "rectangle")
 	{
-		theta									= potbot_lib::utility::get_Yaw(g_odom.pose.pose.orientation) + omega*dt;
-		// theta									= potbot_lib::utility::get_Yaw(g_odom.pose.pose.orientation);
-		x										= g_odom.pose.pose.position.x + v*cos(theta)*dt;
-		y										= g_odom.pose.pose.position.y + v*sin(theta)*dt;
+		theta									+= omega*dt;
+		x										+= v*cos(theta)*dt;
+		y										+= v*sin(theta)*dt;
 	}
 	else if (g_dead_reckoning == "trapezoid")
 	{
-		theta									= potbot_lib::utility::get_Yaw(g_odom.pose.pose.orientation) + ((omega + omega_pre)*dt/2);
-		x										= g_odom.pose.pose.position.x + ((v + v_pre)*dt/2)*cos(theta);
-		y										= g_odom.pose.pose.position.y + ((v + v_pre)*dt/2)*sin(theta);
+		theta									+= (omega + omega_pre)*dt/2;
+		x										+= ((v + v_pre)*dt/2)*cos(theta);
+		y										+= ((v + v_pre)*dt/2)*sin(theta);
 	}
 
 	g_odom.pose.pose.position.x					= x;
@@ -56,6 +54,8 @@ void dead_reckoning(geometry_msgs::TwistStamped vel_msg)
 	t_pre										= g_odom.header.stamp.toSec();
 	v_pre										= v;
 	omega_pre									= omega;
+
+	potbot_lib::utility::print_Pose(g_odom.pose.pose);
 
 }
 
@@ -115,9 +115,7 @@ int main(int argc,char **argv){
 	n.getParam("publish_tf",					g_publish_tf);
 	n.getParam("frame_id_odom",					g_frame_id_odom);
 	n.getParam("frame_id_robot_base",			g_frame_id_robot_base);
-	n.getParam("topic_sub_twist",				g_topic_sub_twist);
-	n.getParam("topic_sub_initial_pose",		g_topic_sub_initpose);
-	n.getParam("topic_pub_odom",				g_topic_pub_odom);
+	n.getParam("dead_reckoning",				g_dead_reckoning);
 	n.getParam("initial_pose_x",				x);
 	n.getParam("initial_pose_y",				y);
 	n.getParam("initial_pose_z",				z);
@@ -126,10 +124,10 @@ int main(int argc,char **argv){
 	n.getParam("initial_pose_yaw",				yaw);
 
 	ros::NodeHandle nh;
-	ros::Subscriber sub_twist					= nh.subscribe(g_topic_sub_twist,1,&twist_callback);
-	ros::Subscriber sub_pose					= nh.subscribe(g_topic_sub_initpose,1,&pose_callback);
+	ros::Subscriber sub_twist					= nh.subscribe("rover_odo",1,&twist_callback);
+	ros::Subscriber sub_pose					= nh.subscribe("initialpose",1,&pose_callback);
 	ros::Subscriber sub_imu						= nh.subscribe("imu/data",1,&imu_callback);
-	g_pub_odom									= nh.advertise<nav_msgs::Odometry>(g_topic_pub_odom, 1);
+	g_pub_odom									= nh.advertise<nav_msgs::Odometry>("odom", 1);
 	
 	g_odom.pose.pose							= potbot_lib::utility::get_Pose(x,y,z,roll,pitch,yaw);
 
