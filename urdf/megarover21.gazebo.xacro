@@ -235,9 +235,9 @@
         <baseline>0.2</baseline>
         <alwaysOn>true</alwaysOn>
         <updateRate>1.0</updateRate>
-        <cameraName>realsense</cameraName>
-        <imageTopicName>color/image_raw</imageTopicName>
-        <cameraInfoTopicName>color/camera_info</cameraInfoTopicName>
+        <cameraName>camera</cameraName>
+        <imageTopicName>left_rect/image_rect</imageTopicName>
+        <cameraInfoTopicName>left_rect/camera_info</cameraInfoTopicName>
         <depthImageTopicName>depth/image_raw</depthImageTopicName>
         <depthImageInfoTopicName>depth/camera_info</depthImageInfoTopicName>
         <pointCloudTopicName>depth/points</pointCloudTopicName>

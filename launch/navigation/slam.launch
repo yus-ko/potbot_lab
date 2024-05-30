@@ -21,6 +21,8 @@
 
   <arg name="file_database"                   default="~/.ros/rtabmap.db"/>
   <arg name="reset_database"                  default="true"/>
+  <arg name="rtabmap_args"                    default="--delete_db_on_start" if="$(arg reset_database)"/>
+  <arg name="rtabmap_args"                    default="" unless="$(arg reset_database)"/>
 
   <group if = "$(eval method_slam == 'gmapping')">
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
@@ -45,8 +47,7 @@
       <arg name="namespace"               value="rtabmap"/>
       <arg name="database_path"           value="$(arg file_database)"/>
       <arg name="wait_for_transform"      value="0.2"/>
-      <arg name="rtabmap_args"            value="--delete_db_on_start" if="$(arg reset_database)"/>
-      <arg name="rtabmap_args"            value="" unless="$(arg reset_database)"/>
+      <arg name="rtabmap_args"            value="$(arg rtabmap_args)"/>
       <arg name="launch_prefix"           value=""/>
       <arg name="approx_sync"             value="true"/>
   
@@ -70,8 +71,7 @@
       <arg name="visual_odometry"         value="false"/>
       <arg name="odom_topic"              value="$(arg topic_odom)"/>
       <arg name="odom_frame_id"           value=""/>
-      <arg name="odom_args"               value="--delete_db_on_start" if="$(arg reset_database)"/>
-      <arg name="odom_args"               value="" unless="$(arg reset_database)"/>
+      <arg name="odom_args"               value="$(arg rtabmap_args)"/>
       
       <arg name="topic_grid_map"          value="$(arg topic_map)"/>
     </include>

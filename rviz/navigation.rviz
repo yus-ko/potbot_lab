@@ -68,73 +68,21 @@ Visualization Manager:
       Use Timestamp: false
       Value: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Filter (blacklist): ""
       Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        map:
-          Value: true
-        robot_0/base_footprint:
-          Value: true
-        robot_0/base_link:
-          Value: true
-        robot_0/base_scan:
-          Value: true
-        robot_0/camera_depth_frame:
-          Value: true
-        robot_0/camera_depth_optical_frame:
-          Value: true
-        robot_0/camera_link:
-          Value: true
-        robot_0/camera_rgb_frame:
-          Value: true
-        robot_0/camera_rgb_optical_frame:
-          Value: true
-        robot_0/caster_back_left_link:
-          Value: true
-        robot_0/caster_back_right_link:
-          Value: true
-        robot_0/imu_link:
-          Value: true
-        robot_0/odom:
-          Value: true
-        robot_0/wheel_left_link:
-          Value: true
-        robot_0/wheel_right_link:
-          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          robot_0/odom:
-            robot_0/base_footprint:
-              robot_0/base_link:
-                robot_0/base_scan:
-                  {}
-                robot_0/camera_link:
-                  robot_0/camera_depth_frame:
-                    robot_0/camera_depth_optical_frame:
-                      {}
-                  robot_0/camera_rgb_frame:
-                    robot_0/camera_rgb_optical_frame:
-                      {}
-                robot_0/caster_back_left_link:
-                  {}
-                robot_0/caster_back_right_link:
-                  {}
-                robot_0/imu_link:
-                  {}
-                robot_0/wheel_left_link:
-                  {}
-                robot_0/wheel_right_link:
-                  {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -502,7 +450,7 @@ Visualization Manager:
           Merged neighbor: 255; 170; 0
           Name: MapGraph
           Neighbor: 0; 0; 255
-          Topic: /robot_0/rtabmap/mapGraph
+          Topic: rtabmap/mapGraph
           Unreliable: false
           User: 255; 0; 0
           Value: true
