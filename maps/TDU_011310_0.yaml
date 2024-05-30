@@ -1,0 +1,7 @@
+image: TDU_011310_0.pgm
+resolution: 0.050000
+origin: [-1.198100, -5.379790, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

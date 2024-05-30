@@ -14,10 +14,17 @@
   <arg name="initial_pose_y"              default="0"/>
   <arg name="initial_pose_yaw"            default="0"/>
 
+  <param name="/use_sim_time"             value="$(arg use_bag)"/>
+
   <group unless="$(arg use_bag)">
     <include file="$(find mynt_eye_ros_wrapper)/launch/mynteye.launch">
       <arg name="mynteye" value="$(arg frame_id_camera)"/>
     </include>
+  </group>
+
+  <group if="$(arg use_bag)">
+    <node pkg="tf" type="static_transform_publisher" name="imu_tf" args="0 0 0 0 0 0 $(arg frame_id_base_footprint) camera_imu_frame 60" />
+    <node pkg="tf" type="static_transform_publisher" name="camera_left_tf" args="0 0.04 0 0 0 0 $(arg frame_id_camera)_link robot_5/camera_left_rect_frame 60" />
   </group>
 
   <group ns="$(arg multi_robot)">

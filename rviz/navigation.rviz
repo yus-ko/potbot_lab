@@ -68,21 +68,73 @@ Visualization Manager:
       Use Timestamp: false
       Value: true
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Filter (blacklist): ""
       Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        map:
+          Value: true
+        robot_0/base_footprint:
+          Value: true
+        robot_0/base_link:
+          Value: true
+        robot_0/base_scan:
+          Value: true
+        robot_0/camera_depth_frame:
+          Value: true
+        robot_0/camera_depth_optical_frame:
+          Value: true
+        robot_0/camera_link:
+          Value: true
+        robot_0/camera_rgb_frame:
+          Value: true
+        robot_0/camera_rgb_optical_frame:
+          Value: true
+        robot_0/caster_back_left_link:
+          Value: true
+        robot_0/caster_back_right_link:
+          Value: true
+        robot_0/imu_link:
+          Value: true
+        robot_0/odom:
+          Value: true
+        robot_0/wheel_left_link:
+          Value: true
+        robot_0/wheel_right_link:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        map:
+          robot_0/odom:
+            robot_0/base_footprint:
+              robot_0/base_link:
+                robot_0/base_scan:
+                  {}
+                robot_0/camera_link:
+                  robot_0/camera_depth_frame:
+                    robot_0/camera_depth_optical_frame:
+                      {}
+                  robot_0/camera_rgb_frame:
+                    robot_0/camera_rgb_optical_frame:
+                      {}
+                robot_0/caster_back_left_link:
+                  {}
+                robot_0/caster_back_right_link:
+                  {}
+                robot_0/imu_link:
+                  {}
+                robot_0/wheel_left_link:
+                  {}
+                robot_0/wheel_right_link:
+                  {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -402,6 +454,61 @@ Visualization Manager:
       Topic: odometry/filtered
       Unreliable: false
       Value: false
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rtabmap_ros/MapCloud
+          Cloud decimation: 4
+          Cloud from scan: false
+          Cloud max depth (m): 4
+          Cloud min depth (m): 0
+          Cloud voxel size (m): 0.009999999776482582
+          Color: 255; 255; 255
+          Color Transformer: RGB8
+          Download graph: false
+          Download map: false
+          Download namespace: rtabmap
+          Enabled: false
+          Filter ceiling (m): 0
+          Filter floor (m): 0
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: MapCloud
+          Node filtering angle (degrees): 30
+          Node filtering radius (m): 0
+          Position Transformer: XYZ
+          Size (Pixels): 3
+          Size (m): 0.009999999776482582
+          Style: Flat Squares
+          Topic: rtabmap/mapData
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Class: rtabmap_ros/MapGraph
+          Enabled: true
+          Global loop closure: 255; 0; 0
+          Landmark: 0; 128; 0
+          Local loop closure: 255; 255; 0
+          Merged neighbor: 255; 170; 0
+          Name: MapGraph
+          Neighbor: 0; 0; 255
+          Topic: /robot_0/rtabmap/mapGraph
+          Unreliable: false
+          User: 255; 0; 0
+          Value: true
+          Virtual: 255; 0; 255
+      Enabled: true
+      Name: rtabmap
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -422,7 +529,7 @@ Visualization Manager:
       X std deviation: 0.5
       Y std deviation: 0.5
     - Class: rviz/SetGoal
-      Topic: move_base_simple/goal
+      Topic: goal
     - Class: rviz/PublishPoint
       Single click: true
       Topic: clicked_point
@@ -430,25 +537,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.722424507141113
+      Distance: 9.97527027130127
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.6021389365196228
-        Y: 1.113593339920044
-        Z: 1.251002311706543
+        X: 0.04620781168341637
+        Y: 0.5631492137908936
+        Z: 0.7919481992721558
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8847970962524414
+      Pitch: 0.8997972011566162
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.150394916534424
+      Yaw: 3.145394802093506
     Saved: ~
 Window Geometry:
   Displays:

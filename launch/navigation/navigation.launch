@@ -1,11 +1,13 @@
 <launch>
   <arg name="multi_robot"                     default=""/>
   <arg name="use_rviz"                        default="true"/>
-  <arg name="method_localization"             default="odom"/> <!-- odom, amcl, gmapping -->
+  <arg name="use_fusion"                      default="true"/>
+  <arg name="method_localization"             default="odom"/> <!-- odom, amcl, rtabmap -->
   <arg name="method_navigation"               default="potbot"/> <!-- potbot, move_base-->
+  <arg name="method_slam"                     default="none"/> <!-- none, gmapping, rtabmap-->
   <arg name="frame_id_global"                 default="map"/>
   <arg name="frame_id_odom"                   default="odom"/>
-  <arg name="frame_id_base_footprint"         default="base_footprint"/>
+  <arg name="frame_id_robot_base"             default="base_footprint"/>
   <arg name="frame_id_scan"                   default="base_scan"/>
   <arg name="frame_id_camera"                 default="camera_link"/>
   <arg name="topic_scan"                      default="scan"/>
@@ -15,6 +17,13 @@
   <arg name="topic_rgb"                       default="camera/rgb/image_raw"/>
   <arg name="topic_info"                      default="camera/rgb/camera_info"/>
   <arg name="topic_depth"                     default="camera/depth/image_raw"/>
+
+  <arg name="stereo"                          default="false"/>
+  <arg name="topic_left_image"                default="camera/left_rect/image_rect" />
+  <arg name="topic_left_camera_info"          default="camera/left_rect/camera_info" />
+  <arg name="topic_right_image"               default="camera/right_rect/image_rect" />
+  <arg name="topic_right_camera_info"         default="camera/right_rect/camera_info" />
+  
   <arg name="model"                           default="burger"/>
   <arg name="initial_pose_x"                  default="0"/>
   <arg name="initial_pose_y"                  default="0"/>
@@ -23,61 +32,90 @@
   <arg name="file_fusion"                     default="$(find potbot_example)/config/navigation/robot_localization.yaml"/>
   <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
   <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
+  <arg name="file_database"                   default="~/.ros/rtabmap.db"/>
+  <arg name="reset_database"                  default="true"/>
 
   <include file="$(find potbot)/launch/env/remote.launch">
     <arg name="urdf_file"               default="$(find xacro)/xacro --inorder '$(arg file_urdf)'"/>
     <arg name="multi_robot_name"        value="$(arg multi_robot)"/>
   </include>
+  <!-- <node pkg="tf" type="static_transform_publisher" name="imu_tf" args="0 0 0 0 0 0 $(arg frame_id_global) base_footprint 60" /> -->
 
-  <include file="$(find potbot_example)/launch/navigation/robot_localization.launch">
-    <arg name="frame_id_global"             value="$(arg frame_id_global)"/>
-    <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
-    <arg name="frame_id_base_footprint"     value="$(arg frame_id_base_footprint)"/>
-    <!-- <arg name="frame_id_world"              value="$(arg frame_id_odom)"/> -->
-    <arg name="file_fusion"                 value="$(arg file_fusion)"/>
-  </include>
+  <group if="$(arg use_fusion)">
+    <include file="$(find potbot_example)/launch/navigation/robot_localization.launch">
+      <arg name="frame_id_global"             value="$(arg frame_id_global)"/>
+      <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
+      <arg name="frame_id_base_footprint"     value="$(arg frame_id_robot_base)"/>
+      <!-- <arg name="frame_id_world"              value="$(arg frame_id_odom)"/> -->
+      <arg name="file_fusion"                 value="$(arg file_fusion)"/>
+    </include>
+  </group>
 
   <include file="$(find potbot_example)/launch/navigation/visual_odometry.launch">
-    <arg name="topic_rgb"                   value="$(arg topic_rgb)"/>
-    <arg name="topic_info"                  value="$(arg topic_info)"/>
-    <arg name="topic_depth"                 value="$(arg topic_depth)"/>
-    <arg name="frame_id_camera"             value="$(arg frame_id_camera)"/>
-    <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
-    <arg name="initial_pose"                value="$(arg initial_pose_x) $(arg initial_pose_y) 0 0 0 $(arg initial_pose_yaw)"/>
+    <arg name="method"                        value="none"/>
+    <arg name="topic_rgb"                     value="$(arg topic_rgb)"/>
+    <arg name="topic_info"                    value="$(arg topic_info)"/>
+    <arg name="topic_depth"                   value="$(arg topic_depth)"/>
+    <arg name="frame_id_camera"               value="$(arg frame_id_camera)"/>
+    <arg name="frame_id_odom"                 value="$(arg frame_id_odom)"/>
+    <arg name="initial_pose"                  value="$(arg initial_pose_x) $(arg initial_pose_y) 0 0 0 $(arg initial_pose_yaw)"/>
   </include>
 
-  <group if = "$(eval method_localization == 'amcl')">
-    <include file="$(find potbot_example)/launch/navigation/amcl.launch">
-      <arg name="frame_id_base_footprint"     value="$(arg frame_id_base_footprint)"/>
-      <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
-      <arg name="topic_scan"                  value="$(arg topic_scan)"/>
-      <arg name="initial_pose_x"              value="$(arg initial_pose_x)"/>
-      <arg name="initial_pose_y"              value="$(arg initial_pose_y)"/>
-      <arg name="initial_pose_yaw"            value="$(arg initial_pose_yaw)"/>
-      <arg name="map_file"                    value="$(arg file_map)"/>
-    </include>
-  </group>
+  <include file="$(find potbot_example)/launch/navigation/localization.launch">
+    <arg name="method_localization"           value="$(arg method_localization)"/>
+    <arg name="method_slam"                   value="$(arg method_slam)"/>
+    <arg name="frame_id_global"               value="$(arg frame_id_global)"/>
+    <arg name="frame_id_robot_base"           value="$(arg frame_id_robot_base)"/>
+    <arg name="frame_id_odom"                 value="$(arg frame_id_odom)"/>
+    <arg name="topic_odom"                    value="$(arg topic_odom)"/>
+    <arg name="topic_scan"                    value="$(arg topic_scan)"/>
 
-  <group if = "$(eval method_localization == 'odom')">
-    <node pkg="map_server" type="map_server" name="map_server" args="$(arg file_map)"/>
-    <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg frame_id_global) $(arg frame_id_odom) 30" />
-  </group>
+    <arg name="topic_rgb"                     value="$(arg topic_rgb)"/>
+    <arg name="topic_depth"                   value="$(arg topic_depth)"/>
+    <arg name="topic_info"                    value="$(arg topic_info)"/>
 
-  <group if = "$(eval method_localization == 'gmapping')">
-    <include file="$(find potbot_example)/launch/navigation/slam.launch">
-      <arg name="set_base_frame"              value="$(arg frame_id_base_footprint)"/>
-      <arg name="set_odom_frame"              value="$(arg frame_id_odom)"/>
-      <arg name="set_map_frame"               value="$(arg frame_id_global)"/>
-      <!-- <arg name="publish_tf"                  value="false"/> -->
-    </include>
-    <!-- <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg frame_id_global) $(arg frame_id_odom) 30" /> -->
-  </group>
+    <arg name="stereo"                        value="$(arg stereo)"/>
+    <arg name="topic_left_image"              value="$(arg topic_left_image)" />
+    <arg name="topic_right_image"             value="$(arg topic_right_image)" />
+    <arg name="topic_left_camera_info"        value="$(arg topic_left_camera_info)" />
+    <arg name="topic_right_camera_info"       value="$(arg topic_right_camera_info)" />
+
+    <arg name="topic_map"                     value="/$(arg multi_robot)/map"/>
+    <arg name="initial_pose_x"                value="$(arg initial_pose_x)"/>
+    <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
+    <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>
+    <arg name="file_map"                      value="$(arg file_map)"/>
+    <arg name="file_database"                 value="$(arg file_database)"/>
+  </include>
+
+  <include file="$(find potbot_example)/launch/navigation/slam.launch">
+    <arg name="method_slam"                   value="$(arg method_slam)"/>
+    <arg name="frame_id_robot_base"           value="$(arg frame_id_robot_base)"/>
+    <arg name="frame_id_odom"                 value="$(arg frame_id_odom)"/>
+    <arg name="frame_id_global"               value="$(arg frame_id_global)"/>
+    <arg name="topic_rgb"                     value="$(arg topic_rgb)"/>
+    <arg name="topic_depth"                   value="$(arg topic_depth)"/>
+    <arg name="topic_info"                    value="$(arg topic_info)"/>
+
+    <arg name="stereo"                        value="$(arg stereo)"/>
+    <arg name="topic_left_image"              value="$(arg topic_left_image)" />
+    <arg name="topic_right_image"             value="$(arg topic_right_image)" />
+    <arg name="topic_left_camera_info"        value="$(arg topic_left_camera_info)" />
+    <arg name="topic_right_camera_info"       value="$(arg topic_right_camera_info)" />
+
+    <arg name="topic_scan"                    value="$(arg topic_scan)"/>
+    <arg name="topic_odom"                    value="$(arg topic_odom)"/>
+    <arg name="topic_map"                     value="/$(arg multi_robot)/map"/>
+
+    <arg name="file_database"                 value="$(arg file_database)"/>
+    <arg name="reset_database"                value="$(arg reset_database)"/>
+  </include>
 
   <group if = "$(eval method_navigation == 'move_base')">
     <include file="$(find potbot_example)/launch/navigation/move_base.launch">
       <arg name="frame_id_global"             value="$(arg frame_id_global)"/>
       <arg name="frame_id_odom"               value="$(arg frame_id_odom)"/>
-      <arg name="frame_id_base_footprint"     value="$(arg frame_id_base_footprint)"/>
+      <arg name="frame_id_base_footprint"     value="$(arg frame_id_robot_base)"/>
       <arg name="frame_id_scan"               value="$(arg frame_id_scan)"/>
       <arg name="max_linear_velocity"         value="0.5"/>
       <arg name="max_angular_velocity"        value="1.0"/>
@@ -92,7 +130,7 @@
     <include file="$(find potbot)/launch/env/potbot.launch">
       <arg name="use_rviz"                value="false"/>
       <arg name="frame_id_global"         value="$(arg frame_id_odom)"/>
-      <arg name="frame_id_robot_base"     value="$(arg frame_id_base_footprint)"/>
+      <arg name="frame_id_robot_base"     value="$(arg frame_id_robot_base)"/>
       <arg name="max_linear_velocity"     value="0.3"/>
       <arg name="max_angular_velocity"    value="1.0"/>
       <arg name="topic_scan"              value="$(arg topic_scan)"/>

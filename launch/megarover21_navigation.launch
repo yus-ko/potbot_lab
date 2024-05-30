@@ -1,39 +1,60 @@
 <launch>
   <arg name="multi_robot"                     default="robot_5"/>
   <arg name="use_rviz"                        default="true"/>
-  <arg name="method_localization"             default="odom"/> <!-- odom, amcl, gmapping -->
-  <arg name="method_navigation"               default="potbot"/> <!-- potbot, move_base-->
+  <arg name="use_fusion"                      default="false"/>
+  <arg name="method_localization"             default="odom"/> <!-- odom, amcl rtabmap -->
+  <arg name="method_navigation"               default="potbot"/> <!-- potbot, move_base -->
+  <arg name="method_slam"                     default="none"/> <!-- none, gmapping, rtabmap -->
   <arg name="frame_id_global"                 default="map"/>
   <arg name="frame_id_odom"                   default="$(arg multi_robot)/odom"/>
   <arg name="frame_id_base_footprint"         default="$(arg multi_robot)/base_footprint"/>
   <arg name="frame_id_scan"                   default="$(arg multi_robot)/base_scan"/>
   <arg name="topic_scan"                      default="/$(arg multi_robot)/scan"/>
-  <arg name="topic_odom"                      default="/$(arg multi_robot)/odometry/filtered"/>
+  <arg name="topic_odom"                      default="/$(arg multi_robot)/odometry/filtered" if="$(arg use_fusion)"/>
+  <arg name="topic_odom"                      default="/$(arg multi_robot)/odom" unless="$(arg use_fusion)"/>
   <arg name="topic_cmd"                       default="/$(arg multi_robot)/cmd_vel"/>
   <arg name="topic_goal"                      default="/$(arg multi_robot)/goal"/>
+
+  <arg name="stereo"                          default="false"/>
+
   <arg name="initial_pose_x"                  default="0"/>
   <arg name="initial_pose_y"                  default="0"/>
   <arg name="initial_pose_yaw"                default="0"/>
-  <arg name="file_urdf"                       default="$(find potbot_example)/urdf/megarover21.urdf.xacro"/>
+
+  <arg name="name_map"                        default="lab"/>
+  <arg name="name_urdf"                       default="megarover21"/>
+
+  <arg name="file_urdf"                       default="$(find potbot_example)/urdf/$(arg name_urdf).urdf.xacro"/>
   <!-- <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/> -->
-  <arg name="file_map"                        default="$(find potbot_example)/maps/lab.yaml"/>
+  <arg name="file_map"                        default="$(find potbot_example)/maps/$(arg name_map).yaml"/>
   <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
+  <arg name="file_database"                   default="~/.ros/rtabmap.db"/>
+  <arg name="reset_database"                  default="true"/>
 
   <group ns="$(arg multi_robot)">
 
     <include file="$(find potbot_example)/launch/navigation/navigation.launch">
       <arg name="multi_robot"                   value="$(arg multi_robot)"/>
       <arg name="use_rviz"                      value="$(arg use_rviz)"/>
+      <arg name="use_fusion"                    value="$(arg use_fusion)"/>
       <arg name="method_localization"           value="$(arg method_localization)"/>
       <arg name="method_navigation"             value="$(arg method_navigation)"/>
+      <arg name="method_slam"                   value="$(arg method_slam)"/>
       <arg name="frame_id_global"               value="$(arg frame_id_global)"/>
       <arg name="frame_id_odom"                 value="$(arg frame_id_odom)"/>
-      <arg name="frame_id_base_footprint"       value="$(arg frame_id_base_footprint)"/>
+      <arg name="frame_id_robot_base"           value="$(arg frame_id_base_footprint)"/>
       <arg name="frame_id_scan"                 value="$(arg frame_id_scan)"/>
       <arg name="frame_id_camera"               value="$(arg multi_robot)/camera_link"/>
-      <arg name="topic_rgb"                     value="camera/left_rect/image_rect"/>
-      <arg name="topic_info"                    value="camera/left_rect/camera_info"/>
-      <arg name="topic_depth"                   value="camera/depth/image_raw"/>
+      <arg name="topic_rgb"                     value="/$(arg multi_robot)/camera/left_rect/image_rect"/>
+      <arg name="topic_info"                    value="/$(arg multi_robot)/camera/left_rect/camera_info"/>
+      <arg name="topic_depth"                   value="/$(arg multi_robot)/camera/depth/image_raw"/>
+
+      <arg name="stereo"                        value="$(arg stereo)"/>
+      <arg name="topic_left_image"              value="/$(arg multi_robot)/camera/left_rect/image_rect" />
+      <arg name="topic_right_image"             value="/$(arg multi_robot)/camera/right_rect/image_rect" />
+      <arg name="topic_left_camera_info"        value="/$(arg multi_robot)/camera/left_rect/camera_info" />
+      <arg name="topic_right_camera_info"       value="/$(arg multi_robot)/camera/right_rect/camera_info" />
+
       <arg name="topic_scan"                    value="$(arg topic_scan)"/>
       <arg name="topic_odom"                    value="$(arg topic_odom)"/>
       <arg name="topic_cmd"                     value="$(arg topic_cmd)"/>
@@ -45,6 +66,8 @@
       <arg name="file_fusion"                   value="$(find potbot_example)/config/megarover21/robot_localization.yaml"/>
       <arg name="file_map"                      value="$(arg file_map)"/>
       <arg name="file_rviz"                     value="$(arg file_rviz)"/>
+      <arg name="file_database"                 value="$(arg file_database)"/>
+      <arg name="reset_database"                value="$(arg reset_database)"/>
     </include>
 
   </group>

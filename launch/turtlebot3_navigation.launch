@@ -1,16 +1,19 @@
 <launch>
   <arg name="multi_robot"                     default="robot_0"/>
   <arg name="use_rviz"                        default="true"/>
-  <arg name="method_localization"             default="odom"/> <!-- odom, amcl, gmapping -->
+  <arg name="use_fusion"                      default="false"/>
+  <arg name="method_localization"             default="odom"/> <!-- odom, amcl rtabmap -->
   <arg name="method_navigation"               default="potbot"/> <!-- potbot, move_base-->
+  <arg name="method_slam"                     default="none"/> <!-- none, gmapping, rtabmap-->
   <arg name="frame_id_global"                 default="map"/>
   <arg name="frame_id_odom"                   default="$(arg multi_robot)/odom"/>
   <arg name="frame_id_base_footprint"         default="$(arg multi_robot)/base_footprint"/>
   <arg name="frame_id_scan"                   default="$(arg multi_robot)/base_scan"/>
   <arg name="topic_scan"                      default="/$(arg multi_robot)/scan"/>
-  <arg name="topic_odom"                      default="/$(arg multi_robot)/odometry/filtered"/>
+  <arg name="topic_odom"                      default="/$(arg multi_robot)/odometry/filtered" if="$(arg use_fusion)"/>
+  <arg name="topic_odom"                      default="/$(arg multi_robot)/odom" unless="$(arg use_fusion)"/>
   <arg name="topic_cmd"                       default="/$(arg multi_robot)/cmd_vel"/>
-  <arg name="topic_goal"                      default="/$(arg multi_robot)/move_base_simple/goal"/>
+  <arg name="topic_goal"                      default="/$(arg multi_robot)/goal"/>
   <arg name="model"                           default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
   <arg name="initial_pose_x"                  default="0.0"/>
   <arg name="initial_pose_y"                  default="0.0"/>
@@ -18,28 +21,37 @@
   <arg name="file_urdf"                       default="$(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro"/>
   <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
   <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
+  <arg name="file_database"                   default="~/.ros/rtabmap.db"/>
+  <arg name="reset_database"                  default="true"/>
   
   <group ns="$(arg multi_robot)">
 
     <include file="$(find potbot_example)/launch/navigation/navigation.launch">
       <arg name="multi_robot"                   value="$(arg multi_robot)"/>
       <arg name="use_rviz"                      value="$(arg use_rviz)"/>
+      <arg name="use_fusion"                    value="$(arg use_fusion)"/>
       <arg name="method_localization"           value="$(arg method_localization)"/>
       <arg name="method_navigation"             value="$(arg method_navigation)"/>
+      <arg name="method_slam"                   value="$(arg method_slam)"/>
       <arg name="frame_id_global"               value="$(arg frame_id_global)"/>
       <arg name="frame_id_odom"                 value="$(arg frame_id_odom)"/>
-      <arg name="frame_id_base_footprint"       value="$(arg frame_id_base_footprint)"/>
+      <arg name="frame_id_robot_base"           value="$(arg frame_id_base_footprint)"/>
       <arg name="frame_id_scan"                 value="$(arg frame_id_scan)"/>
       <arg name="topic_scan"                    value="$(arg topic_scan)"/>
       <arg name="topic_odom"                    value="$(arg topic_odom)"/>
       <arg name="topic_cmd"                     value="$(arg topic_cmd)"/>
       <arg name="topic_goal"                    value="$(arg topic_goal)"/>
+      <arg name="topic_rgb"                     value="/$(arg multi_robot)/camera/rgb/image_raw"/>
+      <arg name="topic_info"                    value="/$(arg multi_robot)/camera/rgb/camera_info"/>
+      <arg name="topic_depth"                   value="/$(arg multi_robot)/camera/depth/image_raw"/>
       <arg name="initial_pose_x"                value="$(arg initial_pose_x)"/>
       <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
       <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>
       <arg name="file_urdf"                     value="$(arg file_urdf)"/>
       <arg name="file_map"                      value="$(arg file_map)"/>
       <arg name="file_rviz"                     value="$(arg file_rviz)"/>
+      <arg name="file_database"                 value="$(arg file_database)"/>
+      <arg name="reset_database"                value="$(arg reset_database)"/>
     </include>
 
   </group>
