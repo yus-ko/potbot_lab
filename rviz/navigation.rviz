@@ -60,7 +60,7 @@ Visualization Manager:
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: map
-      Draw Behind: false
+      Draw Behind: true
       Enabled: true
       Name: Map
       Topic: map
@@ -286,7 +286,7 @@ Visualization Manager:
               Topic: move_base/global_costmap/footprint
               Unreliable: false
               Value: false
-            - Alpha: 0.699999988079071
+            - Alpha: 0.10000000149011612
               Class: rviz/Map
               Color Scheme: costmap
               Draw Behind: true
@@ -331,16 +331,16 @@ Visualization Manager:
               Topic: /robot_0/move_base/local_costmap/footprint
               Unreliable: false
               Value: true
-            - Alpha: 0.699999988079071
+            - Alpha: 0.10000000149011612
               Class: rviz/Map
               Color Scheme: costmap
               Draw Behind: false
-              Enabled: false
+              Enabled: true
               Name: Map
               Topic: move_base/local_costmap/costmap
               Unreliable: false
               Use Timestamp: false
-              Value: false
+              Value: true
             - Alpha: 1
               Buffer Length: 1
               Class: rviz/Path
@@ -457,6 +457,94 @@ Visualization Manager:
           Virtual: 255; 0; 255
       Enabled: true
       Name: rtabmap
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.30000001192092896
+          Class: rviz/Map
+          Color Scheme: costmap
+          Draw Behind: false
+          Enabled: true
+          Name: LocalMap
+          Topic: potbot/Localmap
+          Unreliable: false
+          Use Timestamp: false
+          Value: true
+        - Class: rviz/Marker
+          Enabled: true
+          Marker Topic: /robot_0/potbot/LookAhead
+          Name: Lookahead
+          Namespaces:
+            LookAhead: true
+          Queue Size: 1
+          Value: true
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Head Diameter: 0.30000001192092896
+          Head Length: 0.20000000298023224
+          Length: 0.30000001192092896
+          Line Style: Lines
+          Line Width: 0.029999999329447746
+          Name: LocalPath
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: None
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.10000000149011612
+          Shaft Length: 0.10000000149011612
+          Topic: potbot/Path
+          Unreliable: false
+          Value: true
+        - Alpha: 0.10000000149011612
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 2
+            Min Value: 0
+            Value: false
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: AxisColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: Potential
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.05000000074505806
+          Style: Flat Squares
+          Topic: potbot/field/potential
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+      Enabled: true
+      Name: potbot
+    - Alpha: 0.699999988079071
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz/Pose
+      Color: 0; 0; 0
+      Enabled: true
+      Head Length: 0.10000000149011612
+      Head Radius: 0.10000000149011612
+      Name: Goal
+      Shaft Length: 0.30000001192092896
+      Shaft Radius: 0.029999999329447746
+      Shape: Arrow
+      Topic: goal
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -484,26 +572,21 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 9.97527027130127
+      Angle: 0
+      Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Focal Point:
-        X: 0.04620781168341637
-        Y: 0.5631492137908936
-        Z: 0.7919481992721558
-      Focal Shape Fixed Size: true
-      Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8997972011566162
+      Scale: 58.693565368652344
       Target Frame: <Fixed Frame>
-      Value: Orbit (rviz)
-      Yaw: 3.145394802093506
+      Value: TopDownOrtho (rviz)
+      X: 5.493971824645996
+      Y: 4.4019246101379395
     Saved: ~
 Window Geometry:
   Displays:

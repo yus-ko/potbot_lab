@@ -1,43 +1,50 @@
 <launch>
-  <arg name="frame_id_global"             default="map"/>
-  <arg name="frame_id_odom"               default="odom"/>
-  <arg name="frame_id_base_footprint"     default="base_footprint"/>
-  <arg name="frame_id_scan"               default="base_scan"/>
-  <arg name="max_linear_velocity"         default="0.5"/>
-  <arg name="max_angular_velocity"        default="1.0"/>
-  <arg name="topic_scan"                  default="scan"/>
-  <arg name="topic_odom"                  default="odom"/>
-  <arg name="topic_cmd"                   default="cmd_vel"/>
-  <arg name="topic_goal"                  default="move_base_simple/goal"/>
-  <arg name="move_forward_only"           default="false"/>
+  <arg name="frame_id_global"               default="map"/>
+  <arg name="frame_id_odom"                 default="odom"/>
+  <arg name="frame_id_robot_base"           default="base_footprint"/>
+  <arg name="frame_id_scan"                 default="base_scan"/>
+  <arg name="max_linear_velocity"           default="0.5"/>
+  <arg name="max_angular_velocity"          default="1.0"/>
+  <arg name="topic_scan"                    default="scan"/>
+  <arg name="topic_odom"                    default="odom"/>
+  <arg name="topic_cmd"                     default="cmd_vel"/>
+  <arg name="topic_goal"                    default="move_base_simple/goal"/>
+  <arg name="move_forward_only"             default="false"/>
+
+  <arg name="file_costmap_common_params"    default="$(find potbot_example)/config/navigation/costmap_common_params.yaml"/>
+  <arg name="file_global_costmap_params"    default="$(find potbot_example)/config/navigation/global_costmap_params.yaml"/>
+  <arg name="file_local_costmap_params"     default="$(find potbot_example)/config/navigation/local_costmap_params.yaml"/>
+  <arg name="file_move_base_params"         default="$(find potbot_example)/config/navigation/move_base_params.yaml"/>
+  <arg name="file_dwa_local_planner_params" default="$(find potbot_example)/config/navigation/dwa_local_planner_params.yaml"/>
 
   <!-- move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+    <!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" /> -->
 
-    <rosparam file="$(find potbot_example)/config/navigation/costmap_common_params.yaml"          command="load" ns="global_costmap" />
-    <rosparam file="$(find potbot_example)/config/navigation/global_costmap_params.yaml"          command="load" />
+    <rosparam file="$(arg file_costmap_common_params)"  command="load" ns="global_costmap" />
+    <rosparam file="$(arg file_global_costmap_params)"  command="load" />
     <param name="global_costmap/scan/topic"           value="$(arg topic_scan)"/>
     <param name="global_costmap/global_frame"         value="$(arg frame_id_global)"/>
     <param name="global_costmap/scan/sensor_frame"    value="$(arg frame_id_scan)"/>
-    <param name="global_costmap/robot_base_frame"     value="$(arg frame_id_base_footprint)"/>
+    <param name="global_costmap/robot_base_frame"     value="$(arg frame_id_robot_base)"/>
 
-    <rosparam file="$(find potbot_example)/config/navigation/costmap_common_params.yaml"          command="load" ns="local_costmap" />
-    <rosparam file="$(find potbot_example)/config/navigation/local_costmap_params.yaml"           command="load" />
+    <rosparam file="$(arg file_costmap_common_params)"  command="load" ns="local_costmap" />
+    <rosparam file="$(arg file_local_costmap_params)"   command="load" />
     <param name="local_costmap/scan/topic"            value="$(arg topic_scan)"/>
     <param name="local_costmap/global_frame"          value="$(arg frame_id_odom)"/>
     <param name="local_costmap/scan/sensor_frame"     value="$(arg frame_id_scan)"/>
-    <param name="local_costmap/robot_base_frame"      value="$(arg frame_id_base_footprint)"/>
+    <param name="local_costmap/robot_base_frame"      value="$(arg frame_id_robot_base)"/>
     
-    <rosparam file="$(find potbot_example)/config/navigation/move_base_params.yaml"               command="load" />
-    <rosparam file="$(find potbot_example)/config/navigation/dwa_local_planner_params.yaml"       command="load" />
+    <rosparam file="$(arg file_move_base_params)"         command="load" />
+    <rosparam file="$(arg file_dwa_local_planner_params)" command="load" />
     <remap from="cmd_vel"                             to="$(arg topic_cmd)"/>
     <remap from="odom"                                to="$(arg topic_odom)"/>
     <remap from="move_base_simple/goal"               to="$(arg topic_goal)"/>
     <param name="DWAPlannerROS/max_vel_trans"         value="$(arg max_linear_velocity)"/>
-    <param name="DWAPlannerROS/min_vel_trans"         value="0.0"/>
+    <!-- <param name="DWAPlannerROS/min_vel_trans"         value="0.0"/> -->
     <param name="DWAPlannerROS/max_vel_theta"         value="$(arg max_angular_velocity)"/>
-    <param name="DWAPlannerROS/min_vel_theta"         value="0.0"/>
+    <!-- <param name="DWAPlannerROS/min_vel_theta"         value="0.0"/> -->
     <param name="DWAPlannerROS/min_vel_x"             value="0.0" if="$(arg move_forward_only)" />
   </node>
 

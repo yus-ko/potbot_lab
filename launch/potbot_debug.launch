@@ -62,6 +62,8 @@
       <arg name="potential_field_cols"          value="160"/>
       <arg name="collision_count_to_replanning" value="1"/>
     </include>
+    
+    <!-- <node pkg="potbot_controller" type="potbot_controller_node" name="potbot_controller_node"/> -->
 
   </group>
 </launch>

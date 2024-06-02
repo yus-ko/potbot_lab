@@ -24,9 +24,11 @@
   <arg name="rtabmap_args"                    default="--delete_db_on_start" if="$(arg reset_database)"/>
   <arg name="rtabmap_args"                    default="" unless="$(arg reset_database)"/>
 
+  <arg name="file_gmapping"                   default="$(find potbot_example)/config/navigation/gmapping.yaml"/>
+
   <group if = "$(eval method_slam == 'gmapping')">
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
-      <rosparam command="load"                file="$(find potbot_example)/config/navigation/gmapping.yaml" />
+      <rosparam command="load"                file="$(arg file_gmapping)"/>
       <param name="base_frame"                value="$(arg frame_id_robot_base)"/>
       <param name="odom_frame"                value="$(arg frame_id_odom)"/>
       <param name="map_frame"                 value="$(arg frame_id_global)"/>

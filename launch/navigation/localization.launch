@@ -24,6 +24,8 @@
   <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
   <arg name="file_database"                   default="~/.ros/rtabmap.db"/>
 
+  <arg name="file_amcl"                       default="$(find potbot_example)/config/navigation/amcl.yaml"/>
+
   <group if = "$(eval method_localization == 'amcl')">
     <include file="$(find potbot_example)/launch/navigation/amcl.launch">
       <arg name="frame_id_robot_base"         value="$(arg frame_id_robot_base)"/>
@@ -32,7 +34,8 @@
       <arg name="initial_pose_x"              value="$(arg initial_pose_x)"/>
       <arg name="initial_pose_y"              value="$(arg initial_pose_y)"/>
       <arg name="initial_pose_yaw"            value="$(arg initial_pose_yaw)"/>
-      <arg name="map_file"                    value="$(arg file_map)"/>
+      <arg name="file_map"                    value="$(arg file_map)"/>
+      <arg name="file_amcl"                   value="$(arg file_amcl)"/>
     </include>
   </group>
 

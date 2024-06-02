@@ -1,10 +1,24 @@
 <launch>
+  <arg name="rviz"                            default="true"/>
+  <arg name="loc"                             default="odom"/> <!-- odom, amcl rtabmap -->
+  <arg name="nav"                             default="potbot"/> <!-- potbot, move_base -->
+  <arg name="slam"                            default="none"/> <!-- none, gmapping, rtabmap -->
+  <arg name="x"                               default="0"/>
+  <arg name="y"                               default="0"/>
+  <arg name="yaw"                             default="0"/>
+  <arg name="db"                              default="rtabmap"/>
+  <arg name="reset"                           default="true"/>
+  <arg name="v"                               default="0.5"/>
+  <arg name="omega"                           default="1.0"/>
+  <arg name="fwd"                             default="false"/>
+
+
   <arg name="multi_robot"                     default="robot_0"/>
-  <arg name="use_rviz"                        default="true"/>
+  <arg name="use_rviz"                        default="$(arg rviz)"/>
   <arg name="use_fusion"                      default="false"/>
-  <arg name="method_localization"             default="odom"/> <!-- odom, amcl rtabmap -->
-  <arg name="method_navigation"               default="potbot"/> <!-- potbot, move_base-->
-  <arg name="method_slam"                     default="none"/> <!-- none, gmapping, rtabmap-->
+  <arg name="method_localization"             default="$(arg loc)"/> <!-- odom, amcl rtabmap -->
+  <arg name="method_navigation"               default="$(arg nav)"/> <!-- potbot, move_base-->
+  <arg name="method_slam"                     default="$(arg slam)"/> <!-- none, gmapping, rtabmap-->
   <arg name="frame_id_global"                 default="map"/>
   <arg name="frame_id_odom"                   default="$(arg multi_robot)/odom"/>
   <arg name="frame_id_base_footprint"         default="$(arg multi_robot)/base_footprint"/>
@@ -15,14 +29,18 @@
   <arg name="topic_cmd"                       default="/$(arg multi_robot)/cmd_vel"/>
   <arg name="topic_goal"                      default="/$(arg multi_robot)/goal"/>
   <arg name="model"                           default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
-  <arg name="initial_pose_x"                  default="0.0"/>
-  <arg name="initial_pose_y"                  default="0.0"/>
-  <arg name="initial_pose_yaw"                default="0.0"/>
+  <arg name="initial_pose_x"                  default="$(arg x)"/>
+  <arg name="initial_pose_y"                  default="$(arg y)"/>
+  <arg name="initial_pose_yaw"                default="$(arg yaw)"/>
   <arg name="file_urdf"                       default="$(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro"/>
   <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
   <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
-  <arg name="file_database"                   default="~/.ros/rtabmap.db"/>
-  <arg name="reset_database"                  default="true"/>
+  <arg name="file_database"                   default="~/.ros/$(arg db).db"/>
+  <arg name="reset_database"                  default="$(arg reset)"/>
+
+  <arg name="max_linear_velocity"             default="$(arg v)"/>
+  <arg name="max_angular_velocity"            default="$(arg omega)"/>
+  <arg name="move_forward_only"               default="$(arg fwd)"/>
   
   <group ns="$(arg multi_robot)">
 
@@ -52,6 +70,19 @@
       <arg name="file_rviz"                     value="$(arg file_rviz)"/>
       <arg name="file_database"                 value="$(arg file_database)"/>
       <arg name="reset_database"                value="$(arg reset_database)"/>
+      
+      <arg name="max_linear_velocity"           value="$(arg max_linear_velocity)"/>
+      <arg name="max_angular_velocity"          value="$(arg max_angular_velocity)"/>
+      <arg name="move_forward_only"             value="$(arg move_forward_only)"/>
+
+      <arg name="file_costmap_common_params"    value="$(find turtlebot3_navigation)/param/costmap_common_params_$(arg model).yaml"/>
+      <arg name="file_global_costmap_params"    value="$(find turtlebot3_navigation)/param/global_costmap_params.yaml"/>
+      <arg name="file_local_costmap_params"     value="$(find turtlebot3_navigation)/param/local_costmap_params.yaml"/>
+      <arg name="file_move_base_params"         value="$(find turtlebot3_navigation)/param/move_base_params.yaml"/>
+      <arg name="file_dwa_local_planner_params" value="$(find turtlebot3_navigation)/param/dwa_local_planner_params_$(arg model).yaml"/>
+
+      <arg name="file_amcl"                     value="$(find potbot_example)/config/navigation/amcl.yaml"/>
+      <arg name="file_gmapping"                 value="$(find potbot_example)/config/navigation/gmapping.yaml"/>
     </include>
 
   </group>

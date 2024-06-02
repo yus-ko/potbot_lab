@@ -1,15 +1,16 @@
 <launch>
-  <arg name="frame_id_robot_base"         default="base_footprint"/>
-  <arg name="frame_id_odom"               default="odom"/>
-  <arg name="topic_scan"                  default="scan"/>
-  <arg name="initial_pose_x"              default="0.0"/>
-  <arg name="initial_pose_y"              default="0.0"/>
-  <arg name="initial_pose_yaw"            default="0.0"/>
-  <arg name="map_file"                    default="$(find potbot_description)/maps/garage.yaml"/>
+  <arg name="frame_id_robot_base"           default="base_footprint"/>
+  <arg name="frame_id_odom"                 default="odom"/>
+  <arg name="topic_scan"                    default="scan"/>
+  <arg name="initial_pose_x"                default="0.0"/>
+  <arg name="initial_pose_y"                default="0.0"/>
+  <arg name="initial_pose_yaw"              default="0.0"/>
+  <arg name="file_map"                      default="$(find potbot_description)/maps/garage.yaml"/>
+  <arg name="file_amcl"                     default="$(find potbot_example)/config/navigation/amcl.yaml"/>
 
   <!-- AMCL -->
   <node pkg="amcl" type="amcl" name="amcl">
-    <rosparam command="load" file="$(find potbot_example)/config/navigation/amcl.yaml" />
+    <rosparam command="load"                file="$(arg file_amcl)" />
     <remap from="scan"                      to="$(arg topic_scan)"/>
     <param name="odom_frame_id"             value="$(arg frame_id_odom)"/>
     <param name="base_frame_id"             value="$(arg frame_id_robot_base)"/>
@@ -18,6 +19,6 @@
     <param name="initial_pose_a"            value="$(arg initial_pose_yaw)"/>
   </node>
 
-  <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)"/>
+  <node pkg="map_server" type="map_server" name="map_server" args="$(arg file_map)"/>
 
 </launch>
