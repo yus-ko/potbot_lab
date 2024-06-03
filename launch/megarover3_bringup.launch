@@ -25,9 +25,11 @@
 
     <node name="urg_node" pkg="urg_node" type="urg_node" output="screen">
       <param name="serial_port" value="/dev/ttyACM0"/> 
-      <param name="frame_id" value="$(arg multi_robot)/base_scan"/>
+      <param name="frame_id" value="base_scan"/>
       <param name="tf_prefix" value="/$(arg multi_robot)"/>
     </node>
+
+    <!-- /$(arg camera_name)/gyro_accel/sample -->
 
     <node pkg="potbot_example" type="twist_to_odometry" name="twist_to_odometry">
       <param name="publish_tf"                value="true"/>
