@@ -6,8 +6,7 @@
   <arg name="frame_id_camera"             default="$(arg multi_robot)/$(arg camera_name)"/>
   <arg name="frame_id_global"             default="map"/>
   <arg name="frame_id_odom"               default="$(arg multi_robot)/odom"/>
-  <arg name="frame_id_base_footprint"     default="$(arg multi_robot)/base_footprint"/>
-  <arg name="frame_id_robot_base"         default="$(arg multi_robot)/base_link"/>
+  <arg name="frame_id_robot_base"         default="$(arg multi_robot)/base_footprint"/>
   <arg name="topic_initial_pose"          default="initialpose"/>
   <arg name="topic_odom"                  default="odom"/>
   <arg name="initial_pose_x"              default="0"/>
@@ -55,7 +54,7 @@
     <node pkg="potbot_example" type="twist_to_odometry" name="twist_to_odometry">
       <param name="publish_tf"                value="true"/>
       <param name="frame_id_odom"             value="$(arg frame_id_odom)"/>
-      <param name="frame_id_robot_base"       value="$(arg frame_id_base_footprint)"/>
+      <param name="frame_id_robot_base"       value="$(arg frame_id_robot_base)"/>
       <!-- <remap from="rover_odo"                 to="rover_odo"/> -->
       <remap from="initialpose"               to="$(arg topic_initial_pose)"/>
       <!-- <remap from="imu/data"                  to="imu/data_raw"/> -->
