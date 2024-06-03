@@ -151,8 +151,8 @@
       <arg name="use_rviz"                value="false"/>
       <arg name="frame_id_global"         value="$(arg frame_id_odom)"/>
       <arg name="frame_id_robot_base"     value="$(arg frame_id_robot_base)"/>
-      <arg name="max_linear_velocity"     value="0.3"/>
-      <arg name="max_angular_velocity"    value="1.0"/>
+      <arg name="max_linear_velocity"     value="$(arg max_linear_velocity)"/>
+      <arg name="max_angular_velocity"    value="$(arg max_angular_velocity)"/>
       <arg name="topic_scan"              value="$(arg topic_scan)"/>
       <arg name="topic_odom"              value="$(arg topic_odom)"/>
       <arg name="topic_cmd"               value="$(arg topic_cmd)"/>

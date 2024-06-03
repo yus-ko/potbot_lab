@@ -36,7 +36,7 @@
   <arg name="initial_pose_yaw"                default="$(arg yaw)"/>
 
   <arg name="name_map"                        default="$(arg map)"/>
-  <arg name="name_robot"                      default="megarover21"/>
+  <arg name="name_robot"                      default="megarover3"/>
 
   <arg name="file_urdf"                       default="$(find potbot_example)/urdf/$(arg name_robot).urdf.xacro"/>
   <!-- <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/> -->
@@ -81,7 +81,7 @@
       <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
       <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>
       <arg name="file_urdf"                     value="$(arg file_urdf)"/>
-      <arg name="file_fusion"                   value="$(find potbot_example)/config/$(arg name_robot)/robot_localization.yaml"/>
+      <arg name="file_fusion"                   value="$(find potbot_example)/config/navigation/robot_localization.yaml"/>
       <arg name="file_map"                      value="$(arg file_map)"/>
       <arg name="file_rviz"                     value="$(arg file_rviz)"/>
       <arg name="file_database"                 value="$(arg file_database)"/>

@@ -107,38 +107,33 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_rgb_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_rgb_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        caster_back_left_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        caster_back_right_link:
+        camera_stay_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_optical_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -328,7 +323,7 @@ Visualization Manager:
               Color: 0; 0; 0
               Enabled: true
               Name: Polygon
-              Topic: /robot_0/move_base/local_costmap/footprint
+              Topic: move_base/local_costmap/footprint
               Unreliable: false
               Value: true
             - Alpha: 0.10000000149011612
@@ -471,10 +466,10 @@ Visualization Manager:
           Value: true
         - Class: rviz/Marker
           Enabled: true
-          Marker Topic: /robot_0/potbot/LookAhead
+          Marker Topic: potbot/LookAhead
           Name: Lookahead
           Namespaces:
-            LookAhead: true
+            {}
           Queue Size: 1
           Value: true
         - Alpha: 1

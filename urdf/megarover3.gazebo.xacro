@@ -63,7 +63,7 @@
       <robotBaseFrame>base_footprint</robotBaseFrame>
       <publishWheelTF>false</publishWheelTF>
       <publishTf>true</publishTf>
-      <publishWheelJointState>false</publishWheelJointState>
+      <publishWheelJointState>true</publishWheelJointState>
       <legacyMode>false</legacyMode>
       <updateRate>30</updateRate>
       <leftJoint>wheel_left_joint</leftJoint>
@@ -159,7 +159,7 @@
         <baseline>0.2</baseline>
         <alwaysOn>true</alwaysOn>
         <updateRate>1.0</updateRate>
-        <cameraName>realsense</cameraName>
+        <cameraName>camera</cameraName>
         <imageTopicName>color/image_raw</imageTopicName>
         <cameraInfoTopicName>color/camera_info</cameraInfoTopicName>
         <depthImageTopicName>depth/image_raw</depthImageTopicName>

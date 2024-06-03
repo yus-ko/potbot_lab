@@ -1,5 +1,5 @@
 <launch>
-  <arg name="multi_robot"                 default="robot_0"/>
+  <arg name="multi_robot"                 default="robot_6"/>
   <arg name="use_rviz"                    default="true"/>
   <arg name="publish_control_command"     default="true"/>
   <arg name="frame_id_global"             default="map"/>
@@ -43,7 +43,7 @@
       <remap from="odometry/filtered"     to="$(arg topic_odom)"/>
     </node> -->
 
-    <include file="$(find potbot)/launch/env/potbot.launch">
+    <!-- <include file="$(find potbot)/launch/env/potbot.launch">
       <arg name="use_rviz"                value="$(arg use_rviz)"/>
       <arg name="publish_control_command" value="$(arg publish_control_command)"/>
       <arg name="frame_id_global"         value="$(arg frame_id_odom)"/>
@@ -61,9 +61,15 @@
       <arg name="potential_field_rows"          value="160"/>
       <arg name="potential_field_cols"          value="160"/>
       <arg name="collision_count_to_replanning" value="1"/>
-    </include>
+    </include> -->
     
     <!-- <node pkg="potbot_controller" type="potbot_controller_node" name="potbot_controller_node"/> -->
+
+    <group ns="potbot">
+      <include file="$(find potbot_localmap)/launch/Localmap.launch">
+        <arg name="frame_id_robot_base"                       value="$(arg frame_id_robot_base)"/>
+      </include>
+    </group>
 
   </group>
 </launch>

@@ -18,18 +18,25 @@
   <group ns="$(arg multi_robot)">
 
     <node name="rosserial_python" pkg="rosserial_python" type="serial_node.py" output="screen">
-      <param name="port" value="/dev/ttyUSB0"/> 
-      <param name="baud" value="115200"/>
-      <remap from="rover_twist" to="cmd_vel"/>
+      <param name="port"                      value="/dev/ttyUSB0"/> 
+      <param name="baud"                      value="115200"/>
+      <remap from="rover_twist"               to="cmd_vel"/>
     </node>
 
     <node name="urg_node" pkg="urg_node" type="urg_node" output="screen">
-      <param name="serial_port" value="/dev/ttyACM0"/> 
-      <param name="frame_id" value="base_scan"/>
-      <param name="tf_prefix" value="/$(arg multi_robot)"/>
+      <param name="serial_port"               value="/dev/ttyACM0"/> 
+      <param name="frame_id"                  value="base_scan"/>
+      <param name="tf_prefix"                 value="/$(arg multi_robot)"/>
     </node>
 
-    <!-- /$(arg camera_name)/gyro_accel/sample -->
+    <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_node">
+      <remap from="imu/data_raw"              to="/$(arg camera_name)/gyro_accel/sample"/>
+      <param name="use_mag"                   value="false"/>
+      <param name="fixed_frame"               value="$(arg frame_id_odom)"/>
+      <param name="publish_tf"                value="false"/>
+      <param name="gain"                      value="0.02"/>
+      <param name="remove_gravity_vector"     value="true"/>
+    </node>
 
     <node pkg="potbot_example" type="twist_to_odometry" name="twist_to_odometry">
       <param name="publish_tf"                value="true"/>
