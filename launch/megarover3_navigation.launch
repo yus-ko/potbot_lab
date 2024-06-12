@@ -90,7 +90,7 @@
       <arg name="max_linear_velocity"           value="$(arg max_linear_velocity)"/>
       <arg name="max_angular_velocity"          value="$(arg max_angular_velocity)"/>
       <arg name="move_forward_only"             value="$(arg move_forward_only)"/>
-      <arg name="file_costmap_common_params"    value="$(find potbot_example)/config/navigation/costmap_common_params.yaml"/>
+      <arg name="file_costmap_common_params"    value="$(find potbot_example)/config/$(arg name_robot)/costmap_common_params.yaml"/>
       <arg name="file_global_costmap_params"    value="$(find potbot_example)/config/navigation/global_costmap_params.yaml"/>
       <arg name="file_local_costmap_params"     value="$(find potbot_example)/config/navigation/local_costmap_params.yaml"/>
       <arg name="file_move_base_params"         value="$(find potbot_example)/config/navigation/move_base_params.yaml"/>
