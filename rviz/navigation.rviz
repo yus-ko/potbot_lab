@@ -107,33 +107,38 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_stay_link:
+        camera_rgb_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_rgb_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        caster_back_left_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        caster_back_right_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        left_camera_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        left_camera_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        right_camera_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        right_camera_optical_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -540,6 +545,51 @@ Visualization Manager:
       Topic: goal
       Unreliable: false
       Value: true
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Class: rviz/Polygon
+          Color: 0; 0; 0
+          Enabled: false
+          Name: Polygon
+          Topic: move_base/global_costmap/footprint
+          Unreliable: false
+          Value: false
+        - Alpha: 0.10000000149011612
+          Class: rviz/Map
+          Color Scheme: costmap
+          Draw Behind: true
+          Enabled: false
+          Name: Map
+          Topic: move_base/global_costmap/costmap
+          Unreliable: false
+          Use Timestamp: false
+          Value: false
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 115; 210; 22
+          Enabled: true
+          Head Diameter: 0.30000001192092896
+          Head Length: 0.20000000298023224
+          Length: 0.30000001192092896
+          Line Style: Lines
+          Line Width: 0.029999999329447746
+          Name: global_plan
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: None
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.10000000149011612
+          Shaft Length: 0.10000000149011612
+          Topic: move_base/PotbotPlanner/plan
+          Unreliable: false
+          Value: true
+      Enabled: true
+      Name: PotbotPlanner
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
