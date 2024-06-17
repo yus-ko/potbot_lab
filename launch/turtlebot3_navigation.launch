@@ -16,6 +16,7 @@
   <arg name="multi_robot"                     default="robot_0"/>
   <arg name="use_rviz"                        default="$(arg rviz)"/>
   <arg name="use_fusion"                      default="false"/>
+  <arg name="use_remote"                      default="true"/>
   <arg name="method_localization"             default="$(arg loc)"/> <!-- odom, amcl rtabmap -->
   <arg name="method_navigation"               default="$(arg nav)"/> <!-- potbot, move_base-->
   <arg name="method_slam"                     default="$(arg slam)"/> <!-- none, gmapping, rtabmap-->
@@ -48,6 +49,7 @@
       <arg name="multi_robot"                   value="$(arg multi_robot)"/>
       <arg name="use_rviz"                      value="$(arg use_rviz)"/>
       <arg name="use_fusion"                    value="$(arg use_fusion)"/>
+      <arg name="use_remote"                    value="$(arg use_remote)"/>
       <arg name="method_localization"           value="$(arg method_localization)"/>
       <arg name="method_navigation"             value="$(arg method_navigation)"/>
       <arg name="method_slam"                   value="$(arg method_slam)"/>

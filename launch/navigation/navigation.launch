@@ -2,6 +2,7 @@
   <arg name="multi_robot"                     default=""/>
   <arg name="use_rviz"                        default="true"/>
   <arg name="use_fusion"                      default="true"/>
+  <arg name="use_remote"                      default="true"/>
   <arg name="method_localization"             default="odom"/> <!-- odom, amcl, rtabmap -->
   <arg name="method_navigation"               default="potbot"/> <!-- potbot, move_base-->
   <arg name="method_slam"                     default="none"/> <!-- none, gmapping, rtabmap-->
@@ -47,10 +48,12 @@
   <arg name="file_amcl"                       default="$(find potbot_example)/config/navigation/amcl.yaml"/>
   <arg name="file_gmapping"                   default="$(find potbot_example)/config/navigation/gmapping.yaml"/>
 
-  <include file="$(find potbot)/launch/env/remote.launch">
-    <arg name="urdf_file"               value="$(find xacro)/xacro --inorder '$(arg file_urdf)'"/>
-    <arg name="multi_robot_name"        value="$(arg multi_robot)"/>
-  </include>
+  <group if="$(arg use_remote)">
+    <include file="$(find potbot)/launch/env/remote.launch">
+      <arg name="urdf_file"               value="$(find xacro)/xacro --inorder '$(arg file_urdf)'"/>
+      <arg name="multi_robot_name"        value="$(arg multi_robot)"/>
+    </include>
+  </group>
   <!-- <node pkg="tf" type="static_transform_publisher" name="imu_tf" args="0 0 0 0 0 0 $(arg frame_id_global) base_footprint 60" /> -->
 
   <group if="$(arg use_fusion)">
