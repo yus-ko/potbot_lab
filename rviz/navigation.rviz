@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /move_base1
         - /potbot_base1/GlobalPlanner1/global_plan1
+        - /potbot_base1/LocalPlanner1/potential field1/Autocompute Value Bounds1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz/Selection
@@ -109,14 +110,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         camera_link:
           Alpha: 1
           Show Axes: false
@@ -618,6 +611,57 @@ Visualization Manager:
               Shaft Length: 0.10000000149011612
               Topic: move_base/PotbotLocalPlanner/global_plan
               Unreliable: false
+              Value: true
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 117; 80; 123
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: local_path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: move_base/PotbotLocalPlanner/local_plan
+              Unreliable: false
+              Value: true
+            - Alpha: 0.30000001192092896
+              Autocompute Intensity Bounds: true
+              Autocompute Value Bounds:
+                Max Value: 3
+                Min Value: 0
+                Value: false
+              Axis: Z
+              Channel Name: intensity
+              Class: rviz/PointCloud2
+              Color: 255; 255; 255
+              Color Transformer: AxisColor
+              Decay Time: 0
+              Enabled: true
+              Invert Rainbow: false
+              Max Color: 255; 255; 255
+              Min Color: 0; 0; 0
+              Name: potential field
+              Position Transformer: XYZ
+              Queue Size: 1
+              Selectable: true
+              Size (Pixels): 3
+              Size (m): 0.05000000074505806
+              Style: Flat Squares
+              Topic: move_base/PotbotLocalPlanner/field/potential
+              Unreliable: false
+              Use Fixed Frame: true
+              Use rainbow: true
               Value: true
           Enabled: true
           Name: LocalPlanner
