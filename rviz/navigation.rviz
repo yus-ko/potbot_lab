@@ -3,7 +3,9 @@ Panels:
     Help Height: 78
     Name: Displays
     Property Tree Widget:
-      Expanded: ~
+      Expanded:
+        - /move_base1
+        - /potbot_base1/GlobalPlanner1/global_plan1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz/Selection
@@ -547,49 +549,80 @@ Visualization Manager:
       Value: true
     - Class: rviz/Group
       Displays:
-        - Alpha: 1
-          Class: rviz/Polygon
-          Color: 0; 0; 0
-          Enabled: false
-          Name: Polygon
-          Topic: move_base/global_costmap/footprint
-          Unreliable: false
-          Value: false
-        - Alpha: 0.10000000149011612
-          Class: rviz/Map
-          Color Scheme: costmap
-          Draw Behind: true
-          Enabled: false
-          Name: Map
-          Topic: move_base/global_costmap/costmap
-          Unreliable: false
-          Use Timestamp: false
-          Value: false
-        - Alpha: 1
-          Buffer Length: 1
-          Class: rviz/Path
-          Color: 115; 210; 22
+        - Class: rviz/Group
+          Displays:
+            - Alpha: 1
+              Class: rviz/Polygon
+              Color: 0; 0; 0
+              Enabled: false
+              Name: Polygon
+              Topic: move_base/global_costmap/footprint
+              Unreliable: false
+              Value: false
+            - Alpha: 0.10000000149011612
+              Class: rviz/Map
+              Color Scheme: costmap
+              Draw Behind: true
+              Enabled: false
+              Name: Map
+              Topic: move_base/global_costmap/costmap
+              Unreliable: false
+              Use Timestamp: false
+              Value: false
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 0; 0; 0
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: global_plan
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: move_base/PotbotPlanner/plan
+              Unreliable: false
+              Value: true
           Enabled: true
-          Head Diameter: 0.30000001192092896
-          Head Length: 0.20000000298023224
-          Length: 0.30000001192092896
-          Line Style: Lines
-          Line Width: 0.029999999329447746
-          Name: global_plan
-          Offset:
-            X: 0
-            Y: 0
-            Z: 0
-          Pose Color: 255; 85; 255
-          Pose Style: None
-          Radius: 0.029999999329447746
-          Shaft Diameter: 0.10000000149011612
-          Shaft Length: 0.10000000149011612
-          Topic: move_base/PotbotPlanner/plan
-          Unreliable: false
-          Value: true
+          Name: GlobalPlanner
+        - Class: rviz/Group
+          Displays:
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 25; 255; 0
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: global_path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: move_base/PotbotLocalPlanner/global_plan
+              Unreliable: false
+              Value: true
+          Enabled: true
+          Name: LocalPlanner
       Enabled: true
-      Name: PotbotPlanner
+      Name: potbot_base
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
