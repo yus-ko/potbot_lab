@@ -4,8 +4,6 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /move_base1
-        - /potbot_base1/GlobalPlanner1/global_plan1
         - /potbot_base1/LocalPlanner1/potential field1/Autocompute Value Bounds1
       Splitter Ratio: 0.5
     Tree Height: 549
@@ -110,6 +108,14 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         camera_link:
           Alpha: 1
           Show Axes: false
