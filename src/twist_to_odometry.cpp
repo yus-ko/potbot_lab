@@ -1,4 +1,4 @@
-#include <potbot_lib/Utility.h>
+#include <potbot_lib/utility_ros.h>
 #include <ros/ros.h>
 #include <geometry_msgs/TwistStamped.h>
 #include <nav_msgs/Odometry.h>
