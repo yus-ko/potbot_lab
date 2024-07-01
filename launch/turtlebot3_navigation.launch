@@ -1,7 +1,7 @@
 <launch>
   <arg name="rviz"                            default="true"/>
   <arg name="loc"                             default="odom"/> <!-- odom, amcl rtabmap -->
-  <arg name="nav"                             default="potbot"/> <!-- potbot, move_base -->
+  <arg name="nav"                             default="move_base"/> <!-- potbot, move_base -->
   <arg name="slam"                            default="none"/> <!-- none, gmapping, rtabmap -->
   <arg name="x"                               default="0"/>
   <arg name="y"                               default="0"/>

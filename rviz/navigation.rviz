@@ -4,7 +4,9 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /TF1/Frames1
         - /potbot_base1/LocalPlanner1/potential field1/Autocompute Value Bounds1
+        - /moving obstacle1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz/Selection
@@ -74,10 +76,10 @@ Visualization Manager:
       Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
-        All Enabled: true
+        All Enabled: false
       Marker Scale: 1
       Name: TF
-      Show Arrows: true
+      Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
@@ -681,6 +683,354 @@ Visualization Manager:
           Name: LocalPlanner
       Enabled: true
       Name: potbot_base
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz/Group
+          Displays:
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 25; 255; 0
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: 1
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /robot_1/path
+              Unreliable: false
+              Value: true
+            - Alpha: 1
+              Class: rviz/RobotModel
+              Collision Enabled: false
+              Enabled: true
+              Links:
+                All Links Enabled: true
+                Expand Joint Details: false
+                Expand Link Details: false
+                Expand Tree: false
+                Link Tree Style: Links in Alphabetic Order
+                base_footprint:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                base_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                base_scan:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                caster_back_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                imu_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                wheel_left_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                wheel_right_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+              Name: 1
+              Robot Description: robot_1/robot_description
+              TF Prefix: robot_1
+              Update Interval: 0
+              Value: true
+              Visual Enabled: true
+          Enabled: true
+          Name: 1
+        - Class: rviz/Group
+          Displays:
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 25; 255; 0
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: 2
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /robot_2/path
+              Unreliable: false
+              Value: true
+            - Alpha: 1
+              Class: rviz/RobotModel
+              Collision Enabled: false
+              Enabled: true
+              Links:
+                All Links Enabled: true
+                Expand Joint Details: false
+                Expand Link Details: false
+                Expand Tree: false
+                Link Tree Style: Links in Alphabetic Order
+                base_footprint:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                base_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                base_scan:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                caster_back_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                imu_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                wheel_left_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                wheel_right_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+              Name: 2
+              Robot Description: robot_2/robot_description
+              TF Prefix: robot_2
+              Update Interval: 0
+              Value: true
+              Visual Enabled: true
+          Enabled: true
+          Name: 2
+        - Class: rviz/Group
+          Displays:
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 25; 255; 0
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: 3
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /robot_3/path
+              Unreliable: false
+              Value: true
+            - Alpha: 1
+              Class: rviz/RobotModel
+              Collision Enabled: false
+              Enabled: true
+              Links:
+                All Links Enabled: true
+                Expand Joint Details: false
+                Expand Link Details: false
+                Expand Tree: false
+                Link Tree Style: Links in Alphabetic Order
+                base_footprint:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                base_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                base_scan:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                caster_back_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                imu_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                wheel_left_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                wheel_right_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+              Name: 3
+              Robot Description: robot_3/robot_description
+              TF Prefix: robot_3
+              Update Interval: 0
+              Value: true
+              Visual Enabled: true
+          Enabled: true
+          Name: 3
+        - Class: rviz/Group
+          Displays:
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 25; 255; 0
+              Enabled: true
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.029999999329447746
+              Name: 4
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 255; 85; 255
+              Pose Style: None
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /robot_4/path
+              Unreliable: false
+              Value: true
+            - Alpha: 1
+              Class: rviz/RobotModel
+              Collision Enabled: false
+              Enabled: true
+              Links:
+                All Links Enabled: true
+                Expand Joint Details: false
+                Expand Link Details: false
+                Expand Tree: false
+                Link Tree Style: Links in Alphabetic Order
+                base_footprint:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                base_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                base_scan:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                caster_back_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                imu_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                wheel_left_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                wheel_right_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+              Name: 4
+              Robot Description: robot_4/robot_description
+              TF Prefix: robot_4
+              Update Interval: 0
+              Value: true
+              Visual Enabled: true
+          Enabled: true
+          Name: 4
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/InteractiveMarkers
+              Enable Transparency: true
+              Enabled: true
+              Name: 1
+              Show Axes: false
+              Show Descriptions: true
+              Show Visual Aids: false
+              Update Topic: /robot_1/follow_marker/target/simple_marker/update
+              Value: true
+            - Class: rviz/InteractiveMarkers
+              Enable Transparency: true
+              Enabled: true
+              Name: 2
+              Show Axes: false
+              Show Descriptions: true
+              Show Visual Aids: false
+              Update Topic: /robot_2/follow_marker/target/simple_marker/update
+              Value: true
+            - Class: rviz/InteractiveMarkers
+              Enable Transparency: true
+              Enabled: true
+              Name: 3
+              Show Axes: false
+              Show Descriptions: true
+              Show Visual Aids: false
+              Update Topic: /robot_3/follow_marker/target/simple_marker/update
+              Value: true
+            - Class: rviz/InteractiveMarkers
+              Enable Transparency: true
+              Enabled: true
+              Name: 4
+              Show Axes: false
+              Show Descriptions: true
+              Show Visual Aids: false
+              Update Topic: /robot_4/follow_marker/target/simple_marker/update
+              Value: true
+          Enabled: false
+          Name: marker
+      Enabled: true
+      Name: moving obstacle
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -708,7 +1058,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0
+      Angle: -5.21540641784668e-8
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -718,11 +1068,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 58.693565368652344
+      Scale: 80.69253540039062
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 5.493971824645996
-      Y: 4.4019246101379395
+      X: 3.521225929260254
+      Y: 2.2203526496887207
     Saved: ~
 Window Geometry:
   Displays:
