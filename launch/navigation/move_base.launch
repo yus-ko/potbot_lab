@@ -15,7 +15,7 @@
   <arg name="file_global_costmap_params"    default="$(find potbot_example)/config/navigation/global_costmap_params.yaml"/>
   <arg name="file_local_costmap_params"     default="$(find potbot_example)/config/navigation/local_costmap_params.yaml"/>
   <arg name="file_move_base_params"         default="$(find potbot_example)/config/navigation/move_base_params.yaml"/>
-  <arg name="file_dwa_local_planner_params" default="$(find potbot_example)/config/navigation/dwa_local_planner_params.yaml"/>
+  <arg name="file_local_planner_params"     default="$(find potbot_example)/config/navigation/dwa_local_planner_params.yaml"/>
 
   <!-- move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
@@ -28,8 +28,16 @@
     <!-- default -->
     <!-- <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/> -->
 
-    <param name="base_local_planner" value="potbot_nav/PotbotLocalPlanner"/>
-    <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/> -->
+    <rosparam file="$(arg file_local_planner_params)" command="load" />
+    <param name="PotbotLocalPlanner/controller/frame_id_global" value="$(arg frame_id_global)"/>
+
+    <!-- <param name="base_local_planner" value="potbot_nav/PotbotLocalPlanner"/> -->
+
+    <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+    <param name="DWAPlannerROS/max_vel_trans"         value="$(arg max_linear_velocity)"/>
+    <param name="DWAPlannerROS/max_vel_theta"         value="$(arg max_angular_velocity)"/>
+    <param name="DWAPlannerROS/min_vel_x"             value="0.0" if="$(arg move_forward_only)" /> -->
+
     <!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" /> -->
 
 
@@ -50,18 +58,10 @@
     <param name="local_costmap/robot_base_frame"                  value="$(arg frame_id_robot_base)"/>
     
     <rosparam file="$(arg file_move_base_params)"         command="load" />
-    <rosparam file="$(arg file_dwa_local_planner_params)" command="load" />
     <remap from="cmd_vel"                             to="$(arg topic_cmd)"/>
     <remap from="odom"                                to="$(arg topic_odom)"/>
     <remap from="move_base_simple/goal"               to="$(arg topic_goal)"/>
 
-    <param name="PotbotLocalPlanner/max_vel_x"         value="$(arg max_linear_velocity)"/>
-
-    <param name="DWAPlannerROS/max_vel_trans"         value="$(arg max_linear_velocity)"/>
-    <!-- <param name="DWAPlannerROS/min_vel_trans"         value="0.0"/> -->
-    <param name="DWAPlannerROS/max_vel_theta"         value="$(arg max_angular_velocity)"/>
-    <!-- <param name="DWAPlannerROS/min_vel_theta"         value="0.0"/> -->
-    <param name="DWAPlannerROS/min_vel_x"             value="0.0" if="$(arg move_forward_only)" />
   </node>
 
 </launch>

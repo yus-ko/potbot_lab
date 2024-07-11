@@ -4,7 +4,6 @@
   <arg name="use_fusion"                      default="true"/>
   <arg name="use_remote"                      default="true"/>
   <arg name="method_localization"             default="odom"/> <!-- odom, amcl, rtabmap -->
-  <arg name="method_navigation"               default="potbot"/> <!-- potbot, move_base-->
   <arg name="method_slam"                     default="none"/> <!-- none, gmapping, rtabmap-->
   <arg name="frame_id_global"                 default="map"/>
   <arg name="frame_id_odom"                   default="odom"/>
@@ -43,7 +42,7 @@
   <arg name="file_global_costmap_params"      default="$(find potbot_example)/config/navigation/global_costmap_params.yaml"/>
   <arg name="file_local_costmap_params"       default="$(find potbot_example)/config/navigation/local_costmap_params.yaml"/>
   <arg name="file_move_base_params"           default="$(find potbot_example)/config/navigation/move_base_params.yaml"/>
-  <arg name="file_dwa_local_planner_params"   default="$(find potbot_example)/config/navigation/dwa_local_planner_params.yaml"/>
+  <arg name="file_local_planner_params"       default="$(find potbot_example)/config/navigation/dwa_local_planner_params.yaml"/>
 
   <arg name="file_amcl"                       default="$(find potbot_example)/config/navigation/amcl.yaml"/>
   <arg name="file_gmapping"                   default="$(find potbot_example)/config/navigation/gmapping.yaml"/>
@@ -128,42 +127,24 @@
     <arg name="file_gmapping"                 value="$(arg file_gmapping)"/>
   </include>
 
-  <group if = "$(eval method_navigation == 'move_base')">
-    <include file="$(find potbot_example)/launch/navigation/move_base.launch">
-      <arg name="frame_id_global"                 value="$(arg frame_id_global)"/>
-      <arg name="frame_id_odom"                   value="$(arg frame_id_odom)"/>
-      <arg name="frame_id_robot_base"             value="$(arg frame_id_robot_base)"/>
-      <arg name="frame_id_scan"                   value="$(arg frame_id_scan)"/>
-      <arg name="max_linear_velocity"             value="$(arg max_linear_velocity)"/>
-      <arg name="max_angular_velocity"            value="$(arg max_angular_velocity)"/>
-      <arg name="move_forward_only"               value="$(arg move_forward_only)"/>
-      <arg name="topic_scan"                      value="$(arg topic_scan)"/>
-      <arg name="topic_odom"                      value="$(arg topic_odom)"/>
-      <arg name="topic_cmd"                       value="$(arg topic_cmd)"/>
-      <arg name="topic_goal"                      value="$(arg topic_goal)"/>
-      <arg name="file_costmap_common_params"      value="$(arg file_costmap_common_params)"/>
-      <arg name="file_global_costmap_params"      value="$(arg file_global_costmap_params)"/>
-      <arg name="file_local_costmap_params"       value="$(arg file_local_costmap_params)"/>
-      <arg name="file_move_base_params"           value="$(arg file_move_base_params)"/>
-      <arg name="file_dwa_local_planner_params"   value="$(arg file_dwa_local_planner_params)"/>
-    </include>
-  </group>
-
-  <group if = "$(eval method_navigation == 'potbot')">
-    <include file="$(find potbot)/launch/env/potbot.launch">
-      <arg name="use_rviz"                value="false"/>
-      <arg name="frame_id_global"         value="$(arg frame_id_odom)"/>
-      <arg name="frame_id_robot_base"     value="$(arg frame_id_robot_base)"/>
-      <arg name="max_linear_velocity"     value="$(arg max_linear_velocity)"/>
-      <arg name="max_angular_velocity"    value="$(arg max_angular_velocity)"/>
-      <arg name="topic_scan"              value="$(arg topic_scan)"/>
-      <arg name="topic_odom"              value="$(arg topic_odom)"/>
-      <arg name="topic_cmd"               value="$(arg topic_cmd)"/>
-      <arg name="topic_goal"              value="$(arg topic_goal)"/>
-      <!-- <arg name="topic_pcl2"              value="$(arg topic_pcl2)"/> -->
-      <!-- <arg name="clustering_method"       value="$(arg clustering_method)"/> -->
-    </include>
-  </group>
+  <include file="$(find potbot_example)/launch/navigation/move_base.launch">
+    <arg name="frame_id_global"                 value="$(arg frame_id_global)"/>
+    <arg name="frame_id_odom"                   value="$(arg frame_id_odom)"/>
+    <arg name="frame_id_robot_base"             value="$(arg frame_id_robot_base)"/>
+    <arg name="frame_id_scan"                   value="$(arg frame_id_scan)"/>
+    <arg name="max_linear_velocity"             value="$(arg max_linear_velocity)"/>
+    <arg name="max_angular_velocity"            value="$(arg max_angular_velocity)"/>
+    <arg name="move_forward_only"               value="$(arg move_forward_only)"/>
+    <arg name="topic_scan"                      value="$(arg topic_scan)"/>
+    <arg name="topic_odom"                      value="$(arg topic_odom)"/>
+    <arg name="topic_cmd"                       value="$(arg topic_cmd)"/>
+    <arg name="topic_goal"                      value="$(arg topic_goal)"/>
+    <arg name="file_costmap_common_params"      value="$(arg file_costmap_common_params)"/>
+    <arg name="file_global_costmap_params"      value="$(arg file_global_costmap_params)"/>
+    <arg name="file_local_costmap_params"       value="$(arg file_local_costmap_params)"/>
+    <arg name="file_move_base_params"           value="$(arg file_move_base_params)"/>
+    <arg name="file_local_planner_params"       value="$(arg file_local_planner_params)"/>
+  </include>
 
   <group if="$(arg use_rviz)">
     <node pkg="rviz" type="rviz" name="rviz_navigation" required="true" args="-d $(arg file_rviz)"/>
