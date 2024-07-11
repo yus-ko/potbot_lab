@@ -31,7 +31,7 @@ void dead_reckoning(geometry_msgs::TwistStamped vel_msg)
 	static double v_pre							= v;
 	static double omega_pre						= omega;
 
-	double theta 								= potbot_lib::utility::get_Yaw(g_odom.pose.pose.orientation);
+	double theta 								= tf2::getYaw(g_odom.pose.pose.orientation);
 	double x									= g_odom.pose.pose.position.x;
 	double y 									= g_odom.pose.pose.position.y;
 	if (g_dead_reckoning == "rectangle")
@@ -49,31 +49,14 @@ void dead_reckoning(geometry_msgs::TwistStamped vel_msg)
 
 	g_odom.pose.pose.position.x					= x;
 	g_odom.pose.pose.position.y					= y;
-	g_odom.pose.pose.orientation				= potbot_lib::utility::get_Quat(0,0,theta);
+	g_odom.pose.pose.orientation				= potbot_lib::utility::get_quat(0,0,theta);
 
 	t_pre										= g_odom.header.stamp.toSec();
 	v_pre										= v;
 	omega_pre									= omega;
 
-	potbot_lib::utility::print_Pose(g_odom.pose.pose);
+	potbot_lib::utility::print_pose(g_odom.pose.pose);
 
-}
-
-void odom_broadcast(nav_msgs::Odometry odom)
-{
-	static tf2_ros::TransformBroadcaster dynamic_br;
-	geometry_msgs::TransformStamped transformStamped;
-    transformStamped.header.stamp = odom.header.stamp;
-    transformStamped.header.frame_id = odom.header.frame_id;
-    transformStamped.child_frame_id = odom.child_frame_id;
-    transformStamped.transform.translation.x = odom.pose.pose.position.x;
-    transformStamped.transform.translation.y = odom.pose.pose.position.y;
-    transformStamped.transform.translation.z = odom.pose.pose.position.z;
-    transformStamped.transform.rotation.x = odom.pose.pose.orientation.x;
-    transformStamped.transform.rotation.y = odom.pose.pose.orientation.y;
-    transformStamped.transform.rotation.z = odom.pose.pose.orientation.z;
-    transformStamped.transform.rotation.w = odom.pose.pose.orientation.w;
-    dynamic_br.sendTransform(transformStamped);
 }
 
 void twist_callback(const geometry_msgs::Twist& msg)
@@ -85,8 +68,8 @@ void twist_callback(const geometry_msgs::Twist& msg)
 	tm.twist									= msg;
 
 	dead_reckoning(tm);
-
-	if (g_publish_tf) odom_broadcast(g_odom);
+	static tf2_ros::TransformBroadcaster dynamic_br;
+	if (g_publish_tf) potbot_lib::utility::broadcast_frame(dynamic_br, g_odom);
 	g_pub_odom.publish(g_odom);
 }
 
@@ -100,7 +83,7 @@ void imu_callback(const sensor_msgs::Imu& msg)
 {
 	// ROS_INFO("imu callback");
 	double roll,pitch,yaw;
-	potbot_lib::utility::get_RPY(msg.orientation, roll, pitch, yaw);
+	potbot_lib::utility::get_rpy(msg.orientation, roll, pitch, yaw);
 	// ROS_INFO("(r,p,y) = (%f, %f, %f)", roll/M_PI*180, pitch/M_PI*180, yaw/M_PI*180);
 	g_odom.pose.pose.orientation = msg.orientation;
 
@@ -129,7 +112,7 @@ int main(int argc,char **argv){
 	ros::Subscriber sub_imu						= nh.subscribe("imu/data",1,&imu_callback);
 	g_pub_odom									= nh.advertise<nav_msgs::Odometry>("odom", 1);
 	
-	g_odom.pose.pose							= potbot_lib::utility::get_Pose(x,y,z,roll,pitch,yaw);
+	g_odom.pose.pose							= potbot_lib::utility::get_pose(x,y,z,roll,pitch,yaw);
 
 	ros::spin();
 	
