@@ -721,33 +721,7 @@ Visualization Manager:
                   Show Axes: false
                   Show Trail: false
                   Value: true
-                camera_depth_frame:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                camera_depth_optical_frame:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                camera_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                camera_rgb_frame:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                camera_rgb_optical_frame:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                caster_back_left_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                caster_back_right_link:
+                caster_back_link:
                   Alpha: 1
                   Show Axes: false
                   Show Trail: false
@@ -954,6 +928,14 @@ Visualization Manager:
           Name: marker
       Enabled: true
       Name: moving obstacle
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: move_base/PotbotLocalPlanner/controller/potential_vector
+      Name: TAPF
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
