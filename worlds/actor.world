@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<sdf version="1.5">
+<!-- <sdf version="1.5">
   <model name="actor1">
     <static>true</static>
     <link name="link">
@@ -56,4 +56,48 @@
     </actor>
   </model>
   
+</sdf> -->
+
+<sdf version="1.5">
+    <world name="default">
+        <actor name="actor">
+            <skin>
+                <filename>moonwalk.dae</filename>
+                <scale>1.0</scale>
+            </skin>
+            <pose>0 0 0 0 0 0</pose>
+            <animation name="walking">
+                <filename>walk.dae</filename>
+                <scale>1</scale>
+                <interpolate_x>true</interpolate_x>
+            </animation>
+            <script>
+                <loop>true</loop>
+                <delay_start>0</delay_start>
+                <auto_start>true</auto_start>
+                <trajectory id="0" type="walking">
+                    <waypoint>
+                        <time>0</time>
+                        <pose>0 0 0 0 0 0</pose>
+                    </waypoint>
+                    <waypoint>
+                        <time>10</time>
+                        <pose>5 0 0 0 0 1.57</pose>
+                    </waypoint>
+                    <waypoint>
+                        <time>20</time>
+                        <pose>5 5 0 0 0 3.14</pose>
+                    </waypoint>
+                    <waypoint>
+                        <time>30</time>
+                        <pose>0 5 0 0 0 -1.57</pose>
+                    </waypoint>
+                    <waypoint>
+                        <time>40</time>
+                        <pose>0 0 0 0 0 0</pose>
+                    </waypoint>
+                </trajectory>
+            </script>
+        </actor>
+    </world>
 </sdf>
