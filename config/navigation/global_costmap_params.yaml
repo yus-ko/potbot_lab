@@ -14,5 +14,5 @@ global_costmap:
     - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
 
   obstacle_layer:
-    observation_sources: scan
-    scan: {sensor_frame: base_scan, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+    observation_sources: lidar
+    lidar: {sensor_frame: base_scan, data_type: LaserScan, topic: scan, marking: true, clearing: true}

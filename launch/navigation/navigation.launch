@@ -17,6 +17,7 @@
   <arg name="topic_rgb"                       default="camera/rgb/image_raw"/>
   <arg name="topic_info"                      default="camera/rgb/camera_info"/>
   <arg name="topic_depth"                     default="camera/depth/image_raw"/>
+  <arg name="topic_depth_points"              default="camera/depth/points"/>
 
   <arg name="stereo"                          default="false"/>
   <arg name="topic_left_image"                default="camera/left_rect/image_rect" />
@@ -65,6 +66,12 @@
       <arg name="file_amcl"                   value="$(arg file_amcl)"/>
     </include>
   </group>
+
+  <include file="$(find potbot_example)/launch/navigation/pcl.launch">
+    <arg name="frame_id_robot_base"     value="$(arg frame_id_robot_base)"/>
+    <arg name="topic_depth"             value="$(arg topic_depth)"/>
+    <arg name="topic_info"              value="$(arg topic_info)"/>
+  </include>
 
   <include file="$(find potbot_example)/launch/navigation/visual_odometry.launch">
     <arg name="method"                        value="none"/>
@@ -136,6 +143,7 @@
     <arg name="max_angular_velocity"            value="$(arg max_angular_velocity)"/>
     <arg name="move_forward_only"               value="$(arg move_forward_only)"/>
     <arg name="topic_scan"                      value="$(arg topic_scan)"/>
+    <arg name="topic_depth_points"              value="$(arg topic_depth_points)"/>
     <arg name="topic_odom"                      value="$(arg topic_odom)"/>
     <arg name="topic_cmd"                       value="$(arg topic_cmd)"/>
     <arg name="topic_goal"                      value="$(arg topic_goal)"/>

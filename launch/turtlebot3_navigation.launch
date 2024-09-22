@@ -61,6 +61,7 @@
       <arg name="topic_rgb"                     value="/$(arg multi_robot)/camera/rgb/image_raw"/>
       <arg name="topic_info"                    value="/$(arg multi_robot)/camera/rgb/camera_info"/>
       <arg name="topic_depth"                   value="/$(arg multi_robot)/camera/depth/image_raw"/>
+      <arg name="topic_depth_points"            value="/$(arg multi_robot)/camera/depth/points/downsample"/>
       <arg name="initial_pose_x"                value="$(arg initial_pose_x)"/>
       <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
       <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>

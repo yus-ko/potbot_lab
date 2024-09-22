@@ -6,6 +6,7 @@
   <arg name="max_linear_velocity"           default="0.5"/>
   <arg name="max_angular_velocity"          default="1.0"/>
   <arg name="topic_scan"                    default="scan"/>
+  <arg name="topic_depth_points"            default="camera/depth/points"/>
   <arg name="topic_odom"                    default="odom"/>
   <arg name="topic_cmd"                     default="cmd_vel"/>
   <arg name="topic_goal"                    default="move_base_simple/goal"/>
@@ -44,20 +45,22 @@
     <rosparam file="$(arg file_costmap_common_params)"  command="load" ns="global_costmap" />
     <rosparam file="$(arg file_global_costmap_params)"  command="load" />
     <param name="global_costmap/global_frame"                     value="$(arg frame_id_global)"/>
-    <param name="global_costmap/obstacle_layer/scan/topic"        value="$(arg topic_scan)"/>
-    <param name="global_costmap/obstacle_layer/scan/sensor_frame" value="$(arg frame_id_scan)"/>
+    <param name="global_costmap/obstacle_layer/lidar/topic"        value="$(arg topic_scan)"/>
+    <param name="global_costmap/obstacle_layer/lidar/sensor_frame" value=""/>
     <param name="global_costmap/robot_base_frame"                 value="$(arg frame_id_robot_base)"/>
 
     <rosparam file="$(arg file_costmap_common_params)"  command="load" ns="local_costmap" />
     <rosparam file="$(arg file_local_costmap_params)"   command="load" />
     <param name="local_costmap/global_frame"                      value="$(arg frame_id_odom)"/>
-    <param name="local_costmap/obstacle_layer/scan/topic"         value="$(arg topic_scan)"/>
-    <param name="local_costmap/obstacle_layer/scan/sensor_frame"  value="$(arg frame_id_scan)"/>
-    <param name="local_costmap/state_layer/scan/topic"            value="$(arg topic_scan)"/>
-    <param name="local_costmap/state_layer/scan/sensor_frame"     value="$(arg frame_id_scan)"/>
+    <param name="local_costmap/obstacle_layer/lidar/topic"         value="$(arg topic_scan)"/>
+    <param name="local_costmap/obstacle_layer/lidar/sensor_frame"  value=""/>
+    <param name="local_costmap/obstacle_layer/camera/topic"       value="$(arg topic_depth_points)"/>
+    <param name="local_costmap/obstacle_layer/camera/sensor_frame" value=""/>
+    <param name="local_costmap/state_layer/lidar/topic"            value="$(arg topic_scan)"/>
+    <param name="local_costmap/state_layer/lidar/sensor_frame"     value=""/>
     <param name="local_costmap/robot_base_frame"                  value="$(arg frame_id_robot_base)"/>
     
-    <rosparam file="$(arg file_move_base_params)"         command="load" />
+    <rosparam file="$(arg file_move_base_params)"       command="load" />
     <remap from="cmd_vel"                             to="$(arg topic_cmd)"/>
     <remap from="odom"                                to="$(arg topic_odom)"/>
     <remap from="move_base_simple/goal"               to="$(arg topic_goal)"/>

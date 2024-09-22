@@ -4,9 +4,9 @@
   <arg name="topic_depth"                     default="camera/depth/image_raw"/>
   <arg name="topic_info"                      default="camera/depth/camera_info"/>
 
-  <arg name="topic_cloud_downsample"                     default="camera/depth/points/downsample"/>
-  <arg name="topic_cloud_ground"                      default="camera/depth/points/ground"/>
-  <arg name="topic_cloud_obstacles"                      default="camera/depth/points/obstacles"/>
+  <arg name="topic_cloud_downsample"          default="camera/depth/points/downsample"/>
+  <arg name="topic_cloud_ground"              default="camera/depth/points/ground"/>
+  <arg name="topic_cloud_obstacles"           default="camera/depth/points/obstacles"/>
 
   <node pkg="nodelet" type="nodelet" name="pcl_downsampler" args="standalone rtabmap_ros/point_cloud_xyz" clear_params="true">
     <remap from="depth/image"         to="$(arg topic_depth)"/>
