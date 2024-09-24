@@ -8,7 +8,7 @@
 
   <arg name="map_file" default="$(find potbot_description)/maps/turtlebot3_house.yaml"/>
 
-  <include file="$(find potbot)/launch/potbot_remote.launch">
+  <include file="$(find potbot_example)/launch/potbot_remote.launch">
     <arg name="model" value="beego2"/>
     <arg name="multi_robot_name" value="robot_4"/>
   </include>

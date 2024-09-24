@@ -5,7 +5,7 @@
     <!-- <arg name="world_name"      value="$(arg world_name)"/> -->
   </include>
 
-  <include file="$(find potbot)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
+  <include file="$(find potbot_example)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
     <arg name="tf_prefix"       value="robot_0"/>
     <!-- <arg name="x_pos"           value="2.0"/>
     <arg name="y_pos"           value="4.0"/>
@@ -15,7 +15,7 @@
     <arg name="camera_visual"   value="false"/>
   </include>
 
-  <include file="$(find potbot)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
+  <include file="$(find potbot_example)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
     <arg name="tf_prefix"       value="robot_1"/>
     <arg name="x_pos"           value="0.3"/>
     <arg name="y_pos"           value="-0.3"/>

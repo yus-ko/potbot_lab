@@ -6,7 +6,7 @@
   <!-- Gmapping -->
   <group ns="robot_5">
 
-    <include file="$(find potbot)/launch/megarover_act_sensor.launch">
+    <include file="$(find potbot_example)/launch/megarover_act_sensor.launch">
     </include>
 
     <node pkg="gmapping" type="slam_gmapping" name="megarover_slam_gmapping" output="screen">

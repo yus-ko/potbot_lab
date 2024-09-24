@@ -29,12 +29,12 @@
 
   <group ns="$(arg GROUP)">
 
-    <include file="$(find potbot)/launch/env/remote.launch">
+    <include file="$(find potbot_example)/launch/env/remote.launch">
       <arg name="urdf_file"               default="$(find xacro)/xacro --inorder '$(arg FILE/URDF)'"/>
       <arg name="multi_robot_name"        value="$(arg GROUP)"/>
     </include>
 
-    <include file="$(find potbot)/launch/env/amcl.launch">
+    <include file="$(find potbot_example)/launch/env/amcl.launch">
       <arg name="map_file"                value="$(arg FILE/MAP)"/>
       <arg name="initial_pose_topic"      value="$(arg TOPIC/INITIAL_POSE)"/>
       <arg name="initial_pose_x"          value="$(arg INITIAL/POSE/X)"/>
@@ -49,7 +49,7 @@
       <remap from="odometry/filtered"     to="$(arg TOPIC/ODOM)"/>
     </node>
 
-    <include file="$(find potbot)/launch/env/potbot.launch">
+    <include file="$(find potbot_example)/launch/env/potbot.launch">
       <arg name="GROUP"                         value="$(arg GROUP)"/>
       <arg name="USE_RVIZ"                      value="$(arg USE_RVIZ)"/>
       <arg name="PUBLISH_COMMAND"               value="$(arg PUBLISH_COMMAND)"/>

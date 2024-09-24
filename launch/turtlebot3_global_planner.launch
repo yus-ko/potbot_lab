@@ -15,7 +15,7 @@
   <arg name="file_global_planner"       default="$(find potbot_example)/config/navigation/global_planner.yaml"/>
 
   <group ns = "$(arg multi_robot)">
-    <include file="$(find potbot)/launch/env/remote.launch">
+    <include file="$(find potbot_example)/launch/env/remote.launch">
       <arg name="urdf_file"               value="$(find xacro)/xacro --inorder '$(find turtlebot3_description)/urdf/turtlebot3_waffle.urdf.xacro'"/>
       <arg name="multi_robot_name"     value="$(arg multi_robot)"/>
     </include>

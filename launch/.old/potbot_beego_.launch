@@ -17,7 +17,7 @@
 
   <group ns="$(arg GROUP)">
 
-    <include file="$(find potbot)/launch/beego2_amcl.launch">
+    <include file="$(find potbot_example)/launch/beego2_amcl.launch">
       <arg name="map_file"                value="$(find potbot_description)/maps/garage.yaml"/>
       <arg name="USE_RVIZ"                value="false"/>
       <arg name="initial_pose_x"          value="6.5"/>

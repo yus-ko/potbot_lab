@@ -24,7 +24,7 @@
 
   <group ns="$(arg multi_robot)">
     
-    <!-- <include file="$(find potbot)/launch/env/amcl.launch">
+    <!-- <include file="$(find potbot_example)/launch/env/amcl.launch">
       <arg name="map_file"                value="$(arg file_map)"/>
       <arg name="initial_pose_topic"      value="$(arg topic_initial_pose)"/>
       <arg name="initial_pose_x"          value="$(arg initial_pose_x)"/>
@@ -43,7 +43,7 @@
       <remap from="odometry/filtered"     to="$(arg topic_odom)"/>
     </node> -->
 
-    <!-- <include file="$(find potbot)/launch/env/potbot.launch">
+    <!-- <include file="$(find potbot_example)/launch/env/potbot.launch">
       <arg name="use_rviz"                value="$(arg use_rviz)"/>
       <arg name="publish_control_command" value="$(arg publish_control_command)"/>
       <arg name="frame_id_global"         value="$(arg frame_id_odom)"/>

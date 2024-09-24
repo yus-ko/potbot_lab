@@ -49,7 +49,7 @@
   <arg name="file_gmapping"                   default="$(find potbot_example)/config/navigation/gmapping.yaml"/>
 
   <group if="$(arg use_remote)">
-    <include file="$(find potbot)/launch/env/remote.launch">
+    <include file="$(find potbot_example)/launch/env/remote.launch">
       <arg name="urdf_file"               value="$(find xacro)/xacro --inorder '$(arg file_urdf)'"/>
       <arg name="multi_robot_name"        value="$(arg multi_robot)"/>
     </include>

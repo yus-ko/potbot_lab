@@ -23,14 +23,14 @@
 
   <group ns="$(arg multi_robot)">
 
-    <include file="$(find potbot)/launch/env/remote.launch">
+    <include file="$(find potbot_example)/launch/env/remote.launch">
       <arg name="urdf_file"               default="$(find xacro)/xacro --inorder '$(arg file_urdf)'"/>
       <arg name="multi_robot_name"        value="$(arg multi_robot)"/>
     </include>
 
     <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 $(arg frame_id_global) $(arg frame_id_odom) 30" />
 
-    <include file="$(find potbot)/launch/env/potbot.launch">
+    <include file="$(find potbot_example)/launch/env/potbot.launch">
       <arg name="use_rviz"                value="$(arg use_rviz)"/>
       <arg name="publish_control_command" value="$(arg publish_control_command)"/>
       <arg name="frame_id_global"         value="$(arg frame_id_odom)"/>

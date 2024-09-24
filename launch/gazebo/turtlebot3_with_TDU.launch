@@ -10,7 +10,7 @@
     <arg name="world_name"      value="$(arg world_name)"/>
   </include>
 
-  <include file="$(find potbot)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
+  <include file="$(find potbot_example)/launch/gazebo/spawn_model/spawn_turtlebot3.launch">
     <arg name="tf_prefix"       value="robot_0"/>
     <arg name="x_pos"           value="$(arg x_pos)"/>
     <arg name="y_pos"           value="$(arg y_pos)"/>

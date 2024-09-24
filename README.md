@@ -28,6 +28,15 @@ cd ~/catkin_ws
 catkin build turtlebot3 megarover_samples vs_rover_options_description megarover_description multi_turtlebot_gazebo
 ```
 
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/yus-ko/potbot_example
+```
+```bash
+cd ~/catkin_ws
+catkin build potbot_example
+```
+
 # 起動方法
 
 gazeboが実行されます

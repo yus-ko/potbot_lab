@@ -6,7 +6,7 @@
 
   <group ns="$(arg multi_robot)">
 
-    <include file="$(find potbot)/launch/env/remote.launch">
+    <include file="$(find potbot_example)/launch/env/remote.launch">
       <arg name="urdf_file"               default="$(find xacro)/xacro --inorder '$(arg file_urdf)'"/>
       <arg name="multi_robot_name"        value="$(arg multi_robot)"/>
     </include>
