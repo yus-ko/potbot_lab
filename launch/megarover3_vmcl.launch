@@ -18,7 +18,7 @@
   <arg name="name_robot"                      default="megarover3"/>
 
   <arg name="file_urdf"                       default="$(find potbot_example)/urdf/$(arg name_robot).urdf.xacro"/>
-  <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
+  <arg name="file_rviz"                       default="$(find potbot_example)/rviz/vmcl.rviz"/>
 
   <group ns="$(arg multi_robot)">
 
@@ -38,8 +38,9 @@
       <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
       <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/> -->
       <arg name="file_urdf"                     value="$(arg file_urdf)"/>
-      <!-- <arg name="file_rviz"                     value="$(arg file_rviz)"/> -->
-      <!-- <arg name="file_marker_pose"              value=""/> -->
+      <arg name="file_rviz"                     value="$(arg file_rviz)"/>
+      <arg name="file_marker_pose"              value="$(find potbot_example)/config/aruco/lab.yaml"/>
+      <arg name="depth_scaling"                 value="1000"/>
     </include>
 
   </group>
