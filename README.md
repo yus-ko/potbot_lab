@@ -1,5 +1,11 @@
 # potbot_example
 
+<!-- テスト環境
+| ROS |
+--
+| Melodic |
+| Kinetic | -->
+
 # Installation
 
 はじめに https://github.com/yus-ko/potbot_core をビルドしてください
@@ -7,8 +13,8 @@
 次に以下のコマンドで必要なパッケージをインストールしてください
 
 ```bash
-sudo apt install ros-$ROS_DISTRO-gmapping ros-$ROS_DISTRO-map-server ros-$ROS_DISTRO-robot-localization ros-$ROS_DISTRO-rtabmap-ros ros-$ROS_DISTRO-imu-tools
-sudo apt install ros-$ROS_DISTRO-gazebo-ros ros-$ROS_DISTRO-gazebo-ros-control ros-$ROS_DISTRO-ros-control ros-$ROS_DISTRO-ros-controllers
+sudo apt install ros-$ROS_DISTRO-gmapping ros-$ROS_DISTRO-map-server ros-$ROS_DISTRO-robot-localization ros-$ROS_DISTRO-rtabmap-ros ros-$ROS_DISTRO-imu-tools -y
+sudo apt install ros-$ROS_DISTRO-gazebo-ros ros-$ROS_DISTRO-gazebo-ros-control ros-$ROS_DISTRO-ros-control ros-$ROS_DISTRO-ros-controllers -y
 mkdir -p ~/.gazebo/models && cd ~/.gazebo/models
 git clone https://github.com/osrf/gazebo_models
 mv ~/.gazebo/models/gazebo_models/* ~/.gazebo/models/ && sudo rm -r ~/.gazebo/models/gazebo_models/

@@ -1,0 +1,18 @@
+<launch>
+   <arg name="multi_robot"             default="robot_6"/>
+   <arg name="use_remote"              default="true"/>
+   <arg name="file_urdf"               default="$(find potbot_example)/urdf/megarover3.urdf.xacro"/>
+   <arg name="file_bag"                default=""/>
+
+   <rosparam param="/use_sim_time">true</rosparam>
+
+   <group if="$(arg use_remote)">
+      <include file="$(find potbot_example)/launch/env/remote.launch">
+         <arg name="urdf_file"               value="$(find xacro)/xacro --inorder '$(arg file_urdf)'"/>
+         <arg name="multi_robot_name"        value="$(arg multi_robot)"/>
+      </include>
+   </group>
+
+   <node name="rosbag_play" pkg="rosbag" type="play" args="--clock $(arg file_bag)" />
+
+</launch>
