@@ -13,6 +13,8 @@
       </include>
    </group>
 
+   <!-- <node pkg="tf" type="static_transform_publisher" name="map_tf" args="0 0 0 0 0 0 map $(arg multi_robot)/odom 60"/> -->
+
    <node name="rosbag_play" pkg="rosbag" type="play" args="--clock $(arg file_bag)" />
 
 </launch>

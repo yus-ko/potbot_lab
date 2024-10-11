@@ -29,9 +29,9 @@
   <arg name="initial_pose_x"                  default="0"/>
   <arg name="initial_pose_y"                  default="0"/>
   <arg name="initial_pose_yaw"                default="0"/>
-  <arg name="file_urdf"                       default="$(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro"/>
+  <arg name="file_urdf"                       default=""/>
   <arg name="file_fusion"                     default="$(find potbot_example)/config/navigation/robot_localization.yaml"/>
-  <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
+  <arg name="file_map"                        default=""/>
   <arg name="file_rviz"                       default="$(find potbot_example)/rviz/navigation.rviz"/>
   <arg name="file_database"                   default="~/.ros/rtabmap.db"/>
   <arg name="reset_database"                  default="true"/>
@@ -47,6 +47,7 @@
 
   <arg name="file_amcl"                       default="$(find potbot_example)/config/navigation/amcl.yaml"/>
   <arg name="file_gmapping"                   default="$(find potbot_example)/config/navigation/gmapping.yaml"/>
+  <arg name="file_marker_pose"                default="$(find potbot_example)/config/aruco/lab.yaml"/>
 
   <group if="$(arg use_remote)">
     <include file="$(find potbot_example)/launch/env/remote.launch">
@@ -108,6 +109,7 @@
     <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>
     <arg name="file_map"                      value="$(arg file_map)"/>
     <arg name="file_database"                 value="$(arg file_database)"/>
+    <arg name="file_marker_pose"              value="$(arg file_marker_pose)"/>
   </include>
 
   <include file="$(find potbot_example)/launch/navigation/slam.launch">

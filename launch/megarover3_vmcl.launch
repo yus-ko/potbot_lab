@@ -30,11 +30,6 @@
       <arg name="topic_depth"                   value="/$(arg multi_robot)/camera/depth/image_raw"/>
       <arg name="topic_odom"                    value="$(arg topic_odom)"/>
 
-      <!-- <arg name="topic_rgb"                     value="/camera/color/image_raw"/>
-      <arg name="topic_info"                    value="/camera/color/camera_info"/>
-      <arg name="topic_depth"                   value="/camera/aligned_depth_to_color/image_raw"/>
-      <arg name="topic_odom"                    value="/robot1/odom"/> -->
-
       <arg name="initial_pose_x"                value="$(arg initial_pose_x)"/>
       <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
       <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>
@@ -42,7 +37,10 @@
       <arg name="file_marker_pose"              value="$(find potbot_example)/config/aruco/lab.yaml"/>
       <arg name="depth_scaling"                 value="1000"/>
       <arg name="move_mean_window_num"          value="10"/>
+      <arg name="resampling_period"             value="1.0"/>
     </include>
+
+    <node pkg="map_server" type="map_server" name="map_server" args="$(find potbot_example)/maps/lab_test_0.yaml"/>
 
   </group>
 

@@ -5,7 +5,7 @@
   <arg name="initial_pose_x"                default="0.0"/>
   <arg name="initial_pose_y"                default="0.0"/>
   <arg name="initial_pose_yaw"              default="0.0"/>
-  <arg name="file_map"                      default="$(find potbot_description)/maps/garage.yaml"/>
+  <arg name="file_map"                      default=""/>
   <arg name="file_amcl"                     default="$(find potbot_example)/config/navigation/amcl.yaml"/>
 
   <!-- AMCL -->

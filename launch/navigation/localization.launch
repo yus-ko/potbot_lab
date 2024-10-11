@@ -4,6 +4,7 @@
   <arg name="frame_id_global"                 default="map"/>
   <arg name="frame_id_odom"                   default="odom"/>
   <arg name="frame_id_robot_base"             default="base_footprint"/>
+  <arg name="frame_id_camera_link"            default="camera_link"/>
   <arg name="topic_scan"                      default="scan"/>
   <arg name="topic_odom"                      default="odom"/>
   <arg name="topic_map"                       default="map"/>
@@ -21,10 +22,10 @@
   <arg name="initial_pose_x"                  default="0"/>
   <arg name="initial_pose_y"                  default="0"/>
   <arg name="initial_pose_yaw"                default="0"/>
-  <arg name="file_map"                        default="$(find potbot_description)/maps/garage.yaml"/>
+  <arg name="file_map"                        default=""/>
   <arg name="file_database"                   default="~/.ros/rtabmap.db"/>
-
   <arg name="file_amcl"                       default="$(find potbot_example)/config/navigation/amcl.yaml"/>
+  <arg name="file_marker_pose"                default="$(find potbot_example)/config/aruco/lab.yaml"/>
 
   <group if = "$(eval method_localization == 'amcl')">
     <include file="$(find potbot_example)/launch/navigation/amcl.launch">
@@ -83,6 +84,30 @@
       <arg name="odom_args"               value=""/>
       
       <arg name="topic_grid_map"          value="$(arg topic_map)"/>
+    </include>
+  </group>
+
+  <group if = "$(eval method_localization == 'vmcl')">
+    <node pkg="map_server" type="map_server" name="map_server" args="$(arg file_map)"/>
+    <include file="$(find vmcl)/launch/vmcl.launch">
+      <arg name="use_rviz"                      value="false"/>
+      <!-- <arg name="frame_id_global"               value="$(arg frame_id_global)"/> -->
+      <arg name="frame_id_odom"                 value="$(arg frame_id_odom)"/>
+      <arg name="frame_id_robot_base"           value="$(arg frame_id_robot_base)"/>
+      <arg name="frame_id_camera_link"          value="$(arg frame_id_camera_link)"/>
+      <arg name="topic_rgb"                     value="$(arg topic_rgb)"/>
+      <arg name="topic_info"                    value="$(arg topic_info)"/>
+      <arg name="topic_depth"                   value="$(arg topic_depth)"/>
+      <arg name="topic_odom"                    value="$(arg topic_odom)"/>
+
+      <arg name="initial_pose_x"                value="$(arg initial_pose_x)"/>
+      <arg name="initial_pose_y"                value="$(arg initial_pose_y)"/>
+      <arg name="initial_pose_yaw"              value="$(arg initial_pose_yaw)"/>
+      <!-- <arg name="file_rviz"                     value="$(arg file_rviz)"/> -->
+      <arg name="file_marker_pose"              value="$(arg file_marker_pose)"/>
+      <arg name="depth_scaling"                 value="1000"/>
+      <arg name="move_mean_window_num"          value="10"/>
+      <arg name="resampling_period"             value="1.0"/>
     </include>
   </group>
 

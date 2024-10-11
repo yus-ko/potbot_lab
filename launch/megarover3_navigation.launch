@@ -53,6 +53,7 @@
 
     <include file="$(find potbot_example)/launch/navigation/navigation.launch">
       <arg name="multi_robot"                   value="$(arg multi_robot)"/>
+      <arg name="use_remote"                    value="false"/>
       <arg name="use_rviz"                      value="$(arg use_rviz)"/>
       <arg name="use_fusion"                    value="$(arg use_fusion)"/>
       <arg name="method_localization"           value="$(arg method_localization)"/>
@@ -98,6 +99,7 @@
 
       <arg name="file_amcl"                     value="$(find potbot_example)/config/navigation/amcl.yaml"/>
       <arg name="file_gmapping"                 value="$(find potbot_example)/config/navigation/gmapping.yaml"/>
+      <arg name="file_marker_pose"              value="$(find potbot_example)/config/aruco/lab.yaml"/>
     </include>
 
   </group>
