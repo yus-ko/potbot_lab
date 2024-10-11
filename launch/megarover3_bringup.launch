@@ -10,9 +10,15 @@
   <arg name="initial_pose_x"              default="0"/>
   <arg name="initial_pose_y"              default="0"/>
   <arg name="initial_pose_yaw"            default="0"/>
+  <arg name="file_urdf"                   default="$(find potbot_example)/urdf/megarover3.urdf.xacro"/>
 
   <include file="$(find orbbec_camera)/launch/gemini2.launch">
     <arg name="camera_name" value="$(arg camera_name)"/>
+  </include>
+
+  <include file="$(find potbot_example)/launch/env/remote.launch">
+    <arg name="urdf_file"               value="$(find xacro)/xacro --inorder '$(arg file_urdf)'"/>
+    <arg name="multi_robot_name"        value="$(arg multi_robot)"/>
   </include>
 
   <group ns="$(arg multi_robot)">
@@ -43,8 +49,8 @@
       <param name="frame_id_odom"             value="$(arg frame_id_odom)"/>
       <param name="frame_id_robot_base"       value="$(arg frame_id_robot_base)"/>
       <!-- <remap from="rover_odo"                 to="rover_odo"/> -->
-      <remap from="initialpose"               to="$(arg topic_initial_pose)"/>
-      <!-- <remap from="imu/data"                  to="imu/data_raw"/> -->
+      <remap from="initialpose"               to="$(arg topic_initial_pose)_invalid"/>
+      <remap from="imu/data"                  to="imu/data_raw_invalid"/>
       <remap from="odom"                      to="$(arg topic_odom)"/>
       <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>
       <param name="initial_pose_y"            value="$(arg initial_pose_y)"/>
