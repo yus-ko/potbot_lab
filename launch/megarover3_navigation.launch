@@ -99,7 +99,7 @@
       <arg name="file_amcl"                     value="$(find potbot_example)/config/navigation/amcl.yaml"/>
       <arg name="file_gmapping"                 value="$(find potbot_example)/config/navigation/gmapping.yaml"/>
       <!-- <arg name="file_marker_pose"              value="$(find potbot_example)/config/aruco/lab.yaml"/> -->
-      <arg name="file_marker_pose"              value="$(find potbot_example)/config/aruco/TDU_011310_0.yaml"/>
+      <arg name="file_marker_pose"              value="$(find potbot_example)/config/aruco/TDU_011310_0_turn.yaml"/>
     </include>
 
   </group>
