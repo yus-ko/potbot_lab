@@ -72,21 +72,115 @@ Visualization Manager:
       Use Timestamp: false
       Value: true
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Filter (blacklist): ""
       Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        camera_gyro_accel_frame:
+          Value: true
+        camera_gyro_accel_optical_frame:
+          Value: true
+        map:
+          Value: true
+        marker_0:
+          Value: true
+        marker_1:
+          Value: true
+        marker_2:
+          Value: true
+        marker_3:
+          Value: true
+        marker_4:
+          Value: true
+        marker_5:
+          Value: true
+        marker_6:
+          Value: true
+        robot_6/base_footprint:
+          Value: true
+        robot_6/base_link:
+          Value: true
+        robot_6/base_scan:
+          Value: true
+        robot_6/camera_color_frame:
+          Value: true
+        robot_6/camera_color_optical_frame:
+          Value: true
+        robot_6/camera_depth_frame:
+          Value: true
+        robot_6/camera_depth_optical_frame:
+          Value: true
+        robot_6/camera_ir_frame:
+          Value: true
+        robot_6/camera_ir_optical_frame:
+          Value: true
+        robot_6/camera_link:
+          Value: true
+        robot_6/camera_stay_link:
+          Value: true
+        robot_6/imu_link:
+          Value: true
+        robot_6/left_camera_frame:
+          Value: true
+        robot_6/left_camera_optical_frame:
+          Value: true
+        robot_6/odom:
+          Value: true
+        robot_6/right_camera_frame:
+          Value: true
+        robot_6/right_camera_optical_frame:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        map:
+          marker_0:
+            marker_1:
+              {}
+            marker_2:
+              {}
+            marker_3:
+              {}
+            marker_4:
+              {}
+            marker_5:
+              {}
+            marker_6:
+              {}
+          robot_6/odom:
+            robot_6/base_footprint:
+              robot_6/base_link:
+                robot_6/base_scan:
+                  {}
+                robot_6/camera_stay_link:
+                  robot_6/camera_link:
+                    camera_gyro_accel_frame:
+                      camera_gyro_accel_optical_frame:
+                        {}
+                    robot_6/camera_color_frame:
+                      robot_6/camera_color_optical_frame:
+                        {}
+                    robot_6/camera_depth_frame:
+                      robot_6/camera_depth_optical_frame:
+                        {}
+                    robot_6/camera_ir_frame:
+                      robot_6/camera_ir_optical_frame:
+                        {}
+                    robot_6/imu_link:
+                      {}
+                    robot_6/left_camera_frame:
+                      robot_6/left_camera_optical_frame:
+                        {}
+                    robot_6/right_camera_frame:
+                      robot_6/right_camera_optical_frame:
+                        {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -397,7 +491,7 @@ Visualization Manager:
               Name: state layer
           Enabled: true
           Name: LocalMap
-      Enabled: true
+      Enabled: false
       Name: move_base
     - Angle Tolerance: 0.10000000149011612
       Class: rviz/Odometry
@@ -1029,6 +1123,6 @@ Window Geometry:
     collapsed: true
   Width: 1267
   X: 65
-  Y: 28
+  Y: 27
   marker img:
     collapsed: false

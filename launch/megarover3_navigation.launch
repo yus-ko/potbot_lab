@@ -100,6 +100,7 @@
       <arg name="file_gmapping"                 value="$(find potbot_example)/config/navigation/gmapping.yaml"/>
       <!-- <arg name="file_marker_pose"              value="$(find potbot_example)/config/aruco/lab.yaml"/> -->
       <arg name="file_marker_pose"              value="$(find potbot_example)/config/aruco/TDU_011310_0_turn.yaml"/>
+      <!-- <arg name="file_marker_pose"              value="$(find potbot_example)/config/aruco/TDU_011310_0_straight.yaml"/> -->
     </include>
 
   </group>
