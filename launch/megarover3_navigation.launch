@@ -63,12 +63,16 @@
       <arg name="frame_id_robot_base"           value="$(arg frame_id_base_footprint)"/>
       <arg name="frame_id_scan"                 value="$(arg frame_id_scan)"/>
       <arg name="frame_id_camera"               value="$(arg multi_robot)/camera_link"/>
-      <arg name="topic_rgb"                     value="/$(arg multi_robot)/camera/color/image_raw" if="$(eval camera_product == 'realsense')"/>
+      <!-- <arg name="topic_rgb"                     value="/$(arg multi_robot)/camera/color/image_raw" if="$(eval camera_product == 'realsense')"/>
       <arg name="topic_info"                    value="/$(arg multi_robot)/camera/color/camera_info" if="$(eval camera_product == 'realsense')"/>
       <arg name="topic_depth"                   value="/$(arg multi_robot)/camera/depth/image_rect_raw" if="$(eval camera_product == 'realsense')"/>
       <arg name="topic_rgb"                     value="/$(arg multi_robot)/camera/color/image_raw" if="$(eval camera_product == 'gemini')"/>
       <arg name="topic_info"                    value="/$(arg multi_robot)/camera/color/camera_info" if="$(eval camera_product == 'gemini')"/>
-      <arg name="topic_depth"                   value="/$(arg multi_robot)/camera/depth/image_raw" if="$(eval camera_product == 'gemini')"/>
+      <arg name="topic_depth"                   value="/$(arg multi_robot)/camera/depth/image_raw" if="$(eval camera_product == 'gemini')"/> -->
+
+      <arg name="topic_rgb"                     value="/$(arg multi_robot)/camera/color/image_raw"/>
+      <arg name="topic_info"                    value="/$(arg multi_robot)/camera/color/camera_info"/>
+      <arg name="topic_depth"                   value="/$(arg multi_robot)/camera/depth/image_raw"/>
 
       <arg name="stereo"                        value="$(arg stereo)"/>
       <arg name="topic_left_image"              value="/$(arg multi_robot)/camera/left_rect/image_rect" />
