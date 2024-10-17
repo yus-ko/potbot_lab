@@ -106,7 +106,7 @@
       <!-- <arg name="file_rviz"                     value="$(arg file_rviz)"/> -->
       <arg name="file_marker_pose"              value="$(arg file_marker_pose)"/>
       <arg name="depth_scaling"                 value="1000"/>
-      <arg name="move_mean_window_num"          value="10"/>
+      <arg name="move_mean_window_num"          value="50"/>
       <arg name="resampling_period"             value="1.0"/>
     </include>
   </group>
