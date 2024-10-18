@@ -22,6 +22,7 @@
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
     <!-- default -->
     <param name="base_global_planner" value="navfn/NavfnROS"/>
+    <!-- <param name="base_global_planner" value="a_star_planner/AStarPlanner"/> -->
 
     <!-- <param name="base_global_planner" value="global_planner/GlobalPlanner"/> -->
     <!-- <param name="base_global_planner" value="potbot_nav/PotbotPlanner"/> -->
