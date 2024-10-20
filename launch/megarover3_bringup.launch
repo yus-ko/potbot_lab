@@ -60,7 +60,7 @@
       <param name="frame_id_robot_base"       value="$(arg frame_id_robot_base)"/>
       <!-- <remap from="rover_odo"                 to="rover_odo"/> -->
       <remap from="initialpose"               to="$(arg topic_initial_pose)_invalid"/>
-      <remap from="imu/data"                  to="imu/data_raw_invalid"/>
+      <remap from="imu/data"                  to="imu/data_raw"/>
       <remap from="odom"                      to="$(arg topic_odom)"/>
       <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>
       <param name="initial_pose_y"            value="$(arg initial_pose_y)"/>
