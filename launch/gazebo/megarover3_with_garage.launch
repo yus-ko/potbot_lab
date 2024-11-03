@@ -1,5 +1,5 @@
 <launch>
-  <arg name="world_name" default="$(find potbot_description)/worlds/willowgarage.world"/>
+  <arg name="world_name" default="$(find potbot_example)/worlds/willowgarage_1.world"/>
 
   <include file="$(find potbot_example)/launch/gazebo/gazebo.launch">
     <arg name="world_name"      value="$(arg world_name)"/>
