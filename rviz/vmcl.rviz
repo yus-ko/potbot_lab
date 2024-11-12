@@ -8,7 +8,7 @@ Panels:
         - /Status1
         - /estimated pose1/Shape1
       Splitter Ratio: 0.6470588445663452
-    Tree Height: 469
+    Tree Height: 277
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -67,92 +67,13 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        camera_gyro_accel_frame:
-          Value: false
-        camera_gyro_accel_optical_frame:
-          Value: false
-        map:
-          Value: true
-        marker_1:
-          Value: true
-        marker_2:
-          Value: true
-        marker_3:
-          Value: true
-        robot_6/base_footprint:
-          Value: true
-        robot_6/base_link:
-          Value: false
-        robot_6/base_scan:
-          Value: false
-        robot_6/camera_color_frame:
-          Value: false
-        robot_6/camera_color_optical_frame:
-          Value: false
-        robot_6/camera_depth_frame:
-          Value: false
-        robot_6/camera_depth_optical_frame:
-          Value: false
-        robot_6/camera_ir_frame:
-          Value: false
-        robot_6/camera_ir_optical_frame:
-          Value: false
-        robot_6/camera_link:
-          Value: false
-        robot_6/camera_stay_link:
-          Value: false
-        robot_6/imu_link:
-          Value: false
-        robot_6/left_camera_frame:
-          Value: false
-        robot_6/left_camera_optical_frame:
-          Value: false
-        robot_6/odom:
-          Value: true
-        robot_6/right_camera_frame:
-          Value: false
-        robot_6/right_camera_optical_frame:
-          Value: false
       Marker Scale: 1
       Name: TF
       Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          marker_1:
-            {}
-          marker_2:
-            {}
-          marker_3:
-            {}
-          robot_6/odom:
-            robot_6/base_footprint:
-              robot_6/base_link:
-                robot_6/base_scan:
-                  {}
-                robot_6/camera_stay_link:
-                  robot_6/camera_link:
-                    camera_gyro_accel_frame:
-                      camera_gyro_accel_optical_frame:
-                        {}
-                    robot_6/camera_color_frame:
-                      robot_6/camera_color_optical_frame:
-                        {}
-                    robot_6/camera_depth_frame:
-                      robot_6/camera_depth_optical_frame:
-                        {}
-                    robot_6/camera_ir_frame:
-                      robot_6/camera_ir_optical_frame:
-                        {}
-                    robot_6/imu_link:
-                      {}
-                    robot_6/left_camera_frame:
-                      robot_6/left_camera_optical_frame:
-                        {}
-                    robot_6/right_camera_frame:
-                      robot_6/right_camera_optical_frame:
-                        {}
+        {}
       Update Interval: 0
       Value: true
     - Class: rviz/MarkerArray
@@ -160,8 +81,7 @@ Visualization Manager:
       Marker Topic: debug/observed_marker
       Name: observed marker
       Namespaces:
-        aruco: true
-        axes: true
+        {}
       Queue Size: 100
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -258,6 +178,18 @@ Visualization Manager:
       Unreliable: false
       Use Timestamp: false
       Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: debug/observed_marker/image
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -286,25 +218,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 14.599893569946289
+      Distance: 17.6943359375
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 3.1522786617279053
-        Y: 1.8614041805267334
-        Z: -4.506288051605225
+        X: 3.196331262588501
+        Y: 1.1333080530166626
+        Z: -2.5118277072906494
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.3497967720031738
+      Pitch: 1.1297969818115234
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.69720458984375
+      Yaw: 3.247189521789551
     Saved: ~
 Window Geometry:
   Displays:
@@ -312,7 +244,9 @@ Window Geometry:
   Height: 860
   Hide Left Dock: false
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd0000000400000000000001560000029cfc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000b0fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000029c000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000015f0000030efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d0000030e000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000054100000060fc0100000002fb0000000800540069006d0065010000000000000541000002eb00fffffffb0000000800540069006d00650100000000000004500000000000000000000003e50000029c00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Image:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000400000000000001560000029cfc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000b0fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000001dc000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d006100670065010000021f000000ba0000001600ffffff000000010000015f0000030efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d0000030e000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000054100000060fc0100000002fb0000000800540069006d0065010000000000000541000002eb00fffffffb0000000800540069006d00650100000000000004500000000000000000000003e50000029c00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -323,4 +257,4 @@ Window Geometry:
     collapsed: true
   Width: 1345
   X: 572
-  Y: 28
+  Y: 27
