@@ -73,8 +73,6 @@
 
   </group>
   <include file="$(find potbot_example)/launch/turtlebot3_navigation.launch">
-    <arg name="nav"                value="move_base"/>
     <!-- <arg name="model" value="waffle_pi"/> -->
-    <arg name="use_remote" value="false"/>
   </include>
 </launch>
