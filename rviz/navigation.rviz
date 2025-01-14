@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /TF1/Frames1
         - /move_base1/LocalMap1
-        - /potbot_base1
         - /potbot_base1/LocalPlanner1/potential field1/Autocompute Value Bounds1
       Splitter Ratio: 0.5
     Tree Height: 549
@@ -78,59 +77,31 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        camera_gyro_accel_frame:
-          Value: true
-        camera_gyro_accel_optical_frame:
-          Value: true
         map:
           Value: true
-        marker_0:
+        robot_0/base_footprint:
           Value: true
-        marker_1:
+        robot_0/base_link:
           Value: true
-        marker_2:
+        robot_0/base_scan:
           Value: true
-        marker_3:
+        robot_0/camera_depth_frame:
           Value: true
-        marker_4:
+        robot_0/camera_depth_optical_frame:
           Value: true
-        marker_5:
+        robot_0/camera_link:
           Value: true
-        marker_6:
+        robot_0/camera_rgb_frame:
           Value: true
-        robot_6/base_footprint:
+        robot_0/camera_rgb_optical_frame:
           Value: true
-        robot_6/base_link:
+        robot_0/caster_back_left_link:
           Value: true
-        robot_6/base_scan:
+        robot_0/caster_back_right_link:
           Value: true
-        robot_6/camera_color_frame:
+        robot_0/imu_link:
           Value: true
-        robot_6/camera_color_optical_frame:
-          Value: true
-        robot_6/camera_depth_frame:
-          Value: true
-        robot_6/camera_depth_optical_frame:
-          Value: true
-        robot_6/camera_ir_frame:
-          Value: true
-        robot_6/camera_ir_optical_frame:
-          Value: true
-        robot_6/camera_link:
-          Value: true
-        robot_6/camera_stay_link:
-          Value: true
-        robot_6/imu_link:
-          Value: true
-        robot_6/left_camera_frame:
-          Value: true
-        robot_6/left_camera_optical_frame:
-          Value: true
-        robot_6/odom:
-          Value: true
-        robot_6/right_camera_frame:
-          Value: true
-        robot_6/right_camera_optical_frame:
+        robot_0/odom:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -139,46 +110,24 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
-          marker_0:
-            marker_1:
-              {}
-            marker_2:
-              {}
-            marker_3:
-              {}
-            marker_4:
-              {}
-            marker_5:
-              {}
-            marker_6:
-              {}
-          robot_6/odom:
-            robot_6/base_footprint:
-              robot_6/base_link:
-                robot_6/base_scan:
+          robot_0/odom:
+            robot_0/base_footprint:
+              robot_0/base_link:
+                robot_0/base_scan:
                   {}
-                robot_6/camera_stay_link:
-                  robot_6/camera_link:
-                    camera_gyro_accel_frame:
-                      camera_gyro_accel_optical_frame:
-                        {}
-                    robot_6/camera_color_frame:
-                      robot_6/camera_color_optical_frame:
-                        {}
-                    robot_6/camera_depth_frame:
-                      robot_6/camera_depth_optical_frame:
-                        {}
-                    robot_6/camera_ir_frame:
-                      robot_6/camera_ir_optical_frame:
-                        {}
-                    robot_6/imu_link:
+                robot_0/camera_link:
+                  robot_0/camera_depth_frame:
+                    robot_0/camera_depth_optical_frame:
                       {}
-                    robot_6/left_camera_frame:
-                      robot_6/left_camera_optical_frame:
-                        {}
-                    robot_6/right_camera_frame:
-                      robot_6/right_camera_optical_frame:
-                        {}
+                  robot_0/camera_rgb_frame:
+                    robot_0/camera_rgb_optical_frame:
+                      {}
+                robot_0/caster_back_left_link:
+                  {}
+                robot_0/caster_back_right_link:
+                  {}
+                robot_0/imu_link:
+                  {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -205,33 +154,38 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_stay_link:
+        camera_rgb_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_rgb_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        caster_back_left_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        caster_back_right_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        left_camera_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        left_camera_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        right_camera_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        right_camera_optical_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -689,7 +643,7 @@ Visualization Manager:
               Radius: 0.029999999329447746
               Shaft Diameter: 0.10000000149011612
               Shaft Length: 0.10000000149011612
-              Topic: move_base/potbot/path_planner/path
+              Topic: move_base/PotbotLocalPlanner/local_plan
               Unreliable: false
               Value: true
             - Alpha: 0.30000001192092896
@@ -715,7 +669,7 @@ Visualization Manager:
               Size (Pixels): 3
               Size (m): 0.05000000074505806
               Style: Flat Squares
-              Topic: move_base/potbot/potential_field/field/potential
+              Topic: move_base/PotbotLocalPlanner/path_planner/apf/field/potential
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
@@ -727,6 +681,34 @@ Visualization Manager:
               Namespaces:
                 {}
               Queue Size: 1
+              Value: true
+            - Alpha: 0.30000001192092896
+              Autocompute Intensity Bounds: true
+              Autocompute Value Bounds:
+                Max Value: 3
+                Min Value: 0
+                Value: false
+              Axis: Z
+              Channel Name: intensity
+              Class: rviz/PointCloud2
+              Color: 255; 255; 255
+              Color Transformer: AxisColor
+              Decay Time: 0
+              Enabled: true
+              Invert Rainbow: false
+              Max Color: 255; 255; 255
+              Min Color: 0; 0; 0
+              Name: pso
+              Position Transformer: XYZ
+              Queue Size: 1
+              Selectable: true
+              Size (Pixels): 3
+              Size (m): 0.05000000074505806
+              Style: Flat Squares
+              Topic: move_base/PotbotLocalPlanner/path_planner/surface
+              Unreliable: false
+              Use Fixed Frame: true
+              Use rainbow: true
               Value: true
           Enabled: true
           Name: LocalPlanner
@@ -1045,8 +1027,7 @@ Visualization Manager:
           Marker Topic: debug/observed_marker
           Name: marker
           Namespaces:
-            aruco: true
-            axes: true
+            {}
           Queue Size: 100
           Value: true
         - Class: rviz/Image
