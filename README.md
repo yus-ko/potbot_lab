@@ -22,8 +22,8 @@ mv ~/.gazebo/models/gazebo_models/* ~/.gazebo/models/ && sudo rm -r ~/.gazebo/mo
 
 ```bash
 cd ~/catkin_ws/src
-git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs
-git clone https://github.com/ROBOTIS-GIT/turtlebot3
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs -b $ROS_DISTRO-devel
+git clone https://github.com/ROBOTIS-GIT/turtlebot3 -b $ROS_DISTRO-devel
 git clone https://github.com/vstoneofficial/megarover_samples
 git clone https://github.com/vstoneofficial/vs_rover_options_description
 git clone https://github.com/vstoneofficial/megarover_description
