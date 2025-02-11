@@ -60,6 +60,8 @@
     <param name="local_costmap/obstacle_layer/camera/sensor_frame"  value=""/>
     <param name="local_costmap/state_layer/lidar/topic"             value="$(arg topic_scan)"/>
     <param name="local_costmap/state_layer/lidar/sensor_frame"      value=""/>
+    <param name="local_costmap/state_layer/camera/topic"            value="$(arg topic_depth_points)"/>
+    <param name="local_costmap/state_layer/camera/sensor_frame"     value=""/>
     <param name="local_costmap/robot_base_frame"                    value="$(arg frame_id_robot_base)"/>
     
     <rosparam file="$(arg file_move_base_params)"       command="load" />
